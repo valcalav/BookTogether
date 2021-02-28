@@ -10,22 +10,29 @@ Search bookclubs to join, meet new pleople and read together !
 
 | Route  | Http verb | Description |
 | ------------- | ------------- | ------------- |
-| `/`  | GET  | City selection  |
-| `/`  | POST  | Send city data  |
-| `/bookclubs`  | GET  | Upcoming bookclubs list  |
-| `/bookclubs/:genre`   | POST | Upcoming bookclubs list filtered by genre |
-| `/bookclubs/details/:_id`  | GET  | Selected upcoming bookclub details |
-| `/auth/register`  | GET  | Render sign up form  |
-| `/auth/register`  | POST  | Register new client  |
-| `/auth/login`  | GET  | Render Log in form |
-| `/auth/login`  | POST  | Log user  |
-| `/auth/logout`  | GET  | Log out user |  
-| `user/profile`  | GET  | Render profile page & artist events |
-| `user/edit/:user_id`  | POST  | Edit profile |
-| `user/create-bookclub`  | GET  | Render create bookclub form |
-| `user/create-bookclub`  | POST  | Create bookclub |
-| `user/create-bookclub/edit/:id` | GET  | Render edit bookclub form |
-| `user/create-bookclub/edit/:id` | POST  | Update event |
-| `user/create-bookclub/delete/:id` | POST  | Delete event |
-| `user/admin-page` | GET  | Render admin page |
+| `/api/bookclubs/allBookClubs`  | GET  | All book clubs list  |
+| `/api/bookclubs/:genre`  | GET  | All book clubs list by genre |
+| `/api/bookclubs/:bookClub_id`  | GET  | Book club details |
+| `/api/bookclubs/newBookClub`  | POST  | Create Book club |
+| `/api/bookclubs/editBookClub/:bookClub_id`  | PUT  | Edit Book club |
+| `/api/bookclubs/delete/:bookClub_id`  | DELETE  | Delete Book club |
+| `/api/quotes/newQuote`  | POST  | Create quotes post |
+| `/api/quotes/:user_id`  | GET  | All quotes post filtered by user |
+| `/api/quotes/newQuote`  | PUT  | Edit quotes post |
+| `/api/quotes/newQuote`  | DELETE  | Delete quotes post |
+| `/api/auth/signup`  | POST  | Sign up |
+| `/api/auth/login`  | POST  | Log in |
+| `/api/auth/logout`  | POST  | Log out |
+| `/api/auth/loggedin`  | GET  | Is user logged in |
+
+
+
+
+
+
+
+
+
+
+
 
