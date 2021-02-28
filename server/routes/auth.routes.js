@@ -3,11 +3,17 @@ const router = express.Router()
 const passport = require("passport")
 const bcrypt = require("bcrypt")
 
-const User = require("../models/user.model")
+const { User } = require("../models/user.model")
+const Client = require("../models/client.model")
+
+//Endpoints
+
+
+//Sign up
 
 router.post('/signup', (req, res) => {
 
-    const { username, password } = req.body
+    const { username, password, email, firstName, lastName } = req.body
 
     if (!username || !password) {
         res.status(400).json({ message: 'Please fill all fields' })
@@ -15,7 +21,7 @@ router.post('/signup', (req, res) => {
     }
 
     if (password.length < 2) {
-        res.status(401).json({ message: 'Weak password' })
+        res.status(400).json({ message: 'Weak password' })
         return
     }
 
@@ -30,14 +36,16 @@ router.post('/signup', (req, res) => {
             const salt = bcrypt.genSaltSync(10)
             const hashPass = bcrypt.hashSync(password, salt)
 
-            User
-                .create({ username, password: hashPass })
+            Client
+                .create({ userInfo: {username, email, password: hashPass}, firstName, lastName })
                 .then(newUser => req.login(newUser, err => err ? res.status(500).json({ message: 'Login error' }) : res.status(200).json(newUser)))
                 .catch(() => res.status(500).json({ message: 'Error saving user to DB' }))
         })
+        .catch(() => res.status(500).json({ message: 'This doesnt work' }))
 })
 
 
+//Log in
 
 router.post('/login', (req, res, next) => {
 
@@ -53,17 +61,19 @@ router.post('/login', (req, res, next) => {
             return;
         }
 
-        req.login(theUser, err => err ? res.status(500).json({ message: 'Session error' }) : res.status(200).json(theUser))
+        req.login(theUser, err => err ? res.status(500).json({ message: 'Session error' }) : res.status(200).json(theUser));
 
-    })(req, res, next)
+    })
 })
 
 
+//Log out
 
 router.post('/logout', (req, res) => {
     req.logout()
     res.status(200).json({ message: 'Log out success!' });
 })
+
 
 
 router.get('/loggedin', (req, res) => req.isAuthenticated() ? res.status(200).json(req.user) : res.status(403).json({ message: 'Unauthorized' }))

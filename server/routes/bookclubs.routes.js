@@ -6,7 +6,7 @@ const Event = require('./../models/event.model')
 //Endpoints
 
 //Book clubs list
-router.get('/getAllBookClubs', (req, res) => {
+router.get('/allBookClubs', (req, res) => {
 
     Event
         .find()
@@ -21,8 +21,8 @@ router.get('/:genre', (req, res) => {
     const genre = req.params.genre
 
     Event
-        .find(genre)
-        .then(bookClubs => { res.jason(bookClubs) })
+        .find( genre )
+        .then(bookClubs => { res.json(bookClubs) })
         .catch(err => res.status(500).json({code: 500, message: 'Error fetching Book Clubs'}))
 })
 
@@ -40,10 +40,10 @@ router.get('/details/:bookClub_id', (req, res) => {
 //New Book club
 router.post('/newBookClub', (req, res) => {
 
-    const bookClub = { ...req.body, organizer: req.user._id}
+    const bookClub = req.body
 
     Event
-        -create(bookClub)
+        .create(bookClub)
         .then(response => res.json(response))
         .catch(err => res.status(500).json({ code:500, message:'Error saving new Book Club'}))
 })
@@ -58,15 +58,12 @@ router.put('/editBookClub/:bookClub_id', (req, res) => {
 })
 
 //Delete Book Club
-router.delete('/:bookClub_id', (req, res) => {
+router.delete('/delete/:bookClub_id', (req, res) => {
 
     Event
         .findByIdAndDelete(req.params.bookClub_id, req.body)
         .then(()=> res.json({message: 'Book Club deteled.'}))
         .catch(err => res.status(500).json({ code: 500, message: 'Error deleting BookClub'}))
 })
-
-
-
 
 module.exports = router
