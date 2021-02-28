@@ -46,6 +46,10 @@ const eventSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Client'
     },
+    participants: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Client'
+    }]
 }, {
     timestamps: true
 })

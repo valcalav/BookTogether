@@ -75,7 +75,7 @@ router.post('/logout', (req, res) => {
 })
 
 
-
+//Logged in
 router.get('/loggedin', (req, res) => req.isAuthenticated() ? res.status(200).json(req.user) : res.status(403).json({ message: 'Unauthorized' }))
 
 
