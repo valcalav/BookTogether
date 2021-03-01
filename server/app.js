@@ -11,11 +11,10 @@ const express = require('express')
 const app = express()
 
 // App settings
-// require('./config/session.config')(app)
 require('./config/middleware.config')(app)
 require('./config/locals.config')(app)
-require('./config/passport.config')(app)
 require('./config/cors.config')(app)
+require('./config/passport.config')(app)
 
 
 

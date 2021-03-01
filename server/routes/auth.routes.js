@@ -4,7 +4,7 @@ const passport = require("passport")
 const bcrypt = require("bcrypt")
 
 const { User } = require("../models/user.model")
-const Client = require("../models/client.model")
+const Reader = require("../models/reader.model")
 
 //Endpoints
 
@@ -35,8 +35,8 @@ router.post('/signup', (req, res) => {
 
             const salt = bcrypt.genSaltSync(10)
             const hashPass = bcrypt.hashSync(password, salt)
-
-            Client
+    
+            Reader
                 .create({ userInfo: {username, email, password: hashPass}, firstName, lastName })
                 .then(newUser => req.login(newUser, err => err ? res.status(500).json({ message: 'Login error' }) : res.status(200).json(newUser)))
                 .catch(() => res.status(500).json({ message: 'Error saving user to DB' }))
@@ -48,7 +48,7 @@ router.post('/signup', (req, res) => {
 //Log in
 
 router.post('/login', (req, res, next) => {
-
+    console.log("ay mi amol")
     passport.authenticate('local', (err, theUser, failureDetails) => {
 
         if (err) {
@@ -63,7 +63,7 @@ router.post('/login', (req, res, next) => {
 
         req.login(theUser, err => err ? res.status(500).json({ message: 'Session error' }) : res.status(200).json(theUser));
 
-    })
+    })(req, res, next)
 })
 
 
@@ -76,7 +76,9 @@ router.post('/logout', (req, res) => {
 
 
 //Logged in
+
 router.get('/loggedin', (req, res) => req.isAuthenticated() ? res.status(200).json(req.user) : res.status(403).json({ message: 'Unauthorized' }))
+
 
 
 module.exports = router

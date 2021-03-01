@@ -16,12 +16,12 @@ const quotesPostSchema = new Schema({
     },
     postedBy: {
         type: Schema.Types.ObjectId,
-        ref: 'Client'
+        ref: 'Reader'
     },
 }, {
     timestamps: true
 })
 
-const quotesPost = mongoose.model('quotesPost', quotesPostSchema)
+const QuotesPost = mongoose.model('QuotesPost', quotesPostSchema)
 
-module.exports = quotesPost
+module.exports = QuotesPost

@@ -6,7 +6,7 @@ const flash = require("connect-flash")
 
 
 const { User } = require('../models/user.model')
-const Client = require("../models/client.model")
+const Reader = require("../models/reader.model")
 
 
 module.exports = app => {
@@ -24,7 +24,7 @@ module.exports = app => {
             .findById(id, (err, user) => {
                 if (err) { return next(err); }
                 else if (!user) {
-                    Client
+                    Reader
                         .findById(id, (err, user) => {
                         if (err) { return next(err); }
                         next(null, user);
@@ -38,20 +38,20 @@ module.exports = app => {
     app.use(flash())
 
     passport.use(new LocalStrategy({ passReqToCallback: true }, (req, username, password, next) => {
-
-        User
-            .findOne({'email' : username})
+        console.log(username, "username")
+    
+        User.findOne({username: username})
             .then(user => {
                 if (user) {
                     return next(null, user)
                 } else {
-                    Client
-                        .findOne({ 'userInfo.email' : username }, (err, user) => {
+                    return Reader
+                        .findOne({ "userInfo.username": username }, (err, user) => {
                         if (err) {
                             return next(err);
                         }
                         if (!user) {
-                            return next(null, false, { message: "Incorrect email" });
+                            return next(null, false, { message: "Incorrect username" });
                         }
                         if (!bcrypt.compareSync( password, user.userInfo.password)) {
                             return next(null, false, { message: "Incorrect password" });

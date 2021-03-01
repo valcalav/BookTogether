@@ -5,13 +5,14 @@ const Event = require('./../models/event.model')
 
 //Endpoints
 
+
 //Book clubs list
 router.get('/allBookClubs', (req, res) => {
 
     Event
         .find()
         .then(allEvents => res.json({allEvents}))
-        .catch(err => res.status(500).json({code: 500, message: 'Error fetching Book Clubs'}))
+        .catch(err => res.status(500).json({code: 500, message: 'Error fetching Book Clubs', err}))
 
 })
 
@@ -23,7 +24,7 @@ router.get('/:genre', (req, res) => {
     Event
         .find( genre )
         .then(bookClubs => { res.json(bookClubs) })
-        .catch(err => res.status(500).json({code: 500, message: 'Error fetching Book Clubs'}))
+        .catch(err => res.status(500).json({code: 500, message: 'Error fetching Book Clubs', err}))
 })
 
 //Book club details
@@ -39,13 +40,14 @@ router.get('/details/:bookClub_id', (req, res) => {
 
 //New Book club
 router.post('/newBookClub', (req, res) => {
+    // console.log("Req user es:", req.user)
 
-    const bookClub = req.body
+    const club = { ...req.body, owner: req.user._id }
 
     Event
-        .create(bookClub)
+        .create(club)
         .then(response => res.json(response))
-        .catch(err => res.status(500).json({ code:500, message:'Error saving new Book Club'}))
+        .catch(err => res.status(500).json({ code:500, message:'Error saving new Book Club', err}))
 })
 
 //Edit Book club
@@ -54,7 +56,7 @@ router.put('/editBookClub/:bookClub_id', (req, res) => {
     Event
         .findByIdAndUpdate(req.params.bookClub_id, req.body)
         .then(response => res.json(response))
-        .catch(err => res.status(500).json({ code:500, message: 'Error editing Book Club'}))
+        .catch(err => res.status(500).json({ code:500, message: 'Error editing Book Club', err}))
 })
 
 //Delete Book Club
@@ -63,7 +65,9 @@ router.delete('/delete/:bookClub_id', (req, res) => {
     Event
         .findByIdAndDelete(req.params.bookClub_id, req.body)
         .then(()=> res.json({message: 'Book Club deteled.'}))
-        .catch(err => res.status(500).json({ code: 500, message: 'Error deleting BookClub'}))
+        .catch(err => res.status(500).json({ code: 500, message: 'Error deleting BookClub', err}))
 })
+
+
 
 module.exports = router
