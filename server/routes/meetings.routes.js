@@ -9,15 +9,15 @@ const Event = require('./../models/event.model')
 
 //Create meeting
 
-router.post('/createMeeting', (req, res) => {
-    const event_id = 
+router.post('/:event_id/createMeeting', (req, res) => {
+    
     Meeting
         .create(req.body)
         .then(meeting => {
             Event
-                .findByIdAndUpdate(req.params.id, { $push: { meetings: meeting._id }}, { new: true })
+                .findByIdAndUpdate(req.params.event_id, { $push: { meetings: meeting._id }}, { new: true })
                 .then(() => res.jason(meeting))
-                .catch(err => res.status(500).json({ code: 500, message: 'Error updating event'}))
+                .catch(err => res.status(500).json({ code: 500, message: 'Error updating event with meeting'}))
         })
         .catch(err => res.status(500).json({ code: 500, message: 'Error creating meeting'}))
 })
@@ -37,6 +37,7 @@ router.put('/editMeeting/:meeting_id', (req, res) => {
 //Delete meeting
 
 router.delete('/delete/:meeting_id', (req, res) => {
+
     Meeting
         .findByIdAndDelete(req.params.meeting_id, req.body)
         .then(() => res.json({message: 'Meeting deleted'}))

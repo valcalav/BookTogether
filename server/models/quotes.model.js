@@ -16,7 +16,8 @@ const quotesPostSchema = new Schema({
     },
     postedBy: {
         type: Schema.Types.ObjectId,
-        ref: 'Reader'
+        ref: 'Reader',
+        required: true,
     },
 }, {
     timestamps: true

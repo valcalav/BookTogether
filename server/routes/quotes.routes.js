@@ -9,7 +9,7 @@ const QuotesPost = require('./../models/quotes.model')
 //New quote-post
 router.post('/newQuote', (req, res) => {
 
-    const newQuote = { ...req.body, owner: req.user._id }
+    const newQuote = { ...req.body, postedBy: req.user._id }
 
     QuotesPost
         .create(newQuote)

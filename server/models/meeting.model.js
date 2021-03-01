@@ -8,7 +8,7 @@ const meetingPostSchema = new Schema({
     },
     date: {
         type: Date,
-        required: true,
+        // required: true,
     },
     duration: {
         type: String,

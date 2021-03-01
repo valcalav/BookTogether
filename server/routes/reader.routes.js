@@ -10,25 +10,30 @@ const Reader = require('../models/reader.model')
 
 
 //Join Book Club
-router.put('/joinBookClub/:bookClub_id', (req, res) => {
+router.put('/joinBookClub/:bookClub_id', (req, res, next) => {
 
-    //Cero segura de que esto es así ... Hago un Reader.find() primero ?... solo si quiero pasar otra info aparte del ID... 
-    //AQUI UN PROMISE ALL !
+    const eventPromise = Event.findByIdAndUpdate(req.params.bookClub_id, { $push: { participants: req.user._id}}, { new: true })
 
-    Event
-        .findByIdAndUpdate(req.params.bookClub_id, { $push: { participants: req.user._id }}, { new: true })
-        .then(response => res.json(response))
-        .catch(err => res.status(500).json({code: 500, message: 'Error joining Book Club'}))
+    const readerPromise = Reader.findByIdAndUpdate(req.user._id, { $push: { myBookClubs: req.params.bookClub_id }}, { new: true })
 
-    Reader
-        .findByIdAndUpdate(req.user._id, { $push: { myBookClubs: req.params.bookClub_id }}, { new: true })
-        .then(response => res.json(response))
-        .catch(err => res.status(500).json({code: 500, message: 'Error updating user'}))
+    Promise.all([eventPromise, readerPromise])
+        .then(results => res.json(results))
+        .catch(err => next(new Error(err)))
 
 })
 
 //Leave Book Club
+router.put('/leaveBookClub/:bookClub_id', (req, res, next) => {
 
+    const eventPromise = Event.findByIdAndUpdate(req.params.bookClub_id, { $pull: { participants: req.user._id}}, { new: true })
+
+    const readerPromise = Reader.findByIdAndUpdate(req.user._id, { $pull: { myBookClubs: req.params.bookClub_id }}, { new: true })
+
+    Promise.all([eventPromise, readerPromise])
+        .then(results => res.json(results))
+        .catch(err => next(new Error(err)))
+
+})
 
 
 module.exports = router
