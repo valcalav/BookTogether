@@ -18,7 +18,7 @@ router.post('/newQuote', (req, res) => {
 })
 
 // All quotes posted by user
-router.get('/:user_id', (req, res) => {
+router.get('/myQuotes/:user_id', (req, res) => {
 
     const user_id = req.params.user_id
 
@@ -29,10 +29,10 @@ router.get('/:user_id', (req, res) => {
 })
 
 // Edit quote-post
-router.put('/editQuote/:quotePost_id', (req, res) => {
+router.put('/editQuote/:quote_id', (req, res) => {
 
     QuotesPost
-        .findByIdAndUpdate(req.params.quotePost_id, req.body)
+        .findByIdAndUpdate(req.params.quote_id, req.body)
         .then(response => res.json(response))
         .catch(err => res.status(500).json({ code: 500, message: 'Error editing post', err}))
 })

@@ -17,12 +17,12 @@ router.get('/allBookClubs', (req, res) => {
 })
 
 //Book clubs list by genre
-router.get('/:genre', (req, res) => {
+router.get('/allBookClubs/:genre', (req, res) => {
 
     const genre = req.params.genre
 
     Event
-        .find( genre )
+        .find(genre)
         .then(bookClubs => { res.json(bookClubs) })
         .catch(err => res.status(500).json({code: 500, message: 'Error fetching Book Clubs', err}))
 })
@@ -63,8 +63,8 @@ router.put('/editBookClub/:bookClub_id', (req, res) => {
 router.delete('/delete/:bookClub_id', (req, res) => {
 
     Event
-        .findByIdAndDelete(req.params.bookClub_id, req.body)
-        .then(()=> res.json({message: 'Book Club deteled.'}))
+        .findByIdAndDelete(req.params.bookClub_id)
+        .then(()=> res.json({message: 'Book Club deleted.'}))
         .catch(err => res.status(500).json({ code: 500, message: 'Error deleting BookClub', err}))
 })
 

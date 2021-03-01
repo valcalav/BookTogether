@@ -7,9 +7,8 @@ const Reader = require('../models/reader.model')
 //Endpoints
 
 
-
-
 //Join Book Club
+
 router.put('/joinBookClub/:bookClub_id', (req, res, next) => {
 
     const eventPromise = Event.findByIdAndUpdate(req.params.bookClub_id, { $push: { participants: req.user._id}}, { new: true })
@@ -23,6 +22,7 @@ router.put('/joinBookClub/:bookClub_id', (req, res, next) => {
 })
 
 //Leave Book Club
+
 router.put('/leaveBookClub/:bookClub_id', (req, res, next) => {
 
     const eventPromise = Event.findByIdAndUpdate(req.params.bookClub_id, { $pull: { participants: req.user._id}}, { new: true })
