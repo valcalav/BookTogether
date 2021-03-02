@@ -1,7 +1,7 @@
 import { Component } from 'react'
 import './App.css';
 
-import Routes from './routes/Routes'
+// import Routes from './routes/Routes'
 import NavBar from './layout/Navbar'
 import AuthService from '../service/auth.service'
 
@@ -11,7 +11,7 @@ class App extends Component {
     this.state = {
       loggedUser: undefined
     }
-    this.authService = new AuthService
+    this.authService = new AuthService()
   }
 
   storeUser(loggedUser) {

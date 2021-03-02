@@ -1,0 +1,1 @@
+{"_id":{"$oid":"603d407766fe75f2978f6561"},"title":"primera meeting","duration":"1 hour","meetingLink":"https://open.spotify.com/","description":"esta es la primera meeting veamos si todo funciona bien","createdAt":{"$date":"2021-03-01T19:28:55.874Z"},"updatedAt":{"$date":"2021-03-01T19:28:55.874Z"},"__v":0}

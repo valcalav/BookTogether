@@ -1,0 +1,1 @@
+{"_id":{"$oid":"603d3de1648f3ced59de7bb4"},"book":"me duele la espalda pt2","author":"chica cansada","quote":"tengo que seguir hasta tarde aunque me duela todo parte 2","postedBy":{"$oid":"603d1de46e37ac9a75d02b7b"},"createdAt":{"$date":"2021-03-01T19:17:53.233Z"},"updatedAt":{"$date":"2021-03-01T19:17:53.233Z"},"__v":0}
