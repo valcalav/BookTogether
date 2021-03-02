@@ -38,7 +38,6 @@ module.exports = app => {
     app.use(flash())
 
     passport.use(new LocalStrategy({ passReqToCallback: true }, (req, username, password, next) => {
-        console.log(username, "username")
     
         User.findOne({username: username})
             .then(user => {
