@@ -21,7 +21,7 @@ const eventSchema = new Schema({
     },
     startDate: {
         type: Date,
-        // required: true
+        required: true
     },
     duration: {
         type: String,
@@ -41,6 +41,11 @@ const eventSchema = new Schema({
     description: {
         type: String,
         required: true
+    },
+    imgBookCover: {
+        type: String,
+        required: true,
+        default: "https://www.événementiel.net/wp-content/uploads/2014/02/default-placeholder.png"
     },
     owner: {
         type: Schema.Types.ObjectId,

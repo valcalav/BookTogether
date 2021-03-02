@@ -1,0 +1,15 @@
+.clubs-card h6 {
+    font-size: 14px;
+}
+
+.clubs-card p {
+    font-size: 12px;
+}
+
+.clubs-card small {
+    font-size: 70%;
+}
+
+.find-club-title {
+    margin: 50px 70px;
+}

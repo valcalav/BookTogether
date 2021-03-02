@@ -1,0 +1,12 @@
+.hero-container {
+    height: 420px;
+    padding: 0px 10px;
+}
+
+.hero-title {
+    margin-top: 200px;
+}
+
+.first-hero-btn {
+    margin-right: 5px;
+}

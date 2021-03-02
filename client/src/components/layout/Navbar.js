@@ -16,7 +16,6 @@ const NavBar = ({ storeUser, loggedUser }) => {
     }
 
     return (
-        <>
         <Navbar bg="light" expand="lg">
             <Link to="/">
                 <Navbar.Brand>BookTogether</Navbar.Brand>
@@ -24,20 +23,45 @@ const NavBar = ({ storeUser, loggedUser }) => {
 
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="mr-auto">
-                <Nav.Link href="#home">Home</Nav.Link>
-                <Nav.Link href="#link">Link</Nav.Link>
-                <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-                    <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                    <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                </NavDropdown>
+                <Nav className="ml-auto">
+                <NavLink to="/bookclubs-list">
+                    <Nav.Link as="span">Book Clubs</Nav.Link>
+                </NavLink>
+                <NavLink to="/">
+                    <Nav.Link as="span">About us</Nav.Link>
+                </NavLink>
+
+                {
+                    loggedUser ?
+                    <>
+                        <NavDropdown alignRight title={loggedUser.firstName} id="basic-nav-dropdown">
+                            <NavLink to="/">
+                                <NavDropdown.Item as="span">Profile</NavDropdown.Item>
+                            </NavLink>
+                            <NavLink to="/">
+                                <NavDropdown.Item as="span">My Book Clubs</NavDropdown.Item>
+                            </NavLink>
+                            <NavLink to="/">
+                                <NavDropdown.Item as="span">Create Book Club</NavDropdown.Item>
+                            </NavLink>
+                        </NavDropdown>
+
+                            <Nav.Link as="span" onClick={() => logoutUser()}>Log out</Nav.Link>
+                    </>
+                    :
+                    <>
+                        <NavLink to="/login">
+                            <Nav.Link as="span">Log in</Nav.Link>
+                        </NavLink>
+                        <NavLink to="/signup">
+                            <Nav.Link as="span">Register</Nav.Link>
+                        </NavLink>
+                    </>
+                }
+
                 </Nav>
             </Navbar.Collapse>
         </Navbar>
-        </>
     )
 }
 

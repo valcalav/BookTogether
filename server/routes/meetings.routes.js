@@ -16,7 +16,7 @@ router.post('/:event_id/createMeeting', (req, res) => {
         .then(meeting => {
             Event
                 .findByIdAndUpdate(req.params.event_id, { $push: { meetings: meeting._id }}, { new: true })
-                .then(() => res.jason(meeting))
+                .then(() => res.json(meeting))
                 .catch(err => res.status(500).json({ code: 500, message: 'Error updating event with meeting'}))
         })
         .catch(err => res.status(500).json({ code: 500, message: 'Error creating meeting'}))
