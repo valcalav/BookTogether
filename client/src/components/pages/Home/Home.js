@@ -6,11 +6,15 @@ import Hero from './Hero'
 import Features from '../Home/Features'
 
 export class Home extends Component {
+    constructor(props){
+        super(props)
+    }
+    
     render() {
         return (
             <Container >
                 <Row>
-                    <Hero />
+                    <Hero loggedUser={this.props.loggedUser} />
                 </Row>
                 
                 <Row>

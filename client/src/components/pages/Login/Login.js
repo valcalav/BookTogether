@@ -52,7 +52,7 @@ class Login extends Component {
 
                             <Button variant="dark" block type="submit">Log in</Button>
                         </Form>
-
+                        <small>Don't have an account yet? <a href="/signup" >Register here</a></small>
                     </Col>
 
                 </Row>

@@ -4,11 +4,9 @@ import { Container, Row } from 'react-bootstrap'
 import GenreList from '../Genres-list/GenresList'
 import BookClubsList from './Book-clubs-list'
 
-import './book-clubs.css'
-
 import BookClubsService from '../../../service/bookclubs.service'
 
-class BookClubs extends Component {
+class BookClubsByGenre extends Component {
 
     constructor() {
         super()
@@ -49,4 +47,4 @@ class BookClubs extends Component {
     }
 }
 
-export default BookClubs
+export default BookClubsByGenre

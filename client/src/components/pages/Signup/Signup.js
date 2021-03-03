@@ -36,7 +36,6 @@ export class Signup extends Component {
             .catch(err => console.log({ err }))
     }
 
-
     render() {
         return (
             <Container>
@@ -68,6 +67,7 @@ export class Signup extends Component {
 
                     <Button variant="dark" block type="submit">Sign up</Button>
                 </Form>
+                <small>Already registered? <a href="/signup" >Log in</a></small>
 
                 </Col>
 

@@ -42,8 +42,8 @@ componentDidMount() {
 
                     { this.state.bookClub
                         ?
-                            <>
-                            <img src={bookClub.imgBookCover} ></img>
+                        <>
+                            <img src={bookClub.imgBookCover} alt="book cover"></img>
                             <h4>{bookClub.bookClubName}</h4>
                             <p> "{bookClub.bookTitle}" by {bookClub.bookAuthor} </p>
                             <p> {bookClub.description} </p>
@@ -51,12 +51,17 @@ componentDidMount() {
                             <p> Duration: {bookClub.duration} </p>
                             <p> Language: {bookClub.language} </p>
                             <p> Start date: {bookClub.startDate} </p>
-                            </>
+                        </>
                         :
                         null
                     }
-
-                    <Link to="#" className="btn btn-dark">Join Club</Link>
+                    {
+                        this.props.loggedUser 
+                        ?
+                        <Link to="#" className="btn btn-dark">Join Club</Link>
+                        :
+                        <Link to="/login" className="btn btn-dark">Join Club</Link>
+                    }
 
                     <Link to="/bookclubs-list" className="btn btn-dark">Go back</Link>
 

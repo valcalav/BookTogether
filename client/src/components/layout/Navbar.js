@@ -35,13 +35,13 @@ const NavBar = ({ storeUser, loggedUser }) => {
                     loggedUser ?
                     <>
                         <NavDropdown alignRight title={loggedUser.firstName} id="basic-nav-dropdown">
-                            <NavLink to="/">
+                            <NavLink to="/profile">
                                 <NavDropdown.Item as="span">Profile</NavDropdown.Item>
                             </NavLink>
                             <NavLink to="/">
                                 <NavDropdown.Item as="span">My Book Clubs</NavDropdown.Item>
                             </NavLink>
-                            <NavLink to="/">
+                            <NavLink to="/create-club">
                                 <NavDropdown.Item as="span">Create Book Club</NavDropdown.Item>
                             </NavLink>
                         </NavDropdown>

@@ -1,9 +1,12 @@
 import React from 'react'
 import './Hero.css'
 import { Button } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
+const Hero = ({loggedUser}) => {
 
-function Hero() {
+    console.log("LOGGED USER:", loggedUser)
+    
     return (
         <div className="hero-container">
             <div className="hero-title">
@@ -12,8 +15,19 @@ function Hero() {
             </div>
 
             <div className="hero-buttons">
-                <Button className="first-hero-btn" variant="outline-dark">Create a Book Club</Button>
-                <Button variant="outline-dark">Join a Book Club</Button>
+            {
+                loggedUser ?
+                    <Link to='/create-club'>
+                        <Button className="first-hero-btn" variant="outline-dark">Create a Book Club</Button>
+                    </Link>
+                    :
+                    <Link to='/login'>
+                        <Button className="first-hero-btn" variant="outline-dark">Create a Book Club</Button>
+                    </Link>
+            }
+                <Link to='/bookclubs-list'>
+                    <Button variant="outline-dark">Join a Book Club</Button>
+                </Link>
             </div>
         </div>
     )

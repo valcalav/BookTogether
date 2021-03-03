@@ -1,14 +1,10 @@
-import React from 'react'
 import { Col, Card, ButtonGroup } from 'react-bootstrap'
-
 import { Link } from 'react-router-dom'
 
-import './book-clubs.css'
-
-function BookClubsCard({ bookClubName, bookTitle, bookAuthor, startDate, participants, imgBookCover, _id }) {
-
+function MyClubsCard({clubInfo}) {
+    const {bookAuthor, imgBookCover, bookClubName, bookTitle, startDate, _id} = clubInfo
     return (
-        <Col>
+        <Col md={5}>
             <Card className="clubs-card">
                 <Card.Img variant="top" src={imgBookCover} />
                 <Card.Body>
@@ -16,10 +12,9 @@ function BookClubsCard({ bookClubName, bookTitle, bookAuthor, startDate, partici
                     <hr />
                     <p><strong>{bookTitle}</strong> - {bookAuthor} </p>
                     <small>Start date: {startDate} </small>
-                    <small>Participants: {participants.length} </small>
 
                     <ButtonGroup size="sm" style={{ width: '100%' }}>
-                        <Link to={`/club-details/${_id}`} className="btn btn-dark">Go to Club</Link>
+                        <Link to={`/club-details/${_id}`} className="btn btn-dark">Details</Link>
                     </ButtonGroup>
 
                 </Card.Body>
@@ -28,4 +23,4 @@ function BookClubsCard({ bookClubName, bookTitle, bookAuthor, startDate, partici
     )
 }
 
-export default BookClubsCard
+export default MyClubsCard
