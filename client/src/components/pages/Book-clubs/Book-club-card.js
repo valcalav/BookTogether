@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 
 import './book-clubs.css'
 
-function BookClubsCard({ bookClubName, bookTitle, bookAuthor, startDate, participants, imgBookCover }) {
+function BookClubsCard({ bookClubName, bookTitle, bookAuthor, startDate, participants, imgBookCover, _id }) {
 
     return (
         <Col>
@@ -19,7 +19,7 @@ function BookClubsCard({ bookClubName, bookTitle, bookAuthor, startDate, partici
                     <small>Participants: {participants.length} </small>
 
                     <ButtonGroup size="sm" style={{ width: '100%' }}>
-                        <Link to='#' className="btn btn-dark">Details</Link>
+                        <Link to={`/club-details/${_id}`} className="btn btn-dark">Details</Link>
                     </ButtonGroup>
 
                 </Card.Body>

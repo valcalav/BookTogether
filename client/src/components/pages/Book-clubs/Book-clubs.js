@@ -31,7 +31,6 @@ export class BookClubs extends Component {
     }
 
     render() {
-        // console.log("estoy en book-clubs.js", this.state.bookClubs)
 
         return (
             <>
