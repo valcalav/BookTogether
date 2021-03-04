@@ -3,21 +3,20 @@ import BookClubsService from '../../../service/bookclubs.service'
 
 import { Container, Form, Button } from 'react-bootstrap'
 
-import './Book-club-form.css'
+import './Book-club-forms.css'
 
 class BookClubForm extends Component {
     constructor(props){
         super(props)
         this.state = {
-            bookClub: undefined,
             bookClubName: '',
             bookTitle: '',
             bookAuthor: '',
-            genre: '',
+            genre: 'fantasy',
             startDate: '',
-            duration:'',
-            recurrence:'',
-            language:'',
+            duration:'4 weeks',
+            recurrence:'once a week',
+            language:'english',
             description:'',
             imgBookCover:'',
             error: null,
@@ -28,35 +27,6 @@ class BookClubForm extends Component {
     }
 
     genres = ["fantasy", "science fiction", "dystopian", "action and adventure", "mystery", "horror", "thriller and suspense", "historical fiction", "romance", "womens fiction", "LGBTQ+", "classics", "contemporary fiction", "plays and screenplays", "poetry", "literary fiction", "magical realism", "comics and graphic novels", "short story", "young adult", "new adult", "childrens literature", "memoir and autobiography", "biography", "food and drink", "art and photography", "self-help", "history", "travel", "true crime", "humor", "essays", "guide how-to", "religion and spirituality", "humanities and social sciences", "parenting and families", "science and technology"]
-
-    componentDidMount() {
-        const bookClub_id = this.props.match.params.bookClub_id
-        console.log('bookClub_id', bookClub_id)
-        this.setState({ loading: true })
-        this.bookClubsService
-            .getBookClubDetails(bookClub_id)
-            .then(response => {
-                const date = response.data.startDate.slice(0,10)
-                this.setState({ 
-                    bookClub: response.data,
-                    bookClubName: response.data.bookClubName,
-                    bookTitle: response.data.bookTitle,
-                    bookAuthor: response.data.bookAuthor,
-                    genre: response.data.genre,
-                    startDate: date,
-                    duration: response.data.duration,
-                    recurrence: response.data.recurrence,
-                    language: response.data.language,
-                    description: response.data.description,
-                    imgBookCover: response.data.imgBookCover,
-                    loading: false
-                })
-                console.log(this.state.bookClub)
-                
-            })
-            .catch(err => this.setState({ error: err }))
-
-    }
 
     handleInputChange(e) {
         const { name, value } = e.target
@@ -83,7 +53,6 @@ class BookClubForm extends Component {
             <div class="new-club-form">
             {
                 this.state.loading ? <span>loading</span> : 
-            
 
             <Container >
                 <Form onSubmit={e => this.handleSubmit(e)}>
@@ -106,7 +75,7 @@ class BookClubForm extends Component {
                         </Form.Control>
                     </Form.Group>
                     <Form.Group>
-                        <Form.Label>Write a brief description of the Book Club's goal. Is there a main theme to the discussions? Will the discussions have a social or political focus? Will other works by the same author be an important part of the conversations?</Form.Label>
+                        <Form.Label>Write a brief description of the Book Club's goal. Is there a main theme to the discussions? Will the discussions have a social or political focus? Is there a specific edition you would rather the participants read? Will other works by the same author be an important part of the conversations?</Form.Label>
                         <Form.Control as="textarea" name="description" value={this.state.description} onChange={e => this.handleInputChange(e)} rows={3} />
                     </Form.Group>
 
@@ -151,7 +120,6 @@ class BookClubForm extends Component {
 
                     {
                         this.state.error && <span>Not able to create book Club</span>
-
                     }
                         <Button variant="dark" block type="submit">Create Book Club</Button>
 
@@ -161,7 +129,6 @@ class BookClubForm extends Component {
             </div>
         )
     }
-
 }
 
 export default BookClubForm

@@ -3,30 +3,59 @@ import BookClubsService from '../../../service/bookclubs.service'
 
 import { Container, Form, Button } from 'react-bootstrap'
 
-import './Book-club-form.css'
+import './Book-club-forms.css'
 
 class BookClubForm extends Component {
     constructor(props){
         super(props)
         this.state = {
+            bookClub: undefined,
             bookClubName: '',
             bookTitle: '',
             bookAuthor: '',
-            genre: 'fantasy',
+            genre: '',
             startDate: '',
-            duration:'4 weeks',
-            recurrence:'once a week',
-            language:'english',
+            duration:'',
+            recurrence:'',
+            language:'',
             description:'',
             imgBookCover:'',
             error: null,
             loading: false
         }
-
         this.bookClubsService = new BookClubsService()
     }
 
     genres = ["fantasy", "science fiction", "dystopian", "action and adventure", "mystery", "horror", "thriller and suspense", "historical fiction", "romance", "womens fiction", "LGBTQ+", "classics", "contemporary fiction", "plays and screenplays", "poetry", "literary fiction", "magical realism", "comics and graphic novels", "short story", "young adult", "new adult", "childrens literature", "memoir and autobiography", "biography", "food and drink", "art and photography", "self-help", "history", "travel", "true crime", "humor", "essays", "guide how-to", "religion and spirituality", "humanities and social sciences", "parenting and families", "science and technology"]
+
+    componentDidMount() {
+        const bookClub_id = this.props.match.params.bookClub_id
+        console.log('bookClub_id', bookClub_id)
+
+        this.setState({ loading: true })
+
+        this.bookClubsService
+            .getBookClubDetails(bookClub_id)
+            .then(response => {
+                const date = response.data.startDate.slice(0,10)
+                this.setState({ 
+                    bookClub: response.data,
+                    bookClubName: response.data.bookClubName,
+                    bookTitle: response.data.bookTitle,
+                    bookAuthor: response.data.bookAuthor,
+                    genre: response.data.genre,
+                    startDate: date,
+                    duration: response.data.duration,
+                    recurrence: response.data.recurrence,
+                    language: response.data.language,
+                    description: response.data.description,
+                    imgBookCover: response.data.imgBookCover,
+                    loading: false
+                })
+                console.log(this.state.bookClub)
+            })
+            .catch(err => this.setState({ error: err }))
+    }
 
     handleInputChange(e) {
         const { name, value } = e.target

@@ -3,15 +3,11 @@ import _ from 'lodash';
 import { Container, Row, Col } from 'react-bootstrap'
 import ProfileCard from './Profile-card'
 import MyClubsCard from './my-clubs-card'
-
 import './Profile.css'
-
 import BookClubService from '../../../service/bookclubs.service'
+const bookClubService = new BookClubService()
 
 function Profile({ loggedUser }) {
-
-    const bookClubService = new BookClubService()
-
 
     const [userClubs, setUserClubs] = useState([])
     
@@ -19,14 +15,15 @@ function Profile({ loggedUser }) {
         const clubsIds = loggedUser.clubsCreated
         Promise.all(
             clubsIds.map(async (club) => {
-              const response = await   bookClubService.getBookClubDetails(club)
+              const response = await bookClubService.getBookClubDetails(club)
               setUserClubs( prevState => {
                   console.log('prevState', prevState)
                 return [...prevState, response.data];
             })
         }
           ))
-    }, [])
+    }, [loggedUser])
+
     return (
         <>
         <Container>

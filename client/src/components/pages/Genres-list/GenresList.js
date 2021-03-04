@@ -6,11 +6,18 @@ import './GenresList.css'
 
 function GenresList() {
     
+    
+    
+    // function generateLis(){
+    //     genre in obj 
+
+    // }
     return (
         <Col md={4} className="genres-container">
             <h5>Search by genre</h5>
             <hr />
             <ul>
+         
                 <li><a href={`/bookclubs-genre-list/action and adventure`}>Action & Adventure</a></li>
                 <li><a href="/">Art & Photography</a></li>
                 <li><a href="/">Biography</a></li>
