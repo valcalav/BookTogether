@@ -15,7 +15,7 @@ const eventSchema = new Schema({
         required: true
     },
     genre: {
-        type: [String],
+        type: String,
         enum: ["fantasy", "science fiction", "dystopian", "action and adventure", "mystery", "horror", "thriller and suspense", "historical fiction", "romance", "womens fiction", "LGBTQ+", "classics", "contemporary fiction", "plays and screenplays", "poetry", "literary fiction", "magical realism", "comics and graphic novels", "short story", "young adult", "new adult", "childrens literature", "memoir and autobiography", "biography", "food and drink", "art and photography", "self-help", "history", "travel", "true crime", "humor", "essays", "guide how-to", "religion and spirituality", "humanities and social sciences", "parenting and families", "science and technology"],
         required: true
     },
@@ -35,7 +35,7 @@ const eventSchema = new Schema({
     },
     language: {
         type: String,
-        enum: ["english", "spanish"],
+        enum: ["english", "spanish", "portuguese", "french"],
         required: true
     },
     description: {

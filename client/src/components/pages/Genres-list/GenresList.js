@@ -5,16 +5,17 @@ import { Col } from 'react-bootstrap'
 import './GenresList.css'
 
 function GenresList() {
+    
     return (
         <Col md={4} className="genres-container">
             <h5>Search by genre</h5>
             <hr />
             <ul>
-                <li><a href="/">Action & Adventure</a></li>
+                <li><a href={`/bookclubs-genre-list/action and adventure`}>Action & Adventure</a></li>
                 <li><a href="/">Art & Photography</a></li>
                 <li><a href="/">Biography</a></li>
                 <li><a href="/">Children’s literature</a></li>
-                <li><a href="/">Classics</a></li>
+                <li><a href={`/bookclubs-genre-list/classics`}>Classics</a></li>
                 <li><a href="/">Comics & Graphic Novels</a></li>
                 <li><a href="/">Contemporary Fiction</a></li>
                 <li><a href="/">Dystopian</a></li>
@@ -37,7 +38,7 @@ function GenresList() {
                 <li><a href="/">Plays & Screenplays</a></li>
                 <li><a href="/">Poetry</a></li>
                 <li><a href="/">Religion & Spirituality</a></li>
-                <li><a href="/">Romance</a></li>
+                <li><a href={`/bookclubs-genre-list/romance`}>Romance</a></li>
                 <li><a href="/">Science Fiction</a></li>
                 <li><a href="/">Science & Technology</a></li>
                 <li><a href="/">Self-help</a></li>

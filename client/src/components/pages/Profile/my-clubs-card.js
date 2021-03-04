@@ -14,7 +14,7 @@ function MyClubsCard({clubInfo}) {
                     <small>Start date: {startDate} </small>
 
                     <ButtonGroup size="sm" style={{ width: '100%' }}>
-                        <Link to={`/club-details/${_id}`} className="btn btn-dark">Details</Link>
+                        <Link to={`/edit-club/${_id}`} className="btn btn-dark">Edit</Link>
                     </ButtonGroup>
 
                 </Card.Body>

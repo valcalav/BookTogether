@@ -16,21 +16,17 @@ function Profile({ loggedUser }) {
     const [userClubs, setUserClubs] = useState([])
     
     useEffect(() => {
-        const clubId = loggedUser.myBookClubs
-        const getUserClubDetails = () => {
-            clubId.map(elm => {
-                bookClubService
-                    .getBookClubDetails(elm)
-                    .then(res => {
-                        setUserClubs(prevState => {
-                            return {...prevState, ...res};
-                          })
-                    })
+        const clubsIds = loggedUser.clubsCreated
+        Promise.all(
+            clubsIds.map(async (club) => {
+              const response = await   bookClubService.getBookClubDetails(club)
+              setUserClubs( prevState => {
+                  console.log('prevState', prevState)
+                return [...prevState, response.data];
             })
         }
-        getUserClubDetails()
+          ))
     }, [])
-
     return (
         <>
         <Container>
@@ -40,17 +36,11 @@ function Profile({ loggedUser }) {
                     <ProfileCard {...loggedUser} />
                 </Col>
                 <Col md={6}>
-                    <h5>My book clubs</h5>
-                    <p>
-                    {
-                        userClubs.data ? <MyClubsCard clubInfo={userClubs.data} /> : null
-                    }
-                    
-                    
-                    </p>
-                </Col>
+                    <h5>Created clubs</h5>
 
-                
+                    {userClubs && userClubs.map((userClub)=> <MyClubsCard clubInfo={userClub} />)}
+
+                </Col>
 
             </Row>
 

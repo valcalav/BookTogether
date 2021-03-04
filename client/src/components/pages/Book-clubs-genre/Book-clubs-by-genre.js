@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Container, Row } from 'react-bootstrap'
 
 import GenreList from '../Genres-list/GenresList'
-import BookClubsList from './Book-clubs-list'
+import BookClubCard from '../Book-clubs/Book-club-card'
 
 import BookClubsService from '../../../service/bookclubs.service'
 
@@ -20,15 +20,24 @@ class BookClubsByGenre extends Component {
     componentDidMount() {
         this.loadClubs()
     }
-
+    
     loadClubs() {
+        
+        const {genre} = this.props.match.params
+        console.log("funciona bien", genre)
+    
         this.bookClubsService
-            .getAllBookClubs()
-            .then(response => this.setState({ bookClubs: response.data }))
+            .getAllBookClubsByGenre(genre)
+            .then(response => {
+                console.log("RESPUESTA DE BUSQUEDA!:", {...response.data})
+                this.setState({ bookClubs: response.data })
+            })
             .catch(err => console.log(err))
     }
 
     render() {
+        const {bookClubs} = this.state
+        console.log("EL STATE 2!!!", bookClubs)
 
         return (
             <>
@@ -38,9 +47,10 @@ class BookClubsByGenre extends Component {
             <Container>
                 <Row>
                     <GenreList />
-                    <BookClubsList bookClubs={this.state.bookClubs} />
+                    {
+                        bookClubs ? bookClubs.map(elm => <BookClubCard {...elm} key={elm._id} />) : null
+                    }
                 </Row>
-
             </Container>
             </>
         )

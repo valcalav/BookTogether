@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 const Event = require('./../models/event.model')
+const Reader = require('./../models/reader.model')
 
 //Endpoints
 
@@ -22,7 +23,7 @@ router.get('/allBookClubs/:genre', (req, res) => {
     const genre = req.params.genre
 
     Event
-        .find(genre)
+        .find({genre})
         .then(bookClubs => { res.json(bookClubs) })
         .catch(err => res.status(500).json({code: 500, message: 'Error fetching Book Clubs', err}))
 })
@@ -40,14 +41,23 @@ router.get('/details/:bookClub_id', (req, res) => {
 
 //New Book club
 router.post('/newBookClub', (req, res) => {
-    // console.log("Req user es:", req.user)
 
+    console.log(req.body)
     const club = { ...req.body, owner: req.user._id }
 
     Event
         .create(club)
-        .then(response => res.json(response))
-        .catch(err => res.status(500).json({ code:500, message:'Error saving new Book Club', err}))
+        .then(newClub => {
+            console.log("esta es la respuesta:", newClub)
+            console.log("este es el user", req.user._id)
+            Reader
+                .findByIdAndUpdate(req.user._id, { $push: { clubsCreated: newClub._id}}, { new: true })
+                .then(response => res.json(response))
+                .catch(err => console.log(err))
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json({ code:500, message:'Error saving new Book Club', err})})
 })
 
 //Edit Book club
