@@ -3,7 +3,7 @@ import { Col, Card, ButtonGroup } from 'react-bootstrap'
 
 import { Link } from 'react-router-dom'
 
-import './book-clubs.css'
+import './bookClubs.css'
 
 function BookClubsCard({ bookClubName, bookTitle, bookAuthor, startDate, participants, imgBookCover, _id }) {
 

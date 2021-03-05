@@ -3,7 +3,7 @@ import BookClubsService from '../../../service/bookclubs.service'
 
 import { Container, Form, Button } from 'react-bootstrap'
 
-import './Book-club-forms.css'
+import './BookClubEditForm.css'
 
 class BookClubForm extends Component {
     constructor(props){
@@ -152,7 +152,7 @@ class BookClubForm extends Component {
                         this.state.error && <span>Not able to create book Club</span>
 
                     }
-                        <Button variant="dark" block type="submit">Create Book Club</Button>
+                        <Button variant="dark" block type="submit">Edit Book Club</Button>
 
                 </Form>
             </Container>

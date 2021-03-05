@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import { Container, Row } from 'react-bootstrap'
 
 import GenreList from '../Genres-list/GenresList'
-import BookClubsList from './Book-clubs-list'
+import BookClubsList from './BookClubsList'
 
-import './book-clubs.css'
+import './bookClubs.css'
 
 import BookClubsService from '../../../service/bookclubs.service'
 

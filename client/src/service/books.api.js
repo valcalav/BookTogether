@@ -4,20 +4,20 @@ class GBookService {
     constructor(){
         this.api = axios.create({
             baseURL: 'https://www.googleapis.com/books/v1',
-            withCredentials: true
+            withCredentials: false
         })
     }
 
-    getByTitle (search) {
-        return this.api.get(`/volumes?q=intitle:${search}&key=${MYAPYKEYHERE}`)
+    getByTitle (title) {
+        return this.api.get(`/volumes?q=intitle:${title}&key=${MYAPIKEY}`)
     }
 
-    getByAuthor (search) {
-        return this.api.get(`/volumes?q=inauthor:${search}&key=${MYAPYKEYHERE}`)
+    getByAuthor (author, startIdx, maxResults) {
+        return this.api.get(`/volumes?q=inauthor:${author}&startIndex=${startIdx}&maxResults=${maxResults}&key=${MYAPIKEY}`)
     }
     
     getByTitleAndAuthor (title, author) {
-        return this.api.get(`/volumes?q=${title}+inauthor:${author}&key=${MYAPYKEYHERE}`)
+        return this.api.get(`/volumes?q=${title}+inauthor:${author}&key=${MYAPIKEY}`)
     }
 
 }

@@ -7,11 +7,10 @@ import './GenresList.css'
 function GenresList() {
     
     
-    
-    // function generateLis(){
+    //PENDIENTE LINK CADA UNO !!
+    // function generateList(){
     //     genre in obj 
 
-    // }
     return (
         <Col md={4} className="genres-container">
             <h5>Search by genre</h5>

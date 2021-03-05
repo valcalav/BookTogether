@@ -1,4 +1,4 @@
-import BookClubCard from './Book-club-card'
+import BookClubCard from './BookClubCard'
 
 function BookClubsList({ bookClubs }) {
     

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import _ from 'lodash';
 import { Container, Row, Col } from 'react-bootstrap'
 import ProfileCard from './Profile-card'
 import MyClubsCard from './my-clubs-card'

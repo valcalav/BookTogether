@@ -3,7 +3,7 @@ import './App.css';
 
 import Routes from './routes/Routes'
 import NavBar from './layout/Navbar'
-import Footer from './layout/Footer'
+// import Footer from './layout/Footer'
 import AuthService from '../service/auth.service'
 
 class App extends Component {
@@ -37,7 +37,7 @@ class App extends Component {
         <main>
           <Routes storeUser={user => this.storeUser(user)} loggedUser={this.state.loggedUser} />
         </main>
-        <Footer />
+        
       </>
     )
   }

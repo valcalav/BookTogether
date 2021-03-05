@@ -3,11 +3,11 @@ import { Switch, Route, Redirect } from 'react-router-dom'
 import Home from '../pages/Home/Home'
 import Login from '../pages/Login/Login'
 import Signup from '../pages/Signup/Signup'
-import BookClubs from '../pages/Clubs-list-all/Book-clubs'
-import BookClubsByGenre from '../pages/Clubs-list-by-genre/Book-clubs-by-genre'
-import BookClubDetails from '../pages/Club-details/Book-club-details'
-import BookClubForm from "../pages/Create-book-clubs/Book-club-create-form"
-import BookClubEditForm from "../pages/Create-book-clubs/Book-club-edit-form"
+import BookClubs from '../pages/Clubs-list-all/BookClubsPage'
+import BookClubsByGenre from '../pages/Clubs-list-by-genre/ClubsListByGenre'
+import BookClubDetails from '../pages/Club-details/BookClubDetails'
+import CreateBookClubsPage from '../pages/Create-book-clubs/CreateBookClubsPage'
+import BookClubEditForm from "../pages/Edit-book-clubs/BookClubEditForm"
 import Profile from '../pages/Profile/Profile'
 
 const Routes = ({ storeUser, loggedUser }) => {
@@ -29,8 +29,7 @@ const Routes = ({ storeUser, loggedUser }) => {
 
             <Route path="/edit-club/:bookClub_id" render={props => <BookClubEditForm loggedUser={loggedUser} {...props} /> } />
 
-            <Route path="/create-club" render={props => loggedUser ? <BookClubForm loggedUser={loggedUser} {...props} /> : <Redirect to="/login" />} />
-
+            <Route path="/create-club" render={props => loggedUser ? <CreateBookClubsPage loggedUser={loggedUser} {...props} /> : <Redirect to="/login" />} />
 
             <Route path="/profile" render={() => loggedUser ? <Profile loggedUser={loggedUser} /> : <Redirect to="/login" />} />
 

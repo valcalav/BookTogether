@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 import GenreList from '../Genres-list/GenresList'
-import './Book-club-details.css'
+import './BookClubDetails.css'
 
 import BookClubService from '../../../service/bookclubs.service'
 
