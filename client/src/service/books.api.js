@@ -8,18 +8,17 @@ class GBookService {
         })
     }
 
-    getByTitle (title) {
-        return this.api.get(`/volumes?q=intitle:${title}&key=${MYAPIKEY}`)
+    getByTitle (title, startIdx, maxResults) {
+        return this.api.get(`/volumes?q=intitle:${title}&startIndex=${startIdx}&maxResults=${maxResults}&key=${APIKEY}`)
     }
 
     getByAuthor (author, startIdx, maxResults) {
-        return this.api.get(`/volumes?q=inauthor:${author}&startIndex=${startIdx}&maxResults=${maxResults}&key=${MYAPIKEY}`)
+        return this.api.get(`/volumes?q=inauthor:${author}&startIndex=${startIdx}&maxResults=${maxResults}&key=${APIKEY}`)
     }
     
     getByTitleAndAuthor (title, author) {
-        return this.api.get(`/volumes?q=${title}+inauthor:${author}&key=${MYAPIKEY}`)
+        return this.api.get(`/volumes?q=${title}+inauthor:${author}&key=${APIKEY}`)
     }
-
 }
 
 export default GBookService

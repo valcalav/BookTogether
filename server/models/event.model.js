@@ -11,7 +11,7 @@ const eventSchema = new Schema({
         required: true
     },
     bookAuthor: {
-        type: String,
+        type: [String],
         required: true
     },
     genre: {

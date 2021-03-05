@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Form, Button } from 'react-bootstrap'
+import { Container, Form, Button, Card, Row, Col } from 'react-bootstrap'
 
 import FindBook from './FindBook'
 
 import GBookService from '../../../service/books.api'
+import BookClubsService from '../../../service/bookclubs.service'
 
 
-export default function CreateBookClubs() {
+export default function CreateBookClubs(props) {
     const gBookService = new GBookService()
+    const bookClubsService = new BookClubsService()
     
     const [searchBook, setSearchBook] = useState({
         author:'',
@@ -24,7 +26,6 @@ export default function CreateBookClubs() {
         language:'english',
         description:'',
         imgBookCover:'',
-        genresArr:["fantasy", "science fiction", "dystopian", "action and adventure", "mystery", "horror", "thriller and suspense", "historical fiction", "romance", "womens fiction", "LGBTQ+", "classics", "contemporary fiction", "plays and screenplays", "poetry", "literary fiction", "magical realism", "comics and graphic novels", "short story", "young adult", "new adult", "childrens literature", "memoir and autobiography", "biography", "food and drink", "art and photography", "self-help", "history", "travel", "true crime", "humor", "essays", "guide how-to", "religion and spirituality", "humanities and social sciences", "parenting and families", "science and technology"]
     })
     const [books, setBooks] = useState([])
     const [currentPage, setCurrentPage] = useState(0)
@@ -33,10 +34,12 @@ export default function CreateBookClubs() {
     const [loading, setLoading] = useState(false)
     const [step, setStep] = useState('FindBook')
     const [chosenBook, setChosenBook] = useState({
-        title:'',
-        authors:'',
-        image:''
+        bookTitle:'',
+        bookAuthor:'',
+        imgBookCover:''
     })
+
+    const genresArr = ["fantasy", "science fiction", "dystopian", "action and adventure", "mystery", "horror", "thriller and suspense", "historical fiction", "romance", "womens fiction", "LGBTQ+", "classics", "contemporary fiction", "plays and screenplays", "poetry", "literary fiction", "magical realism", "comics and graphic novels", "short story", "young adult", "new adult", "childrens literature", "memoir and autobiography", "biography", "food and drink", "art and photography", "self-help", "history", "travel", "true crime", "humor", "essays", "guide how-to", "religion and spirituality", "humanities and social sciences", "parenting and families", "science and technology"]
     
     function handleSubmit(e) {
         const MAX_RESULT = 6
@@ -55,17 +58,19 @@ export default function CreateBookClubs() {
                 setError(err)
             })
     }
+
     useEffect(() => {
         if (searchBook.author || searchBook.title) { handleSubmit() }
     }, [currentPage])
 
-    function handleBookChoice(title, authors, image) {
+    function handleBookChoice(bookTitle, bookAuthor, imgBookCover) {
         const selectedBook = {
-            title,
-            authors,
-            image
+            bookTitle,
+            bookAuthor,
+            imgBookCover
         }
         setChosenBook(selectedBook)
+        setCreateClubForm({...createClubForm, bookTitle: bookTitle, bookAuthor: bookAuthor, imgBookCover: imgBookCover})
         setStep('CreateClub')
     }
 
@@ -73,16 +78,27 @@ export default function CreateBookClubs() {
         e.preventDefault()
         const buttonName = e.target.innerText
             if ( buttonName === "Next" ) {
-              setCurrentPage(currentPage +6)
-              
+              setCurrentPage(currentPage +6)    
             } else {
                 if ( currentPage !== 0) {
                     setCurrentPage(currentPage -6)
-                 }
+                }
         }
     }
 
-//TODO LO QUE TENGO A PARTIR DE LA LINEA 101 VA A SER OTRO COMPONENTE
+    function handleSubmitForm(e) {
+        e.preventDefault()
+        bookClubsService
+            .newBookClub(createClubForm)
+            .then(()=> {
+                this.props.history.push('/bookclubs-list')
+            })
+            .catch(err => {
+                console.log("error", err)
+                setError(err)
+            })
+    }
+
     return (
         <div>
         {step === 'FindBook' && !loading ? 
@@ -91,66 +107,87 @@ export default function CreateBookClubs() {
                 searchBook={searchBook}
                 setSearchBook={setSearchBook}
                 books={books}
-                handleSubmit={handleSubmit}
                 setStep={setStep}
                 step={step}
                 handleBookChoice={handleBookChoice}
                 handlePagination={handlePagination}
-            /> :
+            />
+            :
             <div>
 
             <Container >
-                <Form onSubmit={e => handleSubmit(e)}>
-                    <Form.Group>
-                        <Form.Label>Book Club's Name</Form.Label>
-                        <Form.Control type="text" name="bookClubName" value={createClubForm.bookClubName} />
-                    </Form.Group>
+                <Form onSubmit={e => handleSubmitForm(e)}>
 
                     {
-                        chosenBook.title
-                        ? 
-                        <p>Book title: "{chosenBook.title}"</p>
+
+                    chosenBook.bookTitle || chosenBook.bookAuthor || chosenBook.imgBookCover
+                        ?
+                        <Card style={{ width: '500px' }}>
+                            <Row>
+                                <Col md={5} lg={5}  >
+                                <Card.Img variant="top" src={chosenBook.imgBookCover} alt="book cover" />
+                                </Col>
+                                <Col>
+                                <Card.Body>
+                                    <Card.Title>Book title: "{chosenBook.bookTitle}"</Card.Title>
+                                    <Card.Text>
+                                        Authors:
+                                        {chosenBook.bookAuthor.map((author, idx) => {
+                                            return <p key={idx} >- {author}</p>
+                                        })}
+                                    </Card.Text>
+                                    <Button variant="primary" onClick={() => setStep('FindBook')} >Go back</Button>
+                                </Card.Body>
+                                </Col>
+                            </Row>
+                        </Card>
                         :
+                        <>
+                        <h4>What will the club read?</h4>
                         <Form.Group>
                             <Form.Label>Title of the Book the club will read</Form.Label>
-                            <Form.Control type="text" name="bookTitle" value={createClubForm.bookTitle} />
+                            <Form.Control type="text" name="bookTitle" value={createClubForm.bookTitle} onChange={(e) => setCreateClubForm({...createClubForm, bookTitle: e.target.value})}/>
                         </Form.Group>
-                    }
 
-                    {
-                        chosenBook.authors
-                        ?
-                        <>
-                        <p>Authors:</p>
-                        {chosenBook.authors.map((author, idx) => {
-                            return <p key={idx} >- {author}</p>
-                        })}
-                        </>
-                        :
                         <Form.Group>
                             <Form.Label>Author of the book</Form.Label>
-                            <Form.Control type="text" name="bookAuthor" value={createClubForm.bookAuthor} />
+                            <Form.Control type="text" name="bookAuthor" value={createClubForm.bookAuthor} onChange={(e) => setCreateClubForm({...createClubForm, bookAuthor: e.target.value})} />
                         </Form.Group>
+
+                        <Form.Group>
+                            <Form.Label>Book cover image URL</Form.Label>
+                            <Form.Control type="text" name="imgBookCover" value={createClubForm.imgBookCover} onChange={(e) => setCreateClubForm({...createClubForm, imgBookCover: e.target.value})} />
+                        </Form.Group>
+                        </>
+                        
                     }
+
+                    <hr />
+                    <Form.Group>
+                        <Form.Label>Book Club's Name</Form.Label>
+                        <Form.Control type="text" name="bookClubName" value={createClubForm.bookClubName} onChange={(e) => setCreateClubForm({...createClubForm, bookClubName: e.target.value})} />
+                    </Form.Group>
 
                     <Form.Group>
                         <Form.Label>Choose the book genre</Form.Label>
-                        <Form.Control value={createClubForm.genre} as="select" name="genre" >
-                            {createClubForm.genresArr?.map(elm => <option>{elm}</option>)}
+                        <Form.Control as="select" name="genre" value={createClubForm.genre} onChange={(e) => setCreateClubForm({...createClubForm, genre: e.target.value})}>
+                            {genresArr.map(elm => <option>{elm}</option>)}
                         </Form.Control>
                     </Form.Group>
+
                     <Form.Group>
                         <Form.Label>Write a brief description of the Book Club's goal. Is there a main theme to the discussions? Will the discussions have a social or political focus? Is there a specific edition you would rather the participants read? Will other works by the same author be an important part of the conversations?</Form.Label>
-                        <Form.Control as="textarea" name="description" value={createClubForm.description} rows={3} />
+                        <Form.Control as="textarea" name="description" value={createClubForm.description} onChange={(e) => setCreateClubForm({...createClubForm, description: e.target.value})} rows={3} />
                     </Form.Group>
 
                     <Form.Group>
                         <Form.Label>When will the book club begin?</Form.Label>
-                        <Form.Control type="date" name="startDate" value={createClubForm.startDate} />
+                        <Form.Control type="date" name="startDate" value={createClubForm.startDate} onChange={(e) => setCreateClubForm({...createClubForm, startDate: e.target.value})} />
                     </Form.Group>
+
                     <Form.Group>
                         <Form.Label>What is the duration of the Book Club?</Form.Label>
-                        <Form.Control value={createClubForm.duration} as="select" name="duration" >
+                        <Form.Control value={createClubForm.duration} as="select" name="duration" onChange={(e) => setCreateClubForm({...createClubForm, duration: e.target.value})} >
                             <option >4 weeks</option>
                             <option >5 weeks</option>
                             <option >6 weeks</option>
@@ -162,7 +199,7 @@ export default function CreateBookClubs() {
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>How often will the club meet?</Form.Label>
-                        <Form.Control value={createClubForm.recurrence} as="select" name="recurrence" >
+                        <Form.Control value={createClubForm.recurrence} as="select" name="recurrence" onChange={(e) => setCreateClubForm({...createClubForm, recurrence: e.target.value})} >
                             <option>once a week</option>
                             <option>twice a week</option>
                             <option>every two weeks</option>
@@ -171,17 +208,14 @@ export default function CreateBookClubs() {
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>In what language will the book meetings be?</Form.Label>
-                        <Form.Control value={createClubForm.language} as="select" name="language" >
+                        <Form.Control value={createClubForm.language} as="select" name="language" onChange={(e) => setCreateClubForm({...createClubForm, language: e.target.value})} >
                             <option>english</option>
                             <option>spanish</option>
                             <option>portuguese</option>
                             <option>french</option>
                         </Form.Control>
                     </Form.Group>
-                    <Form.Group>
-                        <Form.Label>Book cover image URL</Form.Label>
-                        <Form.Control type="text" name="imgBookCover" value={createClubForm.imgBookCover} />
-                    </Form.Group>
+                    
                     {
                         error && <span>Not able to create book Club</span>
                     }
