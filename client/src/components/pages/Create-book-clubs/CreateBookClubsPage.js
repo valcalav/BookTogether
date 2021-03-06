@@ -6,6 +6,8 @@ import FindBook from './FindBook'
 import GBookService from '../../../service/books.api'
 import BookClubsService from '../../../service/bookclubs.service'
 
+import { GenresArr } from '../../shared/AllGenres'
+
 
 export default function CreateBookClubs(props) {
     const gBookService = new GBookService()
@@ -38,23 +40,20 @@ export default function CreateBookClubs(props) {
         bookAuthor:'',
         imgBookCover:''
     })
-
-    const genresArr = ["fantasy", "science fiction", "dystopian", "action and adventure", "mystery", "horror", "thriller and suspense", "historical fiction", "romance", "womens fiction", "LGBTQ+", "classics", "contemporary fiction", "plays and screenplays", "poetry", "literary fiction", "magical realism", "comics and graphic novels", "short story", "young adult", "new adult", "childrens literature", "memoir and autobiography", "biography", "food and drink", "art and photography", "self-help", "history", "travel", "true crime", "humor", "essays", "guide how-to", "religion and spirituality", "humanities and social sciences", "parenting and families", "science and technology"]
     
     function handleSubmit(e) {
         const MAX_RESULT = 6
-        if (e) {e.preventDefault() } 
+        if (e) { e.preventDefault() } 
         setLoading(true)
+
         gBookService.getByAuthor(searchBook.author, currentPage, MAX_RESULT)
             .then(res => {
-                // console.log(res)
                 const fetchedBooks = res.data.items
                 setBooks(fetchedBooks)
                 setNumResults(fetchedBooks.totalItems)
                 setLoading(false)
             })
             .catch(err => {
-                // console.log(err)
                 setError(err)
             })
     }
@@ -136,7 +135,7 @@ export default function CreateBookClubs(props) {
                                             return <p key={idx} >- {author}</p>
                                         })}
                                     </Card.Text>
-                                    <Button variant="primary" onClick={() => setStep('FindBook')} >Go back</Button>
+                                    <Button variant="primary" onClick={() => setStep('FindBook')} >Change Book</Button>
                                 </Card.Body>
                                 </Col>
                             </Row>
@@ -171,7 +170,7 @@ export default function CreateBookClubs(props) {
                     <Form.Group>
                         <Form.Label>Choose the book genre</Form.Label>
                         <Form.Control as="select" name="genre" value={createClubForm.genre} onChange={(e) => setCreateClubForm({...createClubForm, genre: e.target.value})}>
-                            {genresArr.map(elm => <option>{elm}</option>)}
+                            {GenresArr.map(elm => <option>{elm}</option>)}
                         </Form.Control>
                     </Form.Group>
 

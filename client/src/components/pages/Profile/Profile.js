@@ -4,6 +4,7 @@ import ProfileCard from './Profile-card'
 import MyClubsCard from './my-clubs-card'
 import './Profile.css'
 import BookClubService from '../../../service/bookclubs.service'
+
 const bookClubService = new BookClubService()
 
 function Profile({ loggedUser }) {
@@ -31,10 +32,19 @@ function Profile({ loggedUser }) {
                 <Col md={4} className="profile-cards">
                     <ProfileCard {...loggedUser} />
                 </Col>
-                <Col md={6}>
+                <Col>
                     <h5>Created clubs</h5>
-
-                    {userClubs && userClubs.map((userClub)=> <MyClubsCard clubInfo={userClub} />)}
+                    <Row>
+                    
+                        {userClubs && userClubs.map((userClub)=> <MyClubsCard clubInfo={userClub} />)}
+                    
+                    </Row>
+                    <h5>Joined clubs</h5>
+                    <Row>
+                    
+                        {userClubs && userClubs.map((userClub)=> <MyClubsCard clubInfo={userClub} />)}
+                    
+                    </Row>
 
                 </Col>
 

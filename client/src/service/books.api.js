@@ -9,15 +9,15 @@ class GBookService {
     }
 
     getByTitle (title, startIdx, maxResults) {
-        return this.api.get(`/volumes?q=intitle:${title}&startIndex=${startIdx}&maxResults=${maxResults}&key=${APIKEY}`)
+        return this.api.get(`/volumes?q=intitle:${title}&startIndex=${startIdx}&maxResults=${maxResults}&key=AIzaSyCL85Aun0K58V1YhjUtm0fryvRoBHNUREE`)
     }
 
     getByAuthor (author, startIdx, maxResults) {
-        return this.api.get(`/volumes?q=inauthor:${author}&startIndex=${startIdx}&maxResults=${maxResults}&key=${APIKEY}`)
+        return this.api.get(`/volumes?q=inauthor:${author}&startIndex=${startIdx}&maxResults=${maxResults}&key=AIzaSyCL85Aun0K58V1YhjUtm0fryvRoBHNUREE`)
     }
     
     getByTitleAndAuthor (title, author) {
-        return this.api.get(`/volumes?q=${title}+inauthor:${author}&key=${APIKEY}`)
+        return this.api.get(`/volumes?q=${title}+inauthor:${author}&key=AIzaSyCL85Aun0K58V1YhjUtm0fryvRoBHNUREE`)
     }
 }
 

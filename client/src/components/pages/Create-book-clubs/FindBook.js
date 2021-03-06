@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Form, Button } from 'react-bootstrap'
+import { Form, Button } from 'react-bootstrap'
 
 export default function FindBook(props) {
     const { handleSubmit,
@@ -7,8 +7,12 @@ export default function FindBook(props) {
             handleBookChoice,
             setSearchBook,
             searchBook,
-            handlePagination
+            handlePagination,
+            setStep
             } = props
+
+    const defaultImg = 'https://islandpress.org/sites/default/files/default_book_cover_2015.jpg'
+
     return (
         <div>
            <Form onSubmit={(e) => handleSubmit(e)}>
@@ -27,13 +31,25 @@ export default function FindBook(props) {
 
                 <Button variant="primary" type="submit">Search</Button>
             </Form>
+            <button onClick={()=> setStep("CreateClub")}>Can't find the book you want?</button>
+
             <div>
+            <small>Search resuls:</small> <br />
                 {books && books.map((book, idx)=> {
                     console.log(book)
                     return(
                         <div>
                             <p>{book.volumeInfo.title}</p>
-                            <button onClick={() => handleBookChoice(book.volumeInfo.title, book.volumeInfo.authors, book.volumeInfo.imageLinks.thumbnail)}>Select</button>
+                            {book.volumeInfo.authors.map((author, idx) => <p key={idx}>- {author}</p>)}
+                            <p>Published date: {book.volumeInfo.publishedDate}</p>
+                            <button onClick={() => {
+                                if (book.volumeInfo.imageLinks) {
+                                    handleBookChoice(book.volumeInfo.title, book.volumeInfo.authors, book.volumeInfo.imageLinks.thumbnail)
+                                } else {
+                                    handleBookChoice(book.volumeInfo.title, book.volumeInfo.authors, defaultImg)
+                                }
+                            }
+                            }>Select</button>
                         </div>
                     ) 
                 })}
