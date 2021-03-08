@@ -72,9 +72,15 @@ router.put('/editBookClub/:bookClub_id', (req, res) => {
 //Delete Book Club
 router.delete('/delete/:bookClub_id', (req, res) => {
 
-    Event
-        .findByIdAndDelete(req.params.bookClub_id)
-        .then(()=> res.json({message: 'Book Club deleted.'}))
+    Reader
+        .findByIdAndUpdate(req.user._id, { $pull: { clubsCreated: req.params.bookClub_id}}, { new: true })
+        .then(() => {
+            Event
+                .findByIdAndDelete(req.params.bookClub_id)
+                .then(() => {
+                    res.json({message: 'Book club deleted'})
+                })
+        })
         .catch(err => res.status(500).json({ code: 500, message: 'Error deleting BookClub', err}))
 })
 

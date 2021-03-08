@@ -35,5 +35,15 @@ router.put('/leaveBookClub/:bookClub_id', (req, res, next) => {
 
 })
 
+//Edit Reader info
+router.put('/edit-profile', (req, res) => {
+
+    Reader
+        .findByIdAndUpdate(req.user._id, req.body)
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json({ code:500, message: 'Error editing profile', err}))
+
+})
+
 
 module.exports = router

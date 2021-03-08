@@ -6,13 +6,17 @@ const meetingPostSchema = new Schema({
         type: String,
         required: true,
     },
-    date: {
-        type: Date,
-        // required: true,
+    meetingDate: {
+        type: String,
+        required: true,
+    },
+    meetingTime: {
+        type: String,
+        required: true
     },
     duration: {
         type: String,
-        enum: ["1 hour", "2 hours", "3 hours"],
+        enum: ["1 hour", "1 hour 30 minutes", "2 hours", "2 hours 30 minutes", "3 hours", "4 hours"],
         required: true,
     },
     meetingLink: {
