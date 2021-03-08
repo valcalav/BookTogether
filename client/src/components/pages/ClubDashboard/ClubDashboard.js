@@ -46,7 +46,6 @@ function ClubDashboard(props) {
             .then(response => {
                 let data = response.data
                 setClubMeetings(data)
-                console.log('RESPUESTA DE BUSQUEDA MEETINGS!!!! ', clubMeetings)
             })
     }
 

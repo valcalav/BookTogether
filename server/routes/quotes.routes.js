@@ -18,12 +18,12 @@ router.post('/newQuote', (req, res) => {
 })
 
 // All quotes posted by user
-router.get('/myQuotes/:user_id', (req, res) => {
+router.get('/myQuotes/:reader_id', (req, res) => {
 
-    const user_id = req.params.user_id
-
+    const reader_id = req.params.reader_id
+    console.log("este es el id que le paso", reader_id)
     QuotesPost
-        .find( {postedBy: req.user._id} )
+        .find( {postedBy: req.params.reader_id} )
         .then(posts => res.json({posts}))
         .catch(err => res.status(500).json({code: 500, message: 'Error fetching posts', err}))
 })

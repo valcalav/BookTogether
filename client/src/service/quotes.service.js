@@ -8,7 +8,7 @@ class QuotesService {
         })
     }
 
-    getAllUserQuotes = user_id => this.api.get(`/myQuotes/${user_id}`)
+    getAllUserQuotes = reader_id => this.api.get(`/myQuotes/${reader_id}`)
 
     newQuote = QuoteDetails => this.api.post('/newQuote', QuoteDetails)
 

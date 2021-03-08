@@ -66,6 +66,7 @@ joinClub() {
                             <p> Duration: {bookClub.duration} </p>
                             <p> Language: {bookClub.language} </p>
                             <p> Start date: {bookClub.startDate.slice(0,10)} </p>
+
                         </>
                         :
                         null
@@ -73,7 +74,15 @@ joinClub() {
                     {
                         this.props.loggedUser 
                         ?
-                        <Link to="#" className="btn btn-dark" onClick={() => this.joinClub()}>Join Club</Link>
+                        <>
+                        {
+                            this.props.loggedUser._id === this.state.bookClub?.owner
+                            ?
+                            <Link to={`/edit-club/${bookClub._id}`} className="btn btn-dark">Edit</Link>
+                            :
+                            <Link to="#" className="btn btn-dark" onClick={() => this.joinClub()}>Join Club</Link>
+                        }
+                        </>
                         :
                         <Link to="/login" className="btn btn-dark">Join Club</Link>
                     }

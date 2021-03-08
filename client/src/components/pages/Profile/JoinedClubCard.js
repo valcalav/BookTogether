@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 
 function MyClubsCard({clubInfo}) {
     const {bookAuthor, imgBookCover, bookClubName, bookTitle, startDate, _id} = clubInfo
+    
     return (
         <Col md={3}>
             <Card className="clubs-card">

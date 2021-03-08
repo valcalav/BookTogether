@@ -6,8 +6,7 @@ const quotesPostSchema = new Schema({
         required: true,
         type: String
     },
-    book: {
-        required: true,
+    source: {
         type: String
     },
     author: {

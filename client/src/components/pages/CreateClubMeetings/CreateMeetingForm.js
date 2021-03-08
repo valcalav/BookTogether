@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import MeetingCalendar from './NewMeetingCalendar'
 import { Form, Row, Col, Button } from 'react-bootstrap'
 
@@ -6,7 +6,6 @@ import MeetingService from '../../../service/meeting.service'
 
 
 function CreateMeetingForm({closeModal, match}) {
-
 
     const meetingService = new MeetingService()
 
@@ -24,8 +23,6 @@ function CreateMeetingForm({closeModal, match}) {
     function handleSubmitCreate(e) {
         e.preventDefault()
         
-        console.log('ESTO ES LO QUE PASO', createMeeting)
-
         meetingService.newMeeting(match.params.bookClub_id, createMeeting)
             .then(() => {
                 closeModal()
