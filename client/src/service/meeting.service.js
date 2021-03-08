@@ -9,10 +9,13 @@ class MeetingService {
     }
 
     newMeeting = (bookClub_id, meetingDetails) => this.api.post(`/${bookClub_id}/createMeeting`, meetingDetails)
+    
 
     editMeeting = (meeting_id, meetingDetails) => this.api.put(`/editMeeting/${meeting_id}`, meetingDetails)
 
     deleteMeeting = meeting_id => this.api.delete(`/delete/${meeting_id}`)
+
+    findMeetings = bookClub_id => this.api.get(`/findMeetings/${bookClub_id}`)
 
 }
 

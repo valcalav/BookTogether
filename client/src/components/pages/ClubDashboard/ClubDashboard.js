@@ -6,7 +6,7 @@ import CreateMeetingModal from '../Club-meetings/CreateMeetingModal'
 
 
 import BookClubService from '../../../service/bookclubs.service'
-// import MeetingService from '../../../service/meeting.service'
+import MeetingService from '../../../service/meeting.service'
 
 
 function ClubDashboard(props) {
@@ -14,8 +14,10 @@ function ClubDashboard(props) {
     const [bookClubInfo, setBookClubInfo] = useState('')
     const [loading, setLoading] = useState(false)
     const [modalShow, setModalShow] = useState(false)
+    const [clubMeetings, setClubMeetings] = useState([])
     
     const bookClubService = new BookClubService()
+    const meetingService = new MeetingService()
     
     useEffect(  () => {
         const bookClub_id = props.match.params.bookClub_id
@@ -26,6 +28,13 @@ function ClubDashboard(props) {
                 setLoading({loading: true})
             })
             .catch(err => console.log(err))
+
+        meetingService.findMeetings(bookClub_id)
+            .then(response => {
+                console.log('RESPUESTA DE BUSQUEDA MEETINGS: ', response.data)
+                setClubMeetings([response.data])
+            })
+
     }, [])
     
     return (
@@ -84,7 +93,7 @@ function ClubDashboard(props) {
                     </Container>
 
                     {
-                        modalShow && <CreateMeetingModal show={modalShow} setModalShow={setModalShow} onHide={() => setModalShow(false)}/>
+                        modalShow && <CreateMeetingModal {...props} show={modalShow} setModalShow={setModalShow} onHide={() => setModalShow(false)}/>
                     }
 
                 </div>

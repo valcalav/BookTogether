@@ -45,5 +45,4 @@ router.put('/edit-profile', (req, res) => {
 
 })
 
-
 module.exports = router

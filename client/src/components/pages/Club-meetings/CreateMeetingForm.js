@@ -5,11 +5,8 @@ import { Form, Row, Col, Button } from 'react-bootstrap'
 import MeetingService from '../../../service/meeting.service'
 
 
-function CreateMeetingForm(props) {
+function CreateMeetingForm({closeModal, match}) {
 
-    const {
-        closeModal
-    } = props
 
     const meetingService = new MeetingService()
 
@@ -22,19 +19,14 @@ function CreateMeetingForm(props) {
         description: ''
     })
     const [error, setError] = useState(null)
+    
 
-    useEffect(() => {
-        handleSubmit()
-    }, [])
-
-    function handleSubmit(e) {
-        if(e) {
-            e.preventDefault()
-        }
+    function handleSubmitCreate(e) {
+        e.preventDefault()
         
         console.log('ESTO ES LO QUE PASO', createMeeting)
 
-        meetingService.newMeeting(createMeeting)
+        meetingService.newMeeting(match.params.bookClub_id, createMeeting)
             .then(() => {
                 closeModal()
                 console.log('meeting creada !')
@@ -47,7 +39,7 @@ function CreateMeetingForm(props) {
 
     return (
         <div>
-            <Form onSubmit={e => handleSubmit(e)}>
+            <Form onSubmit={e => handleSubmitCreate(e)}>
                 <Form.Group>
                     <Form.Label>
                     Meeting name (e.g. "First meeting", "Discussion Chapters 1-5")
@@ -55,11 +47,11 @@ function CreateMeetingForm(props) {
                     <Form.Control type="text" placeholder="Discussion Chapters 1-5..." name="title" value={createMeeting.title} onChange={(e) => setCreateMeeting({...createMeeting, title: e.target.value})} />
                 </Form.Group>
 
-                
                 <Row>
                     <Col>
-                        <MeetingCalendar createMeeting={createMeeting} setCreateMeeting={setCreateMeeting} />
+                        <MeetingCalendar createMeeting={createMeeting} setCreateMeeting={(date)=>setCreateMeeting(date)} />
                     </Col>
+
                     <Col>
                         <Form.Group>
                             <Form.Label>Meeting time</Form.Label>

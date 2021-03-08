@@ -11,10 +11,13 @@ const Event = require('./../models/event.model')
 
 router.post('/:event_id/createMeeting', (req, res) => {
 
-    console.log("paso esto", req.body)
+    console.log("req body", req.body, "y req.params", req.params.event_id )
+
+    const event_id = req.params.event_id
+    const meeting = { ...req.body, bookClub: event_id }
     
     Meeting
-        .create(req.body)
+        .create(meeting)
         .then(meeting => {
             Event
                 .findByIdAndUpdate(req.params.event_id, { $push: { meetings: meeting._id }}, { new: true })
@@ -40,6 +43,17 @@ router.put('/editMeeting/:meeting_id', (req, res) => {
 })
 
 
+//Find meetings by Book Club
+router.get('/findMeetings/:bookClub', (req, res) => {
+
+    const bookClub = req.params.bookClub
+
+    Meeting
+        .find({bookClub})
+        .then(meetings => { res.json(meetings) })
+        .catch(err => res.status(500).json({code: 500, message: 'Error fetching Meetings', err}))
+})
+
 //Delete meeting
 
 router.delete('/delete/:meeting_id', (req, res) => {
@@ -49,6 +63,9 @@ router.delete('/delete/:meeting_id', (req, res) => {
         .then(() => res.json({message: 'Meeting deleted'}))
         .catch(err => res.status(500).json({ code: 500, message: 'Error deleting post'}))
 })
+
+
+
 
 
 module.exports = router

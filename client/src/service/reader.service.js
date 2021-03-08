@@ -12,6 +12,8 @@ class ReaderService {
 
     leaveBookClub = bookClub_id => this.api.put(`/leaveBookClub/${bookClub_id}`)
 
+    editProfile = userData => this.api.put('/edit-profile', userData)
+
 }
 
 export default ReaderService

@@ -7,43 +7,43 @@ import './Profile.css'
 import BookClubService from '../../../service/bookclubs.service'
 
 
-function Profile({ loggedUser }) {
+function Profile(props) {
+
+    const { loggedUser } = props
+
     const bookClubService = new BookClubService()
     const [userClubs, setUserClubs] = useState([])
     const [userJoinedClubs, setUserJoinedClubs] = useState([])
     
     useEffect(() => {
-        function bookClubsCreated() {
-            const clubsIds = loggedUser.clubsCreated
-            Promise.all(
-                clubsIds.map(async (club) => {
-                  const response = await bookClubService.getBookClubDetails(club)
-                  setUserClubs( prevState => {
-                    console.log('prevState', prevState)
-                    return [...prevState, response.data];
-                })
-            }))
-        }
-
-        function bookClubsJoined() {
-            const joinedClubsIds = loggedUser.clubsJoined
-            console.log(joinedClubsIds, 'joinedClubsIds')
-            Promise.all(
-                joinedClubsIds.map(async (club) => {
-                    const response = await bookClubService.getBookClubDetails(club)
-                    console.log("profile response", response)
-                    setUserJoinedClubs( prevState => {
-                        return [...prevState, response.data]
-                    })
-                })
-            )
-        }
-
+        props.fetchUser()
         bookClubsCreated()
         bookClubsJoined()
     }, [])
+    
+    function bookClubsCreated() {
+        const clubsIds = loggedUser.clubsCreated
+        Promise.all(
+            clubsIds.map(async (club) => {
+              const response = await bookClubService.getBookClubDetails(club)
+              setUserClubs( prevState => {
+                return [...prevState, response.data];
+            })
+        }))
+    }
 
-
+    function bookClubsJoined() {
+        const joinedClubsIds = loggedUser.clubsJoined
+        console.log(joinedClubsIds, 'joinedClubsIds')
+        Promise.all(
+            joinedClubsIds.map(async (club) => {
+                const response = await bookClubService.getBookClubDetails(club)
+                setUserJoinedClubs( prevState => {
+                    return [...prevState, response.data]
+                })
+            })
+        )
+    }
 
     return (
         <>

@@ -1,8 +1,8 @@
-import { Card } from 'react-bootstrap'
+import { Card, ButtonGroup } from 'react-bootstrap'
 
-// import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
-function ProfileCard({ userInfo, firstName, lastName, profileImg }) {
+function ProfileCard({ userInfo, firstName, lastName, profileImg, _id }) {
 
     return (
         
@@ -13,9 +13,9 @@ function ProfileCard({ userInfo, firstName, lastName, profileImg }) {
                     <h6>{userInfo.username}</h6>
                     <p>Email: {userInfo.email} </p>              
 
-                    {/* <ButtonGroup size="sm" style={{ width: '100%' }}>
-                        <Link to='#' className="btn btn-dark">Edit</Link>
-                    </ButtonGroup> */}
+                    <ButtonGroup size="sm" style={{ width: '100%' }}>
+                        <Link to={`/edit-profile/${_id}`} className="btn btn-dark">Edit</Link>
+                    </ButtonGroup>
 
                 </Card.Body>
             </Card>

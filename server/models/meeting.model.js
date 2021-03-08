@@ -6,11 +6,11 @@ const meetingPostSchema = new Schema({
         type: String,
         required: true,
     },
-    meetingDate: {
+    date: {
         type: String,
         required: true,
     },
-    meetingTime: {
+    time: {
         type: String,
         required: true
     },
@@ -25,6 +25,11 @@ const meetingPostSchema = new Schema({
     },
     description: {
         type: String,
+        required: true,
+    },
+    bookClub: {
+        type: Schema.Types.ObjectId,
+        ref: 'Event',
         required: true,
     }
 }, {

@@ -196,7 +196,7 @@ export default function CreateBookClubs(props) {
                     <Form.Group>
                         <Form.Label>Choose the book genre</Form.Label>
                         <Form.Control as="select" name="genre" value={createClubForm.genre} onChange={(e) => setCreateClubForm({...createClubForm, genre: e.target.value})}>
-                            {GenresArr.map(elm => <option>{elm}</option>)}
+                            {GenresArr.map((elm, idx) => <option key={idx} >{elm}</option>)}
                         </Form.Control>
                     </Form.Group>
 

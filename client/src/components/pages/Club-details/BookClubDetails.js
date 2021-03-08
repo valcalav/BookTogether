@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import GenreList from '../Genres-list/GenresList'
 import './BookClubDetails.css'
@@ -14,8 +14,8 @@ constructor(props) {
     super(props)
     this.state = {
         bookClub: undefined,
-        redirect: false
     }
+
     this.bookClubService = new BookClubService()
     this.readerService = new ReaderService()
 }
@@ -35,10 +35,8 @@ joinClub() {
     this.readerService
         .joinBookClub(bookClub_id)
         .then((response) => {
-            if(response){
-                this.setState({redirect: true})
-                this.props.reRender()
-            }
+            this.props.fetchUser()
+            this.props.history.push('/bookclubs-list')
         })
         .catch(err => console.log(err))       
 }
@@ -46,10 +44,6 @@ joinClub() {
     render() {
 
         const { bookClub } = this.state
-
-        if(this.state.redirect){
-            return <Redirect to='/profile'/>;
-        }
 
         return (
             <>

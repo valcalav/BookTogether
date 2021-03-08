@@ -14,6 +14,11 @@ class BookClubService {
 
     getBookClubDetails = bookClub_id => this.api.get(`/details/${bookClub_id}`)
 
+    getCreatedClubs = user_id => this.api.get(``)
+    //owner
+    getJoinedClubs = user_id => this.api.get(``)
+    //participants
+
     newBookClub = bookClubDetails => this.api.post('/newBookClub', bookClubDetails)
 
     editBookClub = (bookClub_id, bookClubDetails) => this.api.put(`/editBookClub/${bookClub_id}`, bookClubDetails)
