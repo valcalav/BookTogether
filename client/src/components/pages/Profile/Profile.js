@@ -1,28 +1,49 @@
 import React, { useEffect, useState } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
-import ProfileCard from './Profile-card'
-import MyClubsCard from './my-clubs-card'
+import ProfileCard from './ProfileCard'
+import MyClubsCard from './CreatedClubCard'
+import JoinedClubsCard from './JoinedClubCard'
 import './Profile.css'
 import BookClubService from '../../../service/bookclubs.service'
 
-const bookClubService = new BookClubService()
 
 function Profile({ loggedUser }) {
-
+    const bookClubService = new BookClubService()
     const [userClubs, setUserClubs] = useState([])
+    const [userJoinedClubs, setUserJoinedClubs] = useState([])
     
     useEffect(() => {
-        const clubsIds = loggedUser.clubsCreated
-        Promise.all(
-            clubsIds.map(async (club) => {
-              const response = await bookClubService.getBookClubDetails(club)
-              setUserClubs( prevState => {
-                  console.log('prevState', prevState)
-                return [...prevState, response.data];
-            })
+        function bookClubsCreated() {
+            const clubsIds = loggedUser.clubsCreated
+            Promise.all(
+                clubsIds.map(async (club) => {
+                  const response = await bookClubService.getBookClubDetails(club)
+                  setUserClubs( prevState => {
+                    console.log('prevState', prevState)
+                    return [...prevState, response.data];
+                })
+            }))
         }
-          ))
-    }, [loggedUser])
+
+        function bookClubsJoined() {
+            const joinedClubsIds = loggedUser.clubsJoined
+            console.log(joinedClubsIds, 'joinedClubsIds')
+            Promise.all(
+                joinedClubsIds.map(async (club) => {
+                    const response = await bookClubService.getBookClubDetails(club)
+                    console.log("profile response", response)
+                    setUserJoinedClubs( prevState => {
+                        return [...prevState, response.data]
+                    })
+                })
+            )
+        }
+
+        bookClubsCreated()
+        bookClubsJoined()
+    }, [])
+
+
 
     return (
         <>
@@ -35,15 +56,12 @@ function Profile({ loggedUser }) {
                 <Col>
                     <h5>Created clubs</h5>
                     <Row>
-                    
-                        {userClubs && userClubs.map((userClub)=> <MyClubsCard clubInfo={userClub} />)}
-                    
+                        {userClubs && userClubs.map((userClub, idx)=> <MyClubsCard clubInfo={userClub} key={idx} />)}
                     </Row>
+
                     <h5>Joined clubs</h5>
                     <Row>
-                    
-                        {userClubs && userClubs.map((userClub)=> <MyClubsCard clubInfo={userClub} />)}
-                    
+                        {userJoinedClubs && userJoinedClubs.map((userClub, idx)=> <JoinedClubsCard clubInfo={userClub} key={idx} />)}
                     </Row>
 
                 </Col>

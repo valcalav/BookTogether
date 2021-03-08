@@ -10,7 +10,8 @@ class App extends Component {
   constructor(){
     super()
     this.state = {
-      loggedUser: undefined
+      fetchUserStart: false,
+      loggedUser: undefined,
     }
     this.authService = new AuthService()
   }
@@ -20,9 +21,13 @@ class App extends Component {
   }
 
   fetchUser() {
+
     this.authService
       .isLoggedIn()
-      .then(response => this.storeUser(response.data))
+      .then(response => {
+        this.storeUser(response.data)
+        this.setState({ fetchUserStart: true })
+      })
       .catch(() => this.storeUser(undefined))
   }
 
@@ -30,12 +35,16 @@ class App extends Component {
     this.fetchUser()
   }
 
+  reRender(){
+    window.location.reload()
+  }
+
   render() {
     return(
       <>
         <NavBar storeUser={user => this.storeUser(user)} loggedUser={this.state.loggedUser} />
         <main>
-          <Routes storeUser={user => this.storeUser(user)} loggedUser={this.state.loggedUser} />
+          <Routes fetchUserStart={this.state.fetchUserStart} reRender={this.reRender} storeUser={user => this.storeUser(user)} loggedUser={this.state.loggedUser} />
         </main>
         
       </>

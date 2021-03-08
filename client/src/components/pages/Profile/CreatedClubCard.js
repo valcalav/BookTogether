@@ -1,4 +1,4 @@
-import { Row, Col, Card, ButtonGroup } from 'react-bootstrap'
+import { Col, Card, ButtonGroup } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 function MyClubsCard({clubInfo}) {
@@ -13,8 +13,9 @@ function MyClubsCard({clubInfo}) {
                     <p><strong>{bookTitle}</strong> - {bookAuthor} </p>
                     <small>Start date: {startDate}</small>
 
-                    <ButtonGroup size="sm" style={{ width: '100%' }}>
+                    <ButtonGroup size="sm" style={{width: '100%' }}>
                         <Link to={`/edit-club/${_id}`} className="btn btn-dark">Edit</Link>
+                        <Link to={`/club-dashboard/${_id}`} className="btn btn-dark">Go to Club</Link>
                     </ButtonGroup>
 
                 </Card.Body>

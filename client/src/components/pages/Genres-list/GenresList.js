@@ -14,7 +14,7 @@ function GenresList() {
             <hr />
             <ul>
                 {
-                    Object.keys(GenresObj).map((key, idx) => ( <li><a href={`/bookclubs-genre-list/${key}`}>{GenresObj[key]}</a></li>))
+                    Object.keys(GenresObj).map((key, idx) => ( <li key={idx}><a href={`/bookclubs-genre-list/${key}`}>{GenresObj[key]}</a></li>))
                 }
             </ul>
         </Col>

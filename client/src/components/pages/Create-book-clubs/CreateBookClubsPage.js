@@ -46,16 +46,41 @@ export default function CreateBookClubs(props) {
         if (e) { e.preventDefault() } 
         setLoading(true)
 
-        gBookService.getByAuthor(searchBook.author, currentPage, MAX_RESULT)
-            .then(res => {
-                const fetchedBooks = res.data.items
-                setBooks(fetchedBooks)
-                setNumResults(fetchedBooks.totalItems)
-                setLoading(false)
-            })
-            .catch(err => {
-                setError(err)
-            })
+        if (searchBook.author?.length > 0 && !searchBook.title) {
+            gBookService.getByAuthor(searchBook.author, currentPage, MAX_RESULT)
+                .then(res => {
+                    const fetchedBooks = res.data.items
+                    setBooks(fetchedBooks)
+                    setNumResults(fetchedBooks.totalItems)
+                    setLoading(false)
+                })
+                .catch(err => {
+                    setError(err)
+                })
+        } else if (searchBook.title?.length > 0 && !searchBook.author) {
+            gBookService.getByTitle(searchBook.title, currentPage, MAX_RESULT)
+                .then(res => {
+                    const fetchedBooks = res.data.items
+                    setBooks(fetchedBooks)
+                    setNumResults(fetchedBooks.totalItems)
+                    setLoading(false)
+                })
+                .catch(err => {
+                    setError(err)
+                })
+        } else if (searchBook.title?.length > 0 && searchBook.author?.length > 0) {
+            gBookService.getByTitleAndAuthor(searchBook.title, searchBook.author, currentPage, MAX_RESULT)
+                .then(res => {
+                    const fetchedBooks = res.data.items
+                    setBooks(fetchedBooks)
+                    setNumResults(fetchedBooks.totalItems)
+                    setLoading(false)
+                })
+                .catch(err => {
+                    setError(err)
+                })
+        }
+
     }
 
     useEffect(() => {
@@ -90,7 +115,7 @@ export default function CreateBookClubs(props) {
         bookClubsService
             .newBookClub(createClubForm)
             .then(()=> {
-                this.props.history.push('/bookclubs-list')
+                props.history.push('/bookclubs-list')
             })
             .catch(err => {
                 console.log("error", err)
@@ -100,7 +125,7 @@ export default function CreateBookClubs(props) {
 
     return (
         <div>
-        {step === 'FindBook' && !loading ? 
+        {step === 'FindBook' ? 
             <FindBook
                 handleSubmit={handleSubmit}
                 searchBook={searchBook}
@@ -110,6 +135,7 @@ export default function CreateBookClubs(props) {
                 step={step}
                 handleBookChoice={handleBookChoice}
                 handlePagination={handlePagination}
+                loading={loading}
             />
             :
             <div>
@@ -131,7 +157,7 @@ export default function CreateBookClubs(props) {
                                     <Card.Title>Book title: "{chosenBook.bookTitle}"</Card.Title>
                                     <Card.Text>
                                         Authors:
-                                        {chosenBook.bookAuthor.map((author, idx) => {
+                                        {chosenBook.bookAuthor?.map((author, idx) => {
                                             return <p key={idx} >- {author}</p>
                                         })}
                                     </Card.Text>
@@ -196,6 +222,7 @@ export default function CreateBookClubs(props) {
                             <option >6 months</option>
                         </Form.Control>
                     </Form.Group>
+
                     <Form.Group>
                         <Form.Label>How often will the club meet?</Form.Label>
                         <Form.Control value={createClubForm.recurrence} as="select" name="recurrence" onChange={(e) => setCreateClubForm({...createClubForm, recurrence: e.target.value})} >
@@ -205,6 +232,7 @@ export default function CreateBookClubs(props) {
                             <option>once a month</option>
                         </Form.Control>
                     </Form.Group>
+
                     <Form.Group>
                         <Form.Label>In what language will the book meetings be?</Form.Label>
                         <Form.Control value={createClubForm.language} as="select" name="language" onChange={(e) => setCreateClubForm({...createClubForm, language: e.target.value})} >
