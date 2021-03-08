@@ -15,7 +15,7 @@ function BookClubsCard({ bookClubName, bookTitle, bookAuthor, startDate, partici
                     <h6>{bookClubName}</h6>
                     <hr />
                     <p><strong>{bookTitle}</strong> - {bookAuthor} </p>
-                    <small>Start date: {startDate} </small>
+                    <small>Start date: {startDate.slice(0,10)} </small>
                     <small>Participants: {participants.length} </small>
 
                     <ButtonGroup size="sm" style={{ width: '100%' }}>

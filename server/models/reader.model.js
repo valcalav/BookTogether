@@ -12,8 +12,9 @@ const readerSchema = new Schema({
         type: String,
         required: true
     },
-    favoriteGenres: {
-        type: [String],
+    country: String,
+    favoriteGenre: {
+        type: String,
         enum: ["fantasy", "science fiction", "dystopian", "action and adventure", "mystery", "horror", "thriller and suspense", "historical fiction", "romance", "womens fiction", "LGBTQ+", "classics", "contemporary fiction", "plays and screenplays", "poetry", "literary fiction", "magical realism", "comics and graphic novels", "short story", "young adult", "new adult", "childrens literature", "memoir and autobiography", "biography", "food and drink", "art and photography", "self-help", "history", "travel", "true crime", "humor", "essays", "guide how-to", "religion and spirituality", "humanities and social sciences", "parenting and families", "science and technology"],
     },
     profileImg: {

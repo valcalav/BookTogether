@@ -64,9 +64,12 @@ class BookClubForm extends Component {
 
     handleSubmit(e) {
         this.setState({loading: true})
+        
+        const bookClub_id = this.props.match.params.bookClub_id
+
         e.preventDefault()
-        this.bookClubsService
-            .newBookClub(this.state)
+
+        this.bookClubsService.editBookClub(bookClub_id, this.state)
             .then(() => {
                 this.setState({ loading: false })
                 this.props.history.push('/')
@@ -79,6 +82,8 @@ class BookClubForm extends Component {
 
     deleteClub() {
         const bookClub_id = this.props.match.params.bookClub_id
+
+
 
         this.setState({loading:true})
         this.bookClubsService

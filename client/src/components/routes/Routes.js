@@ -11,6 +11,7 @@ import BookClubEditForm from "../pages/Edit-book-clubs/BookClubEditForm"
 import Profile from '../pages/Profile/Profile'
 import EditProfile from '../pages/Profile/EditProfile'
 import ClubDashboard from '../pages/ClubDashboard/ClubDashboard'
+import EditMeetingPage from '../pages/EditMeetings/EditMeetingPage'
 
 const Routes = ({ storeUser, loggedUser, fetchUser }) => {
 
@@ -35,9 +36,11 @@ const Routes = ({ storeUser, loggedUser, fetchUser }) => {
         
                     <Route path="/profile" exact render={(props) => loggedUser ? <Profile fetchUser={fetchUser} loggedUser={loggedUser} {...props}/> : <Redirect to="/login" />}/>
 
-                    <Route path="/edit-profile/:user_id" render={(props) => loggedUser ? <EditProfile loggedUser={loggedUser} {...props}/> : <Redirect to="/login" />}/>
+                    <Route path="/edit-profile/:reader_id" render={(props) => loggedUser ? <EditProfile loggedUser={loggedUser} {...props}/> : <Redirect to="/login" />}/>
         
-                    <Route path="/club-dashboard/:bookClub_id" render= {props => loggedUser ? <ClubDashboard loggedUser={loggedUser}  {...props}/> : <Redirect to="/login" /> } />
+                    <Route path="/club-dashboard/:bookClub_id" exact render= {props => loggedUser ? <ClubDashboard loggedUser={loggedUser}  {...props}/> : <Redirect to="/login" /> } />
+
+                    <Route path="/edit-meeting/:_id" exact render={props => loggedUser ? <EditMeetingPage loggedUser={loggedUser} {...props} /> : <Redirect to="/login" /> } />
         
                 </Switch>
         

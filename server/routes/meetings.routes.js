@@ -42,6 +42,14 @@ router.put('/editMeeting/:meeting_id', (req, res) => {
         .catch(err => res.status(500).json({ code: 500, message: 'Error editing meeting'}))
 })
 
+//Find one meeting
+router.get('/details/:meeting_id', (req, res) => {
+
+    Meeting
+        .findById(req.params.meeting_id)
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json({ code: 500, message:'Error fetching meeting', err}))
+})
 
 //Find meetings by Book Club
 router.get('/findMeetings/:bookClub', (req, res) => {

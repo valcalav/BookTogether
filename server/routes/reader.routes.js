@@ -36,7 +36,7 @@ router.put('/leaveBookClub/:bookClub_id', (req, res, next) => {
 })
 
 //Edit Reader info
-router.put('/edit-profile', (req, res) => {
+router.put('/edit-profile/:reader_id', (req, res) => {
 
     Reader
         .findByIdAndUpdate(req.user._id, req.body)

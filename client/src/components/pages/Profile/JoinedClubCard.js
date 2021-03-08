@@ -11,7 +11,7 @@ function MyClubsCard({clubInfo}) {
                     <h6>{bookClubName}</h6>
                     <hr />
                     <p><strong>{bookTitle}</strong> - {bookAuthor} </p>
-                    <small>Start date: {startDate}</small>
+                    <small>Start date: {startDate.slice(0,10)}</small>
 
                     <ButtonGroup size="sm" style={{ width: '100%' }}>
                         <Link to={`/club-dashboard/${_id}`} className="btn btn-dark">Go to Club</Link>

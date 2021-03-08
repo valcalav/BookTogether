@@ -2,7 +2,7 @@ import { Card, ButtonGroup } from 'react-bootstrap'
 
 import { Link } from 'react-router-dom'
 
-function ProfileCard({ userInfo, firstName, lastName, profileImg, _id }) {
+function ProfileCard({ userInfo, firstName, lastName, profileImg, country, favoriteGenre, _id }) {
 
     return (
         
@@ -11,7 +11,9 @@ function ProfileCard({ userInfo, firstName, lastName, profileImg, _id }) {
                 <Card.Body>
                     <h5>{firstName} {lastName} </h5>
                     <h6>{userInfo.username}</h6>
-                    <p>Email: {userInfo.email} </p>              
+                    <p> <strong>Email:</strong> {userInfo.email} </p>
+                    {country && <p>{country}</p>}
+                    {favoriteGenre && <p>Favorite genre: {favoriteGenre}</p>}       
 
                     <ButtonGroup size="sm" style={{ width: '100%' }}>
                         <Link to={`/edit-profile/${_id}`} className="btn btn-dark">Edit</Link>

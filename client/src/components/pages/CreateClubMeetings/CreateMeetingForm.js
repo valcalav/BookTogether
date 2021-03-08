@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import MeetingCalendar from './MeetingCalendar'
+import MeetingCalendar from './NewMeetingCalendar'
 import { Form, Row, Col, Button } from 'react-bootstrap'
 
 import MeetingService from '../../../service/meeting.service'

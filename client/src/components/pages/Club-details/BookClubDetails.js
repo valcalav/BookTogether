@@ -65,7 +65,7 @@ joinClub() {
                             <p> Genre: {bookClub.genre} </p>
                             <p> Duration: {bookClub.duration} </p>
                             <p> Language: {bookClub.language} </p>
-                            <p> Start date: {bookClub.startDate} </p>
+                            <p> Start date: {bookClub.startDate.slice(0,10)} </p>
                         </>
                         :
                         null

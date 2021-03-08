@@ -12,7 +12,7 @@ class ReaderService {
 
     leaveBookClub = bookClub_id => this.api.put(`/leaveBookClub/${bookClub_id}`)
 
-    editProfile = userData => this.api.put('/edit-profile', userData)
+    editProfile = (reader_id, userData) => this.api.put(`/edit-profile/${reader_id}`, userData)
 
 }
 
