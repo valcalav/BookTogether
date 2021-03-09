@@ -11,24 +11,12 @@ const Event = require('./../models/event.model')
 
 router.post('/:event_id/createMeeting', (req, res) => {
 
-    console.log("req body", req.body, "y req.params", req.params.event_id )
-
     const event_id = req.params.event_id
     const meeting = { ...req.body, bookClub: event_id }
     
-    Meeting
-        .create(meeting)
-        .then(meeting => {
-            Event
-                .findByIdAndUpdate(req.params.event_id, { $push: { meetings: meeting._id }}, { new: true })
-                .then(() => res.json(meeting))
-                .catch(err => {
-                    console.log(err)
-                    res.status(500).json({ code: 500, message: 'Error updating event with meeting'})})
-        })
-        .catch(err => {
-            console.log(err)
-            res.status(500).json({ code: 500, message: 'Error creating meeting'})})
+   Meeting.createAndAssignToEvent(meeting, event_id)
+   .then((meeting) => res.json(meeting))
+   .catch(err => res.status(500).json({code: 500, message: 'Error'}))
 })
 
 

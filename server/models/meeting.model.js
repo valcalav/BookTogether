@@ -36,6 +36,24 @@ const meetingPostSchema = new Schema({
     timestamps: true
 })
 
+
+meetingPostSchema.statics.createAndAssignToEvent = function(meetingData, eventId) {
+    return this
+    .create(meetingData)
+    .then(meeting => {
+        return mongoose.model('Event')
+            .findByIdAndUpdate(eventId, { $push: { meetings: meeting._id }}, { new: true })
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json({ code: 500, message: 'Error updating event with meeting'})})
+    .catch(err => {
+        console.log(err)
+        res.status(500).json({ code: 500, message: 'Error creating meeting'})})
+    }
+
 const Meeting = mongoose.model('Meeting', meetingPostSchema)
+
+
 
 module.exports = Meeting
