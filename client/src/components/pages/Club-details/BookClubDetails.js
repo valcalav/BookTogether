@@ -21,8 +21,12 @@ constructor(props) {
 }
 
 componentDidMount() {
-    const bookClub_id = this.props.match.params.bookClub_id
+    this.BookDetails()
+}
 
+BookDetails() {
+    const bookClub_id = this.props.match.params.bookClub_id
+    
     this.bookClubService
         .getBookClubDetails(bookClub_id)
         .then(response => this.setState({ bookClub: response.data }))
@@ -43,7 +47,8 @@ joinClub() {
 
     render() {
 
-        const { bookClub } = this.state
+        // const { imgBookCover, bookClubName, bookTitle, bookAuthor, description, genre, duration, language, startDate } = this.state.bookClub
+        const {bookClub} = this.state
 
         return (
             <>
