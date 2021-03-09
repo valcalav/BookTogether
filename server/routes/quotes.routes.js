@@ -21,7 +21,7 @@ router.post('/newQuote', (req, res) => {
 router.get('/myQuotes/:reader_id', (req, res) => {
 
     const reader_id = req.params.reader_id
-    console.log("este es el id que le paso", reader_id)
+    
     QuotesPost
         .find( {postedBy: req.params.reader_id} )
         .then(posts => res.json({posts}))

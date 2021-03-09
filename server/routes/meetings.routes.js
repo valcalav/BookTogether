@@ -14,11 +14,11 @@ router.post('/:event_id/createMeeting', (req, res) => {
     const event_id = req.params.event_id
     const meeting = { ...req.body, bookClub: event_id }
     
-   Meeting.createAndAssignToEvent(meeting, event_id)
-   .then((meeting) => res.json(meeting))
-   .catch(err => res.status(500).json({code: 500, message: 'Error'}))
+   Meeting
+        .createAndAssignToEvent(meeting, event_id)
+        .then((meeting) => res.json(meeting))
+        .catch(err => res.status(500).json({code: 500, message: 'Error'}))
 })
-
 
 //Edit meeting
 

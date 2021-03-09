@@ -64,6 +64,19 @@ const eventSchema = new Schema({
     timestamps: true
 })
 
+eventSchema.statics.createAndAssingToReader = function(clubData, userId) {
+    return this
+    .create(clubData)
+    .then(newClub => {
+        return mongoose.model('Reader')
+        .findByIdAndUpdate(userId, { $push: { clubsCreated: newClub._id}}, { new: true })
+        .catch(err => console.log(err))
+    })
+    .catch(err => {
+        console.log(err)
+        res.status(500).json({ code:500, message:'Error saving new Book Club', err})})
+}
+
 const Event = mongoose.model('Event', eventSchema)
 
 module.exports = Event

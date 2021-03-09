@@ -43,22 +43,13 @@ router.get('/details/:bookClub_id', (req, res) => {
 //New Book club
 router.post('/newBookClub', (req, res) => {
 
-    console.log(req.body)
+    console.log('ESTE ES EL REQ USER', req.user)
     const club = { ...req.body, owner: req.user._id }
+    const userId = req.user._id
 
-    Event
-        .create(club)
-        .then(newClub => {
-            console.log("esta es la respuesta:", newClub)
-            console.log("este es el user", req.user._id)
-            Reader
-                .findByIdAndUpdate(req.user._id, { $push: { clubsCreated: newClub._id}}, { new: true })
-                .then(response => res.json(response))
-                .catch(err => console.log(err))
-        })
-        .catch(err => {
-            console.log(err)
-            res.status(500).json({ code:500, message:'Error saving new Book Club', err})})
+    Event.createAndAssingToReader(club, userId)
+    .then((response) => res.json(response))
+    .catch(err => res.status(500).json({code:500, message:'Error'}))
 })
 
 //Edit Book club
@@ -84,7 +75,5 @@ router.delete('/delete/:bookClub_id', (req, res) => {
         })
         .catch(err => res.status(500).json({ code: 500, message: 'Error deleting BookClub', err}))
 })
-
-
 
 module.exports = router
