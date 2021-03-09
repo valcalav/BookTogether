@@ -16,6 +16,8 @@ class QuotesService {
 
     deleteQuote = quote_id => this.api.delete(`/delete/${quote_id}`)
 
+    findOne = quote_id => this.api.get(`/details/${quote_id}`)
+
 }
 
 export default QuotesService

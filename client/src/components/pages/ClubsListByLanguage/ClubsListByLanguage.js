@@ -3,12 +3,11 @@ import { Container, Row, Col } from 'react-bootstrap'
 
 import GenreList from '../Genres-list/GenresList'
 import LanguageList from '../LanguageList/LanguageList'
-
 import BookClubCard from '../Clubs-list-all/BookClubCard'
 
 import BookClubsService from '../../../service/bookclubs.service'
 
-class BookClubsByGenre extends Component {
+class BookClubsByLanguage extends Component {
 
     constructor() {
         super()
@@ -25,11 +24,11 @@ class BookClubsByGenre extends Component {
     
     loadClubs() {
         
-        const {genre} = this.props.match.params
-        console.log("funciona bien", genre)
+        const {language} = this.props.match.params
+        console.log("funciona bien", language)
     
         this.bookClubsService
-            .getAllBookClubsByGenre(genre)
+            .getAllBookClubsByLanguage(language)
             .then(response => {
                 console.log("RESPUESTA DE BUSQUEDA!:", {...response.data})
                 this.setState({ bookClubs: response.data })
@@ -39,7 +38,6 @@ class BookClubsByGenre extends Component {
 
     render() {
         const {bookClubs} = this.state
-        console.log("EL STATE 2!!!", bookClubs)
 
         return (
             <>
@@ -51,6 +49,7 @@ class BookClubsByGenre extends Component {
                     <Col>
                         <GenreList />
                         <LanguageList />
+                        
                     </Col>
                     {
                         bookClubs ? bookClubs.map(elm => <BookClubCard {...elm} key={elm._id} />) : null
@@ -62,4 +61,4 @@ class BookClubsByGenre extends Component {
     }
 }
 
-export default BookClubsByGenre
+export default BookClubsByLanguage

@@ -9,7 +9,7 @@ import './GenresList.css'
 function GenresList() {
     
     return (
-        <Col md={4} className="genres-container">
+        <Col className="genres-container">
             <h5>Search by genre</h5>
             <hr />
             <ul>

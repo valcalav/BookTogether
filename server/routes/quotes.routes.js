@@ -28,6 +28,15 @@ router.get('/myQuotes/:reader_id', (req, res) => {
         .catch(err => res.status(500).json({code: 500, message: 'Error fetching posts', err}))
 })
 
+//Find one quote-post
+router.get('/details/:quote_id', (req, res) => {
+
+    QuotesPost
+        .findById(req.params.quote_id)
+        .then(response => res.json(response))
+        .catch(err => res.status(500).json({ code: 500, message:'Error fetching meeting', err}))
+})
+
 // Edit quote-post
 router.put('/editQuote/:quote_id', (req, res) => {
 

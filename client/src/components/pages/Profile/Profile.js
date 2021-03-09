@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react'
-import { Container, Row, Col, Card, Button } from 'react-bootstrap'
+import { Container, Row, Col, Card, Button, Modal } from 'react-bootstrap'
 
 import ProfileCard from './ProfileCard'
 import MyClubsCard from './CreatedClubCard'
 import JoinedClubsCard from './JoinedClubCard'
-import QuotesPostsCard from '../QuotesPosts/QuotesPostsCard'
+import QuotesPostsCard from '../QuotesPosts/QuotePostsCard'
+import CreateQuotePost from '../QuotesPosts/CreateQuotePost'
 
 import './Profile.css'
 
 import BookClubService from '../../../service/bookclubs.service'
 import QuotesService from '../../../service/quotes.service'
+import { Link } from 'react-router-dom'
 
 
 function Profile(props) {
@@ -22,6 +24,7 @@ function Profile(props) {
     const [userClubs, setUserClubs] = useState([])
     const [userJoinedClubs, setUserJoinedClubs] = useState([])
     const [quotePost, setQuotePost] = useState([])
+    const [modalShow, setModalShow] = useState(false)
     
     useEffect(() => {
         props.fetchUser()
@@ -62,6 +65,14 @@ function Profile(props) {
             .catch(err => console.log(err))
     }
 
+    function handleClose(){
+        setModalShow(false);}
+
+    function handleShow(){
+        setModalShow(true);
+    } 
+    
+
     return (
         <>
         <Container>
@@ -69,6 +80,9 @@ function Profile(props) {
             <Row>
                 <Col md={4} className="profile-cards">
                     <ProfileCard {...loggedUser} />
+                    <div>
+                        <Link to='/create-club' className="btn btn-dark">Create a Book Club</Link>
+                    </div>
                 </Col>
                 <Col>
                     <h5>Created clubs</h5>
@@ -87,8 +101,9 @@ function Profile(props) {
                             <Card.Header as="h5">Favorite Quotes</Card.Header>
                             <Card.Body>
                                 {quotePost.posts && quotePost.posts.map((quote, idx) => <QuotesPostsCard quoteInfo={quote} key={idx} />)}
-                    
-                                <Button block variant="primary">Add quote</Button>
+
+                                <Button block variant="primary" onClick={() => setModalShow(true)}>Add quote</Button>
+
                             </Card.Body>
                         </Card>
                     </Row>
@@ -97,6 +112,22 @@ function Profile(props) {
             </Row>
 
         </Container>
+
+        {
+            modalShow === true && <Modal centered show={modalShow} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Modal heading</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <CreateQuotePost closeModal={handleClose} loggedUser={loggedUser} />
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>Close</Button>
+                    <Button variant="primary" onClick={handleClose}>Save Changes</Button>
+                </Modal.Footer>
+            </Modal>
+        }
+
         </>
     )
 }

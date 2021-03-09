@@ -12,6 +12,8 @@ class BookClubService {
     
     getAllBookClubsByGenre = genre => this.api.get(`/allBookClubs/${genre}`)
 
+    getAllBookClubsByLanguage = language => this.api.get(`/allBookClubs/language/${language}`)
+
     getBookClubDetails = bookClub_id => this.api.get(`/details/${bookClub_id}`)
 
     getCreatedClubs = user_id => this.api.get(``)

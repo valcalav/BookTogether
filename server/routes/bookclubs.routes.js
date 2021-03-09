@@ -29,6 +29,17 @@ router.get('/allBookClubs/:genre', (req, res) => {
         .catch(err => res.status(500).json({code: 500, message: 'Error fetching Book Clubs', err}))
 })
 
+//Book clubs list by language
+router.get('/allBookClubs/language/:language', (req, res) => {
+
+    const language = req.params.language
+
+    Event
+        .find({language})
+        .then(bookClubs => { res.json(bookClubs) })
+        .catch(err => res.status(500).json({code: 500, message: 'Error fetching Book Clubs', err}))
+})
+
 //Book club details
 router.get('/details/:bookClub_id', (req, res) => {
 
@@ -75,5 +86,6 @@ router.delete('/delete/:bookClub_id', (req, res) => {
         })
         .catch(err => res.status(500).json({ code: 500, message: 'Error deleting BookClub', err}))
 })
+
 
 module.exports = router

@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
-import { Container, Row } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 
 import GenreList from '../Genres-list/GenresList'
+import LanguageList from '../LanguageList/LanguageList'
 import BookClubsList from './BookClubsList'
 
 import './bookClubs.css'
@@ -39,7 +40,10 @@ class BookClubs extends Component {
             </div>
             <Container>
                 <Row>
-                    <GenreList />
+                    <Col lg={5} >
+                        <GenreList />
+                        <LanguageList />
+                    </Col>
                     <BookClubsList bookClubs={this.state.bookClubs} />
                 </Row>
 

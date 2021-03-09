@@ -61,7 +61,4 @@ router.delete('/delete/:meeting_id', (req, res) => {
 })
 
 
-
-
-
 module.exports = router

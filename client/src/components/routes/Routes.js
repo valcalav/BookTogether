@@ -5,6 +5,7 @@ import Login from '../pages/Login/Login'
 import Signup from '../pages/Signup/Signup'
 import BookClubs from '../pages/Clubs-list-all/BookClubsPage'
 import BookClubsByGenre from '../pages/Clubs-list-by-genre/ClubsListByGenre'
+import BookClubsByLanguage from '../pages/ClubsListByLanguage/ClubsListByLanguage'
 import BookClubDetails from '../pages/Club-details/BookClubDetails'
 import CreateBookClubsPage from '../pages/Create-book-clubs/CreateBookClubsPage'
 import BookClubEditForm from "../pages/Edit-book-clubs/BookClubEditForm"
@@ -12,6 +13,8 @@ import Profile from '../pages/Profile/Profile'
 import EditProfile from '../pages/Profile/EditProfile'
 import ClubDashboard from '../pages/ClubDashboard/ClubDashboard'
 import EditMeetingPage from '../pages/EditMeetings/EditMeetingPage'
+import EditQuotePost from '../pages/QuotesPosts/EditQuotePostPage'
+
 
 const Routes = ({ storeUser, loggedUser, fetchUser }) => {
 
@@ -27,6 +30,8 @@ const Routes = ({ storeUser, loggedUser, fetchUser }) => {
                     <Route path="/bookclubs-list" render={() => <BookClubs loggedUser={loggedUser} />} />
         
                     <Route path="/bookclubs-genre-list/:genre" render={props => <BookClubsByGenre loggedUser={loggedUser} {...props} /> } />
+
+                    <Route path="/bookclubs-language-list/:language" render={props => <BookClubsByLanguage loggedUser={loggedUser} {...props} /> } />
         
                     <Route path="/club-details/:bookClub_id" render={props => <BookClubDetails fetchUser={fetchUser} loggedUser={loggedUser} {...props} /> } />
         
@@ -41,6 +46,8 @@ const Routes = ({ storeUser, loggedUser, fetchUser }) => {
                     <Route path="/club-dashboard/:bookClub_id" exact render= {props => loggedUser ? <ClubDashboard loggedUser={loggedUser}  {...props}/> : <Redirect to="/login" /> } />
 
                     <Route path="/edit-meeting/:_id" exact render={props => loggedUser ? <EditMeetingPage loggedUser={loggedUser} {...props} /> : <Redirect to="/login" /> } />
+
+                    <Route path="/edit-quote/:_id" exact render={props => loggedUser ? <EditQuotePost loggedUser={loggedUser} {...props} /> : <Redirect to="/login" /> } />
         
                 </Switch>
         
