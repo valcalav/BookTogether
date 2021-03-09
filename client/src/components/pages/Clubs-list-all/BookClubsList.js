@@ -6,7 +6,7 @@ function BookClubsList({ bookClubs }) {
     
     return (
         <Row>
-            {bookClubs.allEvents ? bookClubs.allEvents.map(elm => <BookClubCard {...elm} key={elm._id} />) : null }
+            {bookClubs ? bookClubs.map(elm => <BookClubCard {...elm} key={elm._id} />) : null }
         </Row>
     )
 }

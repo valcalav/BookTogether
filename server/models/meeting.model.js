@@ -51,7 +51,7 @@ meetingPostSchema.statics.createAndAssignToEvent = function(meetingData, eventId
             from: 'Book Together <booktogether@info.com>',
             to: emails,
             subject: 'New Book Club meeting!',
-            text: 'Your next Book Club meeting has been scheduled for ' + meeting.date + ' at ' + meeting.time + ' hours. The link to enter the meeting is: ' + meeting.meetingLink + 'Visit the Book Club Dashboard for more information.'
+            text: 'Your next Book Club meeting has been scheduled for ' + meetingData.date + ' at ' + meetingData.time + ' hours. The link to enter the meeting' + meetingData.title + ', is: ' + meetingData.meetingLink + '. Visit the Book Club Dashboard for more information.'
         }
         transporter
             .sendMail(mailContent)
@@ -64,10 +64,6 @@ meetingPostSchema.statics.createAndAssignToEvent = function(meetingData, eventId
         res.status(500).json({ code: 500, message: 'Error creating meeting'})})
     }
 
-
-
 const Meeting = mongoose.model('Meeting', meetingPostSchema)
-
-
 
 module.exports = Meeting
