@@ -70,7 +70,8 @@ class BookClubForm extends Component {
         e.preventDefault()
 
         this.bookClubsService.editBookClub(bookClub_id, this.state)
-            .then(() => {
+            .then((response) => {
+                this.props.fetchUser()
                 this.setState({ loading: false })
                 this.props.history.push('/')
             })
@@ -83,16 +84,12 @@ class BookClubForm extends Component {
     deleteClub() {
         const bookClub_id = this.props.match.params.bookClub_id
 
-
-
         this.setState({loading:true})
         this.bookClubsService
             .deleteBookClub(bookClub_id)
+            .then(() => this.props.fetchUser())
             .then(() => this.props.history.push('/profile'))
-            .catch(err => {
-                this.setState({error: err})
-                console.log('error:', err)
-            })
+            .catch(err => this.setState({error: err}))
     }
 
     render(){

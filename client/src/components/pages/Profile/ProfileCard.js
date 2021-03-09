@@ -6,7 +6,7 @@ function ProfileCard({ userInfo, firstName, lastName, profileImg, country, favor
 
     return (
         
-            <Card className="clubs-card">
+            <Card>
                 <Card.Img variant="top" src={profileImg} />
                 <Card.Body>
                     <h5>{firstName} {lastName} </h5>

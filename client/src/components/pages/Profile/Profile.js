@@ -39,7 +39,7 @@ function Profile(props) {
             clubsIds.map(async (club) => {
               const response = await bookClubService.getBookClubDetails(club)
               setUserClubs( prevState => {
-                return [...prevState, response.data];
+                return response.data ? [...prevState, response.data] : [...prevState];
             })
         }))
     }

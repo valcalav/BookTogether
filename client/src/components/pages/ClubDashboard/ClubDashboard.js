@@ -53,6 +53,7 @@ function ClubDashboard(props) {
         readerService.leaveBookClub(bookClub_id)
             .then(response => {
                 console.log('Left bokclub')
+                props.fetchUser()
                 props.history.push('/')
             })
             .catch(err => console.log(err))
@@ -96,6 +97,7 @@ function ClubDashboard(props) {
 
                                     </Card.Body>
                                 </Card>
+                                        <Link to='/profile' className="btn btn-dark">Back to profile</Link>
                             </Col>
 
                             <Col lg={8}>

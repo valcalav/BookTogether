@@ -114,7 +114,8 @@ export default function CreateBookClubs(props) {
         e.preventDefault()
         bookClubsService
             .newBookClub(createClubForm)
-            .then(()=> {
+            .then((response)=> {
+                props.fetchUser()
                 props.history.push('/bookclubs-list')
             })
             .catch(err => {

@@ -44,7 +44,9 @@ class BookClubs extends Component {
                         <GenreList />
                         <LanguageList />
                     </Col>
-                    <BookClubsList bookClubs={this.state.bookClubs} />
+                    <Col>
+                        <BookClubsList bookClubs={this.state.bookClubs} />
+                    </Col>
                 </Row>
 
             </Container>

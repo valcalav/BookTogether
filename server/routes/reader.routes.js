@@ -11,7 +11,7 @@ const Reader = require('../models/reader.model')
 
 router.put('/joinBookClub/:bookClub_id', (req, res, next) => {
 
-    const eventPromise = Event.findByIdAndUpdate(req.params.bookClub_id, { $push: { participants: req.user._id}}, { new: true })
+    const eventPromise = Event.findByIdAndUpdate(req.params.bookClub_id, { $push: { participants: req.user._id, participantsEmails: req.user.userInfo.email } }, { new: true })
 
     const readerPromise = Reader.findByIdAndUpdate(req.user._id, { $push: { clubsJoined: req.params.bookClub_id }}, { new: true })
 
@@ -25,7 +25,7 @@ router.put('/joinBookClub/:bookClub_id', (req, res, next) => {
 
 router.put('/leaveBookClub/:bookClub_id', (req, res, next) => {
 
-    const eventPromise = Event.findByIdAndUpdate(req.params.bookClub_id, { $pull: { participants: req.user._id}}, { new: true })
+    const eventPromise = Event.findByIdAndUpdate(req.params.bookClub_id, { $pull: { participants: req.user._id, participantsEmails: req.user.userInfo.email}}, { new: true })
 
     const readerPromise = Reader.findByIdAndUpdate(req.user._id, { $pull: { clubsJoined: req.params.bookClub_id }}, { new: true })
 

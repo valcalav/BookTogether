@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const transporter = require('../config/nodemailer.config')
 const Schema = mongoose.Schema
 
 const meetingPostSchema = new Schema({
@@ -37,20 +38,33 @@ const meetingPostSchema = new Schema({
 })
 
 
-meetingPostSchema.statics.createAndAssignToEvent = function(meetingData, eventId) {
+meetingPostSchema.statics.createAndAssignToEvent = function(meetingData, eventId, emailList) {
     return this
     .create(meetingData)
     .then(meeting => {
         return mongoose.model('Event')
             .findByIdAndUpdate(eventId, { $push: { meetings: meeting._id }}, { new: true })
         })
-        .catch(err => {
-            console.log(err)
-            res.status(500).json({ code: 500, message: 'Error updating event with meeting'})})
+    .then(meeting => {
+        let emails = emailList.join(', ')
+        let mailContent = {
+            from: 'Book Together <booktogether@info.com>',
+            to: emails,
+            subject: 'New Book Club meeting!',
+            text: 'Your next Book Club meeting has been scheduled for ' + meeting.date + ' at ' + meeting.time + ' hours. The link to enter the meeting is: ' + meeting.meetingLink + 'Visit the Book Club Dashboard for more information.'
+        }
+        transporter
+            .sendMail(mailContent)
+            .then(details => {
+                console.log('Email sent:', details)
+            })
+    })
     .catch(err => {
         console.log(err)
         res.status(500).json({ code: 500, message: 'Error creating meeting'})})
     }
+
+
 
 const Meeting = mongoose.model('Meeting', meetingPostSchema)
 

@@ -56,6 +56,7 @@ const eventSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Reader'
     }],
+    participantsEmails: [String],
     meetings: [{
         type: Schema.Types.ObjectId,
         ref: 'Meeting'

@@ -35,19 +35,19 @@ const Routes = ({ storeUser, loggedUser, fetchUser }) => {
         
                     <Route path="/club-details/:bookClub_id" render={props => <BookClubDetails fetchUser={fetchUser} loggedUser={loggedUser} {...props} /> } />
         
-                    <Route path="/edit-club/:bookClub_id" render={props => <BookClubEditForm loggedUser={loggedUser} {...props} /> } />
+                    <Route path="/edit-club/:bookClub_id" render={props => <BookClubEditForm fetchUser={fetchUser} loggedUser={loggedUser} {...props} /> } />
         
-                    <Route path="/create-club" render={props => loggedUser ? <CreateBookClubsPage loggedUser={loggedUser} {...props} /> : <Redirect to="/login" />} />
+                    <Route path="/create-club" render={props => loggedUser ? <CreateBookClubsPage fetchUser={fetchUser} loggedUser={loggedUser} {...props} /> : <Redirect to="/login" />} />
         
-                    <Route path="/profile" exact render={(props) => loggedUser ? <Profile fetchUser={fetchUser} loggedUser={loggedUser} {...props}/> : <Redirect to="/login" />}/>
+                    <Route path="/profile" exact render={(props) => loggedUser ? <Profile fetchUser={fetchUser} loggedUser={loggedUser} {...props}/> : <Redirect to="/" />}/>
 
-                    <Route path="/edit-profile/:reader_id" render={(props) => loggedUser ? <EditProfile loggedUser={loggedUser} {...props}/> : <Redirect to="/login" />}/>
+                    <Route path="/edit-profile/:reader_id" render={(props) => loggedUser ? <EditProfile fetchUser={fetchUser} loggedUser={loggedUser} {...props}/> : <Redirect to="/" />}/>
         
-                    <Route path="/club-dashboard/:bookClub_id" exact render= {props => loggedUser ? <ClubDashboard loggedUser={loggedUser}  {...props}/> : <Redirect to="/login" /> } />
+                    <Route path="/club-dashboard/:bookClub_id" exact render= {props => loggedUser ? <ClubDashboard fetchUser={fetchUser} loggedUser={loggedUser}  {...props}/> : <Redirect to="/login" /> } />
 
                     <Route path="/edit-meeting/:_id" exact render={props => loggedUser ? <EditMeetingPage loggedUser={loggedUser} {...props} /> : <Redirect to="/login" /> } />
 
-                    <Route path="/edit-quote/:_id" exact render={props => loggedUser ? <EditQuotePost loggedUser={loggedUser} {...props} /> : <Redirect to="/login" /> } />
+                    <Route path="/edit-quote/:_id" exact render={props => loggedUser ? <EditQuotePost fetchUser={fetchUser} loggedUser={loggedUser} {...props} /> : <Redirect to="/login" /> } />
         
                 </Switch>
         

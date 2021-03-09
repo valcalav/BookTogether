@@ -1,15 +1,45 @@
+.clubs-card {
+    box-shadow: 2px 0px 10px 2px rgb(212, 212, 212);
+    width: 160px;
+}
+
 .clubs-card h6 {
     font-size: 14px;
+    margin: 0px;
+    padding-top: 0px;
+}
+
+.clubs-card hr {
+    margin: 10px;
 }
 
 .clubs-card p {
     font-size: 12px;
 }
 
+.clubs-card img {
+    width: 140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    padding-top: 3px;
+}
+
 .clubs-card small {
     font-size: 70%;
+}
+
+.card-body {
+    padding: 10px 17px;
 }
 
 .find-club-title {
     margin: 50px 70px;
 }
+
+
+/* .book-card :hover {
+    width: 200px;
+
+  } */

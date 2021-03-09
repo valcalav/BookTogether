@@ -1,5 +1,8 @@
 const express = require('express')
+const transporter = require('../config/nodemailer.config')
+
 const router = express.Router()
+
 
 const Meeting = require('../models/meeting.model')
 const Event = require('./../models/event.model')
@@ -13,11 +16,23 @@ router.post('/:event_id/createMeeting', (req, res) => {
 
     const event_id = req.params.event_id
     const meeting = { ...req.body, bookClub: event_id }
-    
-   Meeting
-        .createAndAssignToEvent(meeting, event_id)
-        .then((meeting) => res.json(meeting))
-        .catch(err => res.status(500).json({code: 500, message: 'Error'}))
+
+    Event
+        .findById(event_id)
+        .then(response => {
+            let emailList = response.participantsEmails
+            return emailList
+        })
+        .then(emailList => {
+            Meeting
+                .createAndAssignToEvent(meeting, event_id, emailList)
+                .then((meeting) => res.json(meeting))
+                .catch(err => res.status(500).json({code: 500, message: 'Error'}))
+        })
+        .catch(err => {
+            console.log(err)
+            res.status(500).json({ code: 500, message: 'Error creating meeting'})
+        })
 })
 
 //Edit meeting
