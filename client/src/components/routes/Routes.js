@@ -14,6 +14,7 @@ import EditProfile from '../pages/Profile/EditProfile'
 import ClubDashboard from '../pages/ClubDashboard/ClubDashboard'
 import EditMeetingPage from '../pages/EditMeetings/EditMeetingPage'
 import EditQuotePost from '../pages/QuotesPosts/EditQuotePostPage'
+import BestsellersPage from '../pages/BestsellersPage/BestsellersPage'
 
 
 const Routes = ({ storeUser, loggedUser, fetchUser }) => {
@@ -26,6 +27,8 @@ const Routes = ({ storeUser, loggedUser, fetchUser }) => {
                     <Route path="/login" render={props => <Login storeUser={storeUser} {...props} />} />
         
                     <Route path="/signup" render={props => <Signup storeUser={storeUser}  {...props} />} />
+
+                    <Route path="/bestsellers" render={props => <BestsellersPage {...props} />} />
         
                     <Route path="/bookclubs-list" render={() => <BookClubs loggedUser={loggedUser} />} />
         

@@ -39,7 +39,7 @@ class App extends Component {
   render() {
     return(
       <>
-        <NavBar storeUser={user => this.storeUser(user)} loggedUser={this.state.loggedUser} />
+        <NavBar className="nav-bar" storeUser={user => this.storeUser(user)} loggedUser={this.state.loggedUser} />
         <main>
           <Routes fetchUser={()=> this.fetchUser()} storeUser={user => this.storeUser(user)} loggedUser={this.state.loggedUser} />
         </main>

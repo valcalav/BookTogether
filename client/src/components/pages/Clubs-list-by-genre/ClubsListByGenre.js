@@ -4,6 +4,7 @@ import { Container, Row, Col } from 'react-bootstrap'
 import GenreList from '../Genres-list/GenresList'
 import LanguageList from '../LanguageList/LanguageList'
 
+// import Paginate from '../../shared/Paginate'
 import BookClubCard from '../Clubs-list-all/BookClubCard'
 
 import BookClubsService from '../../../service/bookclubs.service'
@@ -75,19 +76,21 @@ class BookClubsByGenre extends Component {
                         <LanguageList />
                     </Col>
                     <Col>
-                        <Row>        
-                            {
-                                bookClubs ? this.paginate(bookClubs.map(elm => <BookClubCard {...elm} key={elm._id} />)) : null
-                            }
+                        <Row>
+                        {
+                            bookClubs ? this.paginate(bookClubs.map(elm => <BookClubCard {...elm} key={elm._id} />)) : null
+                        }
                         </Row>
-                            <button 
-                                onClick={ ()=> this.decreasePagination() }
-                                disabled={this.state.currentFirstBookClub === 0}>Back
-                            </button>
-                            <button 
-                                onClick={ ()=> this.increasePagination() }
-                                disabled={this.state.currentPage === Math.ceil(this.state.bookClubs.length / this.state.bookClubsPerPage) -1}>Next
-                            </button>
+
+                        <button 
+                            onClick={ ()=> this.decreasePagination() }
+                            disabled={this.state.currentFirstBookClub === 0}>Back
+                        </button>
+                        <button 
+                            onClick={ ()=> this.increasePagination() } 
+                            disabled={this.state.currentPage === Math.ceil(this.state.bookClubs.length / this.state.bookClubsPerPage) -1}>Next
+                        </button>
+                        
                     </Col>
                 </Row>
             </Container>

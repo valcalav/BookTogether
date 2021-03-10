@@ -1,5 +1,7 @@
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
 
+import './Navbar.css'
+
 import { NavLink, Link } from 'react-router-dom'
 
 import AuthService from './../../service/auth.service'
@@ -16,7 +18,7 @@ const NavBar = ({ storeUser, loggedUser }) => {
     }
 
     return (
-        <Navbar bg="light" expand="lg">
+        <Navbar className="navbar" bg="light" expand="lg">
             <Link to="/">
                 <Navbar.Brand>BookTogether</Navbar.Brand>
             </Link>
@@ -25,7 +27,10 @@ const NavBar = ({ storeUser, loggedUser }) => {
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="ml-auto">
                 <NavLink to="/bookclubs-list">
-                    <Nav.Link as="span">Book Clubs</Nav.Link>
+                    <Nav.Link className="nav" as="span">Book Clubs</Nav.Link>
+                </NavLink>
+                <NavLink to="/bestsellers">
+                    <Nav.Link as="span">Bestsellers</Nav.Link>
                 </NavLink>
                 <NavLink to="/">
                     <Nav.Link as="span">About us</Nav.Link>

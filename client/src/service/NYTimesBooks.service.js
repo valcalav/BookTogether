@@ -8,7 +8,9 @@ class NYTBooksService {
         })
     }
 
+    getFictionBestsellers = () => this.api.get('/fiction')
 
+    getNonFictionBestsellers = () => this.api.get('/non-fiction')
 
 }
 
