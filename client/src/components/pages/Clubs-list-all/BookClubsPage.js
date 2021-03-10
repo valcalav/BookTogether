@@ -16,7 +16,7 @@ export default function BookClubs() {
     const [state, setState] = useState({
         bookClubs: [],
         searchedBookClubs: [], // FALTA HACER EL SEARCH BAR !
-        bookClubsPerPage: 4,
+        bookClubsPerPage: 8,
         currentFirstBookClub: 0,
         currentPage: 0,
         loading: false,
@@ -47,7 +47,6 @@ export default function BookClubs() {
     currentPage: state.currentPage -1,
     currentFirstBookClub: state.currentFirstBookClub - state.bookClubsPerPage
     })
-
 
     return (
         <div>

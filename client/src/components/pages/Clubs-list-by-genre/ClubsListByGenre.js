@@ -14,6 +14,11 @@ class BookClubsByGenre extends Component {
         super()
         this.state = {
             bookClubs: [],
+            bookClubsPerPage: 8,
+            currentFirstBookClub: 0,
+            currentPage: 0,
+            loading: false,
+            error: null,
         }
 
         this.bookClubsService = new BookClubsService()
@@ -24,22 +29,39 @@ class BookClubsByGenre extends Component {
     }
     
     loadClubs() {
-        
         const {genre} = this.props.match.params
-        console.log("funciona bien", genre)
     
         this.bookClubsService
             .getAllBookClubsByGenre(genre)
             .then(response => {
-                console.log("RESPUESTA DE BUSQUEDA!:", {...response.data})
                 this.setState({ bookClubs: response.data })
             })
             .catch(err => console.log(err))
     }
 
+    increasePagination() {
+        this.setState({
+            currentPage: this.state.currentPage +1,
+            currentFirstBookClub: this.state.currentFirstBookClub + this.state.bookClubsPerPage
+         })
+    }
+
+    decreasePagination() {
+        this.setState({
+            currentPage: this.state.currentPage -1,
+            currentFirstBookClub: this.state.currentFirstBookClub - this.state.bookClubsPerPage
+        })
+    }
+
+    paginate(clubs) {
+        return clubs.slice(this.state.currentFirstBookClub, this.state.currentFirstBookClub + this.state.bookClubsPerPage)
+    }
+
+
+
     render() {
-        const {bookClubs} = this.state
-        console.log("EL STATE 2!!!", bookClubs)
+        const { bookClubs } = this.state
+        // console.log("EL STATE 2!!!", bookClubs)
 
         return (
             <>
@@ -48,13 +70,25 @@ class BookClubsByGenre extends Component {
             </div>
             <Container>
                 <Row>
-                    <Col>
+                    <Col lg={5}>
                         <GenreList />
                         <LanguageList />
                     </Col>
-                    {
-                        bookClubs ? bookClubs.map(elm => <BookClubCard {...elm} key={elm._id} />) : null
-                    }
+                    <Col>
+                        <Row>        
+                            {
+                                bookClubs ? this.paginate(bookClubs.map(elm => <BookClubCard {...elm} key={elm._id} />)) : null
+                            }
+                        </Row>
+                            <button 
+                                onClick={ ()=> this.decreasePagination() }
+                                disabled={this.state.currentFirstBookClub === 0}>Back
+                            </button>
+                            <button 
+                                onClick={ ()=> this.increasePagination() }
+                                disabled={this.state.currentPage === Math.ceil(this.state.bookClubs.length / this.state.bookClubsPerPage) -1}>Next
+                            </button>
+                    </Col>
                 </Row>
             </Container>
             </>

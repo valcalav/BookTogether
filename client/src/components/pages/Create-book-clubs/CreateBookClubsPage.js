@@ -108,7 +108,7 @@ export default function CreateBookClubs(props) {
                     setCurrentPage(currentPage -6)
                 }
         }
-    }
+    } 
 
     function handleSubmitForm(e) {
         e.preventDefault()
