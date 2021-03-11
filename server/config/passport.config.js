@@ -20,6 +20,7 @@ module.exports = app => {
     passport.serializeUser((user, next) => next(null, user._id))
     
     passport.deserializeUser((id, next) => {
+        console.log(id, "----------------------------------------------------------------------------- deseriliaze")
         Promise.all([User.findById(id), Reader.findById(id)])
         .then(res => {
             if(res[0]) next(null, res[0])
@@ -52,8 +53,7 @@ module.exports = app => {
     app.use(flash())
 
     passport.use(new LocalStrategy({ passReqToCallback: true }, (req, username, password, next) => {
-        Promise.all([ User.findOne({username: username}), Reader
-            .findOne({ "userInfo.username": username })])
+        Promise.all([ User.findOne({username: username}), Reader.findOne({ "userInfo.username": username })])
             .then( res => {
                 if(res[0]) next(null, res[0])
                 else if(res[1]) next(null, res[1])
