@@ -20,26 +20,33 @@ module.exports = app => {
     passport.serializeUser((user, next) => next(null, user._id))
     
     passport.deserializeUser((id, next) => {
-        User
-            .findById(id, (err, user) => {
+        Promise.all([User.findById(id), Reader.findById(id)])
+        .then(res => {
+            if(res[0]) next(null, res[0])
+            else if(res[1]) next(null, res[1])
+            else next(new Error("no user"))
+        })
+        .catch(err => next(err))
+        // User
+        //     .findById(id, (err, user) => {
 
-                if (err) { 
-                    next(err); 
-                    return
-                }
-                else if (!user) {
-                    Reader
-                        .findById(id, (err, user) => {
-                            if (err) { 
-                                next(err); 
-                                return
-                            }
-                        next(null, user);
-                    });
-                } else {
-                    next(null, user);
-                }
-            });
+        //         if (err) { 
+        //             next(err); 
+        //             return
+        //         }
+        //         else if (!user) {
+        //             Reader
+        //                 .findById(id, (err, user) => {
+        //                     if (err) { 
+        //                         next(err); 
+        //                         return
+        //                     }
+        //                 next(null, user);
+        //             });
+        //         } else {
+        //             next(null, user);
+        //         }
+        //     });
     })
 
     app.use(flash())
