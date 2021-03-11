@@ -52,10 +52,10 @@ function CreateQuotePost({ closeModal, loggedUser }) {
                 </Row>
 
                 {
-                    error && <span>Not able to create meeting</span>
+                    error && <span>Not able to add quote</span>
                 }
 
-                <Button block variant="outline-success" type="submit">Create</Button>
+                <Button block variant="outline-info" type="submit">Create</Button>
             </Form>
         </div>
     )

@@ -2,3 +2,22 @@
     margin-right: 20px;
     margin-bottom: 50px;
 }
+
+.genres-container h5 {
+    font-weight: 600;
+}
+
+a {
+    color: inherit;
+    font-weight: 500;
+    
+}
+
+ul {
+    list-style-type: none;
+    padding: 0px;
+}
+
+li {
+    margin-top: 5px;
+}

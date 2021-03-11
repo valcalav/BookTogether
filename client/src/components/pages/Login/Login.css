@@ -1,0 +1,24 @@
+.login-container{
+    height: 900px;
+    display: flex;
+}
+
+.openBook {
+    margin: auto;
+    text-align: center;
+    display: flex;
+    margin-bottom: 40px;
+}
+
+form {
+    width: 100%;
+}
+
+.note-to-user {
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.input {
+    box-shadow: 2px 2px 5px 0px rgb(219, 219, 219);
+}

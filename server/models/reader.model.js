@@ -19,7 +19,7 @@ const readerSchema = new Schema({
     },
     profileImg: {
         type: String,
-        default: "https://www.creativefabrica.com/wp-content/uploads/2020/03/05/Book-Line-Icon-SVG-Graphics-3130387-1-1-580x386.jpg"
+        default: "https://www.nailseatowncouncil.gov.uk/wp-content/uploads/blank-profile-picture-973460_1280.jpg"
     },
     clubsJoined: {
         type: [String]

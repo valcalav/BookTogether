@@ -54,7 +54,7 @@ function ClubDashboard(props) {
             .then(response => {
                 console.log('Left bokclub')
                 props.fetchUser()
-                props.history.push('/')
+                props.history.push('/bookclubs-list')
             })
             .catch(err => console.log(err))
     }
@@ -89,9 +89,9 @@ function ClubDashboard(props) {
                                         <ButtonGroup size="sm" style={{ width: '100%' }} >
                                         {
                                             bookClubInfo.owner === loggedUser._id ?
-                                            <Link to='#' className="btn btn-outline-danger">Edit club</Link>
+                                            <Link to={`/edit-club/${bookClubInfo._id}`} className="btn btn-outline-danger">Edit club</Link>
                                             :
-                                            <Link to='#' className="btn btn-outline-danger" onClick={() => leaveClub()} >Leave club</Link>
+                                            <Link to='/bookclubs-list' className="btn btn-outline-danger" onClick={() => leaveClub()} >Leave club</Link> 
                                         }
                                         </ButtonGroup>
 

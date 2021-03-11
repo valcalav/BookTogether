@@ -1,9 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300&display=swap');
 
 .navbar {
-  font-family: 'Montserrat', sans-serif;
+    font-family: 'Montserrat', sans-serif;
+    height: 90px;
+}
+
+.navbar-brand {
+    font-size: 33px;
+    letter-spacing: 2.5px;
+    margin-left: 80px;
+    font-weight: 300;
 }
 
 .nav-link {
-    margin-left: 50px;
+    margin-left: 90px;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+.navbar-collapse {
+    margin-right: 100px;
 }

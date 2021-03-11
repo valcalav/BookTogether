@@ -1,11 +1,10 @@
 .clubs-card {
-    box-shadow: 2px 0px 10px 2px rgb(212, 212, 212);
-    width: 160px;
+    margin-bottom: 40px;
 }
 
 .clubs-card h6 {
-    font-size: 14px;
-    margin: 0px;
+    font-size: 16px;
+    margin-bottom: 10px;
     padding-top: 0px;
 }
 
@@ -18,7 +17,9 @@
 }
 
 .clubs-card img {
-    width: 140px;
+    height: 200px;
+    width: auto;
+    display: flex;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -30,16 +31,40 @@
     font-size: 70%;
 }
 
-.card-body {
-    padding: 10px 17px;
+.clubs-card-body {
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+}
+
+.card.clubs-card {
+    border: none;
+    border-right: 2px solid rgb(238, 238, 238);
+    border-radius: 0px;
 }
 
 .find-club-title {
     margin: 50px 70px;
 }
 
+.btn-pagination {
+    margin-right: 20px;
+}
 
-/* .book-card :hover {
-    width: 200px;
+.buttons-pagination {
+    display: flex;
+    justify-content: center;
+}
 
-  } */
+.clubs-list-header h1 {
+    margin-top: 60px;
+    margin-bottom: 60px;
+}
+
+.clubs-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+

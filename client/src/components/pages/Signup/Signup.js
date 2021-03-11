@@ -1,7 +1,11 @@
 import React, { Component } from 'react'
 import AuthService from '../../../service/auth.service'
 
+import '../Login/Login.css'
+
 import { Form, Button, Container, Row, Col } from 'react-bootstrap'
+import openBook from '../../../images/openbook.jpeg'
+
 
 export class Signup extends Component {
 
@@ -41,33 +45,35 @@ export class Signup extends Component {
             <Container>
                 <Row>
 
-                <Col md={{ span: 4, offset: 4 }}>
+                <Col className="login-container align-items-center" lg={{ span: 6, offset: 3 }}>
 
                 <Form onSubmit={e => this.handleSubmit(e)}>
+                    <img className="openBook" src={openBook} />
                     <Form.Group>
                         <Form.Label>Username</Form.Label>
-                        <Form.Control type="text" name="username" value={this.state.username} onChange={e => this.handleInputChange(e)} />
+                        <Form.Control className="input" type="text" name="username" value={this.state.username} onChange={e => this.handleInputChange(e)} />
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Email</Form.Label>
-                        <Form.Control type="email" name="email" value={this.state.email} onChange={e => this.handleInputChange(e)} />
+                        <Form.Control className="input" type="email" name="email" value={this.state.email} onChange={e => this.handleInputChange(e)} />
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>First Name</Form.Label>
-                        <Form.Control type="firstName" name="firstName" value={this.state.firstName} onChange={e => this.handleInputChange(e)} />
+                        <Form.Control className="input" type="firstName" name="firstName" value={this.state.firstName} onChange={e => this.handleInputChange(e)} />
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Last Name</Form.Label>
-                        <Form.Control type="lastName" name="lastName" value={this.state.lastName} onChange={e => this.handleInputChange(e)} />
+                        <Form.Control className="input" type="lastName" name="lastName" value={this.state.lastName} onChange={e => this.handleInputChange(e)} />
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" name="password" value={this.state.password} onChange={e => this.handleInputChange(e)} />
+                        <Form.Control className="input" type="password" name="password" value={this.state.password} onChange={e => this.handleInputChange(e)} />
                     </Form.Group>
 
-                    <Button variant="dark" block type="submit">Sign up</Button>
+                    <Button variant="dark" block type="submit" className="input">Sign up</Button>
+                    <br/>
+                    <small className="note-to-user">Already registered? <a href="/login" >Log in</a></small>
                 </Form>
-                <small>Already registered? <a href="/login" >Log in</a></small>
 
                 </Col>
 

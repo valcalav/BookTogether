@@ -2,21 +2,23 @@ import { Card, ButtonGroup } from 'react-bootstrap'
 
 import { Link } from 'react-router-dom'
 
+import placeIcon from '../../../images/places.png'
+
 function ProfileCard({ userInfo, firstName, lastName, profileImg, country, favoriteGenre, _id }) {
 
     return (
-        
-            <Card>
-                <Card.Img variant="top" src={profileImg} />
-                <Card.Body>
+            
+            <Card className="profile-card-img">
+                <Card.Img className="profile-img" variant="top" src={profileImg} />
+                <Card.Body className="profile-card-body">
                     <h5>{firstName} {lastName} </h5>
                     <h6>{userInfo.username}</h6>
                     <p> <strong>Email:</strong> {userInfo.email} </p>
-                    {country && <p>{country}</p>}
-                    {favoriteGenre && <p>Favorite genre: {favoriteGenre}</p>}       
+                    {country && <p><img src={placeIcon} alt="place-icon" />{country}</p>}
+                    {favoriteGenre && <p><strong>Favorite genre:</strong> {favoriteGenre}</p>}       
 
-                    <ButtonGroup size="sm" style={{ width: '100%' }}>
-                        <Link to={`/edit-profile/${_id}`} className="btn btn-dark">Edit</Link>
+                    <ButtonGroup className="mt-auto" size="sm" style={{ width: '100%' }}>
+                        <Link to={`/edit-profile/${_id}`} className="btn btn-light btn-edit">Edit</Link>
                     </ButtonGroup>
 
                 </Card.Body>

@@ -3,7 +3,11 @@ import { Container, Row, Col } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 import GenreList from '../Genres-list/GenresList'
+import LanguageList from '../LanguageList/LanguageList'
+
 import './BookClubDetails.css'
+import '../Clubs-list-all/bookClubs.css'
+
 
 import BookClubService from '../../../service/bookclubs.service'
 import ReaderService from '../../../service/reader.service'
@@ -52,47 +56,70 @@ joinClub() {
 
         return (
             <>
-            <div className="find-club-title">
-                <h3>Find and Join a Book club</h3>
-            </div>
-            <Container>
+            
+            <Container fluid>
                 <Row>
-                    <GenreList />
+                    <Col className="clubs-list-header" md={{ span: 10, offset: 1, pull: 1 }}>
+                        <h1>Find and Join a Book club</h1>
+                        <Link to='/create-club' className="btn btn-outline-info create-btn">Create a Book Club</Link>
+                    </Col>
+
+                </Row>
+                <Row>
+                    <Col md={{ span: 3, offset: 1 }}>
+                        <GenreList />
+                        <LanguageList />
+                    </Col>
                     <Col md={6} >
 
-                    { this.state.bookClub
-                        ?
-                        <>
-                            <img src={bookClub.imgBookCover} alt="book cover"></img>
-                            <h4>{bookClub.bookClubName}</h4>
-                            <p> "{bookClub.bookTitle}" by {bookClub.bookAuthor} </p>
-                            <p> {bookClub.description} </p>
-                            <p> Genre: {bookClub.genre} </p>
-                            <p> Duration: {bookClub.duration} </p>
-                            <p> Language: {bookClub.language} </p>
-                            <p> Start date: {bookClub.startDate.slice(0,10)} </p>
-
-                        </>
-                        :
-                        null
-                    }
-                    {
-                        this.props.loggedUser 
-                        ?
-                        <>
-                        {
-                            this.props.loggedUser._id === this.state.bookClub?.owner
+                    <Row>
+                        { this.state.bookClub
                             ?
-                            <Link to={`/edit-club/${bookClub._id}`} className="btn btn-dark">Edit</Link>
+                            <>
+                            <Col md={{ span: 4, offset: 1 }}>
+                                <img src={bookClub.imgBookCover} alt="book cover"></img>
+                            </Col>
+                            <Col className="details-info">
+                                <h6>{bookClub.bookClubName.toUpperCase()}</h6>
+                                <hr />
+                                <h6> "{bookClub.bookTitle}" by {bookClub.bookAuthor} </h6>
+                                <p> {bookClub.description} </p>
+                                <p><strong>Genre: </strong> {bookClub.genre.charAt(0).toUpperCase() + bookClub.genre.slice(1)} </p>
+                                <p><strong>Duration: </strong>{bookClub.duration} </p>
+                                <p><strong>Language: </strong>{bookClub.language.charAt(0).toUpperCase() + bookClub.language.slice(1)} </p>
+                                <p><strong>Start date: </strong>{bookClub.startDate.slice(0,10)} </p>
+                            </Col>
+                            </>
                             :
-                            <Link to="#" className="btn btn-dark" onClick={() => this.joinClub()}>Join Club</Link>
+                            null
                         }
-                        </>
-                        :
-                        <Link to="/login" className="btn btn-dark">Join Club</Link>
-                    }
+                    </Row>
+                    <Row>
+                        {
+                            this.props.loggedUser 
+                            ?
+                            <>
+                            {
+                                this.props.loggedUser._id === this.state.bookClub?.owner
+                                ?
+                                <Col>
+                                    <Link to={`/edit-club/${bookClub._id}`} className="btn btn-light btn-edit btn-join-right">Edit</Link>
+                                </Col>
+                                :
+                                <Col>
+                                    <Link to="#" className="btn btn-info btn-join-right" onClick={() => this.joinClub()}>Join Club</Link>
+                                </Col>
+                            }
+                            </>
+                            :
+                            <Col>
+                                <Link to="/login" className="btn btn-info btn-join-right">Join Club</Link>
+                            </Col>
+                        }
+                    </Row>
 
-                    <Link to="/bookclubs-list" className="btn btn-dark">Go back</Link>
+
+                    <Link to="/bookclubs-list" className="btn btn-secondary btn-back">Go back</Link>
 
                     </Col>
                 </Row>

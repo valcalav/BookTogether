@@ -1,5 +1,7 @@
 import React from 'react'
-import { Form, Button, Spinner } from 'react-bootstrap'
+import { Container, Row, Col, Form, Button, Spinner } from 'react-bootstrap'
+
+import './CreateBookClubs.css'
 
 export default function FindBook(props) {
 
@@ -17,24 +19,32 @@ export default function FindBook(props) {
     const defaultImg = 'https://islandpress.org/sites/default/files/default_book_cover_2015.jpg'
 
     return (
-        <div>
+        <Container>
+            <Row>
+                <Col className="find-book">    
+                    <h4>Step 1: select the book the club will read</h4>  
+                </Col>
+            </Row>
            <Form onSubmit={(e) => handleSubmit(e)}>
+            <Row>
+            <Col>
                 <Form.Group>
                     <Form.Label>Title</Form.Label>
                     <Form.Control type="text" name="title" value={searchBook.title} placeholder="Search by title..." onChange={(e) => setSearchBook({...searchBook, title: e.target.value})} />
-                    <Form.Text className="text-muted">
-                    Search by title.
-                    </Form.Text>
                 </Form.Group>
-
+            </Col>
+            <Col>
                 <Form.Group>
                     <Form.Label>Author</Form.Label>
                     <Form.Control type="text" name="author" value={searchBook.author} placeholder="Search by Author" onChange={(e) => setSearchBook({...searchBook, author: e.target.value})} />
                 </Form.Group>
+            </Col>
 
-                <Button variant="primary" type="submit">Search</Button>
+            </Row>
+
+                <Button variant="info" type="submit">Search</Button>
+                <Button variant="outline-info" onClick={()=> setStep("CreateClub")}>Can't find the book you want?</Button>
             </Form>
-            <button onClick={()=> setStep("CreateClub")}>Can't find the book you want?</button>
 
             <section className="search-container" >
                 <small>Search resuls:</small>
@@ -64,8 +74,10 @@ export default function FindBook(props) {
                                 </div>
                             ) 
                         })}
-                        <button onClick={(e)=> handlePagination(e)} >Back</button>
-                        <button onClick={(e)=> handlePagination(e)}>Next</button>
+                        <div className="buttons-pagination" >
+                            <button className="btn btn-light btn-edit btn-pagination" onClick={(e)=> handlePagination(e)} >Back</button>
+                            <button className="btn btn-light btn-edit btn-pagination" onClick={(e)=> handlePagination(e)}>Next</button>
+                        </div>
                     </div>
                 }
             </section>
@@ -73,6 +85,6 @@ export default function FindBook(props) {
 
 
 
-        </div>
+        </Container>
     )
 }

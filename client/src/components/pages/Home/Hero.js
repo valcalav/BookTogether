@@ -9,6 +9,7 @@ const Hero = ({loggedUser}) => {
     
     return (
         <div className="hero-container">
+        <br />
             <div className="hero-title">
                 <h1>Meet new people and</h1>
                 <h1>read together</h1>
@@ -18,15 +19,15 @@ const Hero = ({loggedUser}) => {
             {
                 loggedUser ?
                     <Link to='/create-club'>
-                        <Button className="first-hero-btn" variant="outline-dark">Create a Book Club</Button>
+                        <button className="herobtn">Create a Book Club</button>
                     </Link>
                     :
                     <Link to='/login'>
-                        <Button className="first-hero-btn" variant="outline-dark">Create a Book Club</Button>
+                        <button className="herobtn">Create a Book Club</button>
                     </Link>
             }
                 <Link to='/bookclubs-list'>
-                    <Button variant="outline-dark">Join a Book Club</Button>
+                    <button className="herobtn">Join a Book Club</button>
                 </Link>
             </div>
         </div>

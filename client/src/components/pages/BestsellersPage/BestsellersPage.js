@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 
+import './BestsellersPage.css'
+
 import NYTBooksService from '../../../service/NYTimesBooks.service'
 
 function BestsellersPage() {
@@ -35,18 +37,18 @@ function BestsellersPage() {
 
     return (
         <div>
-            <h1>Aqui los bestsellers!</h1>
+            <h1 className="bestseller-title">NYTimes Best sellers</h1>
             <Container>
                 <Row>
                     <Col>
-                        <h4>Fiction Bestsellers:</h4>
+                        <h3>Fiction Best sellers:</h3>
                         {
                             bestsellersFiction && bestsellersFiction.map((elm, idx) => {
                                 return <article key={idx} >
-                                <p>Book: "{elm.book_details[0].title}" by {elm.book_details[0].author}</p>
-                                <p>Rank: {elm.rank}</p>
-                                <p>Weeks on the list: {elm.weeks_on_list}</p>
+                                <h6>{elm.rank}. "{elm.book_details[0].title}" by {elm.book_details[0].author}</h6>
+                                <p className="description">{elm.book_details[0].description}</p>
                                 <p>Publisher: {elm.book_details[0].publisher}</p>
+                                <p>{elm.weeks_on_list} weeks on the list</p>
                                 <hr />
 
                                 </article>
@@ -54,14 +56,14 @@ function BestsellersPage() {
                         }
                     </Col>
                     <Col>
-                    <h4>Non-Fiction Bestsellers:</h4>
+                    <h3>Non-Fiction Best sellers:</h3>
                     {
                         bestsellersNonFiction && bestsellersNonFiction.map((elm, idx) => {
                             return <article key={idx} >
-                            <p>Book: "{elm.book_details[0].title}" by {elm.book_details[0].author}</p>
-                            <p>Rank: {elm.rank}</p>
-                            <p>Weeks on the list: {elm.weeks_on_list}</p>
+                            <h6>{elm.rank}. "{elm.book_details[0].title}" by {elm.book_details[0].author}</h6>
+                            <p className="description">{elm.book_details[0].description}</p>
                             <p>Publisher: {elm.book_details[0].publisher}</p>
+                            <p>{elm.weeks_on_list} weeks on the list</p>
                             <hr />
 
                             </article>

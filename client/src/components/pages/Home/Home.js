@@ -1,24 +1,22 @@
 import React, { Component } from 'react'
 
-import { Container, Row } from 'react-bootstrap'
+import { Container } from 'react-bootstrap'
 
 import Hero from './Hero'
-import Features from '../Home/Features'
+import './Hero.css'
 
 export class Home extends Component {
     
     
     render() {
         return (
-            <Container fluid >
-                <Row>
-                    <Hero loggedUser={this.props.loggedUser} />
-                </Row>
-                
-                <Row>
-                    <Features />
-                </Row>
-            </Container>
+            <div>
+                <Container fluid >
+                    
+                        <Hero loggedUser={this.props.loggedUser} />
+                    
+                </Container>
+            </div>
         )
     }
 }

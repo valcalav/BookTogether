@@ -1,0 +1,9 @@
+.find-book h4 {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.buttons-pagination {
+    display: flex;
+    justify-content: center;
+}

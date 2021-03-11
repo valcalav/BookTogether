@@ -8,27 +8,25 @@ import './bookClubs.css'
 function BookClubsCard({ bookClubName, bookTitle, bookAuthor, startDate, participants, imgBookCover, _id }) {
 
     return (
-        <Col lg={3} >
-            <div className='book-card'>
+        <Col md={3} >
                 <Card className="clubs-card">
                     <div>
-
                     <Card.Img variant="top" src={imgBookCover} />
                     </div>
-                    <Card.Body className="card-body">
-                        <h6>{bookClubName}</h6>
-                        <hr />
-                        <p><strong>{bookTitle}</strong> - {bookAuthor} </p>
-                        <small>Start date: {startDate.slice(0,10)} </small>
-                        <small>Participants: {participants.length} </small>
+                    <Card.Body className="clubs-card-body">
+                        <Card.Title as="h6">{bookClubName.toUpperCase()}</Card.Title>
+                        <Card.Text>
+                        <strong>{bookTitle}</strong> - {bookAuthor}
+                        <br />
+                        Start date: {startDate.slice(0,10)}
+                        </Card.Text>
 
-                        <ButtonGroup size="sm" style={{ width: '100%' }}>
-                            <Link to={`/club-details/${_id}`} className="btn btn-dark">Go to Club</Link>
+                        <ButtonGroup className="mt-auto" size="sm" style={{ width: '100%' }}>
+                            <Link to={`/club-details/${_id}`} className="btn btn-info">Club details</Link>
                         </ButtonGroup>
 
                     </Card.Body>
                 </Card>
-            </div>
         </Col>
 
     )

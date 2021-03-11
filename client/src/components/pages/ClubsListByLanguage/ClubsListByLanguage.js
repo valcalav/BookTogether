@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 import GenreList from '../Genres-list/GenresList'
 import LanguageList from '../LanguageList/LanguageList'
 import BookClubCard from '../Clubs-list-all/BookClubCard'
+
+import '../Clubs-list-all/bookClubs.css'
 
 import BookClubsService from '../../../service/bookclubs.service'
 
@@ -63,32 +66,36 @@ class BookClubsByLanguage extends Component {
 
         return (
             <>
-            <div className="find-club-title">
-                <h3>Find and Join a Book club</h3>
-            </div>
-            <Container>
+            <Container fluid>
                 <Row>
-                    <Col lg={5}>
+                    <Col className="clubs-list-header" md={{ span: 10, offset: 1, pull: 1 }}>
+                        <h1>Find and Join a Book club</h1>
+                        <Link to='/create-club' className="btn btn-outline-info create-btn">Create a Book Club</Link>
+                    </Col>
+
+                </Row>
+                <Row>
+                    <Col md={{ span: 3, offset: 1 }}>
                         <GenreList />
                         <LanguageList />
                         
                     </Col>
-                    <Col>
+                    <Col md={{ span: 7, pull: 1 }}>
                         <Row>
                         {
                             bookClubs ? this.paginate(bookClubs.map(elm => <BookClubCard {...elm} key={elm._id} />)) : null
                         }
                         </Row>
-
-                            <button 
+                        <div className="buttons-pagination" >
+                            <button className="btn btn-light btn-edit btn-pagination"
                                 onClick={ ()=> this.decreasePagination() }
                                 disabled={this.state.currentFirstBookClub === 0}>Back
                             </button>
-                            <button 
+                            <button className="btn btn-light btn-edit btn-pagination" 
                                 onClick={ ()=> this.increasePagination() } 
                                 disabled={this.state.currentPage === Math.ceil(this.state.bookClubs.length / this.state.bookClubsPerPage) -1}>Next
                             </button>
-
+                        </div>
                     </Col>
                 </Row>
             </Container>

@@ -16,7 +16,7 @@ function QuotesPostsCard({quoteInfo}) {
                 {quoteInfo.author}, <cite title="Source Title">{quoteInfo.source}</cite>
                 </footer>
                 </blockquote>
-                <Link to={`/edit-quote/${quoteInfo._id}`} style={{marginLeft: "auto"}} className="btn btn-secondary">Edit</Link>
+                <Link to={`/edit-quote/${quoteInfo._id}`} style={{marginLeft: "auto"}} className="btn btn-light btn-edit quote">Edit</Link>
                 <hr />
             </>
     )

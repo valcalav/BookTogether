@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Container, Row, Col, Card, Button, Modal } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 import ProfileCard from './ProfileCard'
 import MyClubsCard from './CreatedClubCard'
@@ -9,10 +10,10 @@ import CreateQuotePost from '../QuotesPosts/CreateQuotePost'
 
 import './Profile.css'
 
+import quoteImg from '../../../images/quotes-icon.png'
+
 import BookClubService from '../../../service/bookclubs.service'
 import QuotesService from '../../../service/quotes.service'
-import { Link } from 'react-router-dom'
-
 
 function Profile(props) {
 
@@ -75,34 +76,39 @@ function Profile(props) {
 
     return (
         <>
-        <Container>
+        <Container className="profile-container" fluid>
             
             <Row>
-                <Col md={4} className="profile-cards">
+                <Col md={{ span: 3, offset: 1 }}>
                     <ProfileCard {...loggedUser} />
-                    <div>
-                        <Link to='/create-club' className="btn btn-dark">Create a Book Club</Link>
-                    </div>
                 </Col>
-                <Col>
-                    <h5>Created clubs</h5>
+                <Col md={{ span: 7, pull: 1 }}>
+                    <div className="my-clubs-header">
+                        <h5>Created clubs</h5>
+                        <Link to='/create-club' className="btn btn-outline-info">Create a Book Club</Link>
+                    </div>
                     <hr />
                     <Row>
                         {userClubs && userClubs.map((userClub, idx)=> <MyClubsCard clubInfo={userClub} key={idx} />)}
                     </Row>
 
-                    <h5>Joined clubs</h5>
+                    <div className="my-clubs-header">
+                        <h5>Joined clubs</h5>
+                        <Link to='/bookclubs-list' className="btn btn-outline-info">Join a Book Club</Link>
+                    </div>
                     <hr />
                     <Row>
                         {userJoinedClubs && userJoinedClubs.map((userClub, idx)=> <JoinedClubsCard clubInfo={userClub} key={idx} />)}
                     </Row>
                     <Row>
                         <Card className="card-quotes" >
-                            <Card.Header as="h5">Favorite Quotes</Card.Header>
+                            <Card.Header as="h5">
+                            <img src={quoteImg} alt="quotes-icon"/>
+                            Favorite Quotes</Card.Header>
                             <Card.Body>
                                 {quotePost.posts && quotePost.posts.map((quote, idx) => <QuotesPostsCard quoteInfo={quote} key={idx} />)}
 
-                                <Button block variant="primary" onClick={() => setModalShow(true)}>Add quote</Button>
+                                <Button block className="mt-auto" variant="info" onClick={() => setModalShow(true)}>Add quote</Button>
 
                             </Card.Body>
                         </Card>
@@ -116,14 +122,15 @@ function Profile(props) {
         {
             modalShow === true && <Modal centered show={modalShow} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
+                    <Modal.Title>
+                        <img src={quoteImg} alt="quotes-icon"/>
+                    </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <CreateQuotePost closeModal={handleClose} loggedUser={loggedUser} />
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>Close</Button>
-                    <Button variant="primary" onClick={handleClose}>Save Changes</Button>
                 </Modal.Footer>
             </Modal>
         }

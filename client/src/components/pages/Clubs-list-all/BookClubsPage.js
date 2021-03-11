@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 
 import GenreList from '../Genres-list/GenresList'
 import LanguageList from '../LanguageList/LanguageList'
@@ -16,7 +17,7 @@ export default function BookClubs() {
     const [state, setState] = useState({
         bookClubs: [],
         searchedBookClubs: [], // FALTA HACER EL SEARCH BAR !
-        bookClubsPerPage: 8,
+        bookClubsPerPage: 12,
         currentFirstBookClub: 0,
         currentPage: 0,
         loading: false,
@@ -49,32 +50,38 @@ export default function BookClubs() {
     })
 
     return (
-        <div>
-             <div className="find-club-title">
-                 <h3>Find and Join a Book club</h3>
-             </div>
-             <Container>
+        <>
+             <Container fluid>
+                <Row>
+                    <Col className="clubs-list-header" md={{ span: 10, offset: 1, pull: 1 }}>
+                        <h1>Find and Join a Book club</h1>
+                        <Link to='/create-club' className="btn btn-outline-info create-btn">Create a Book Club</Link>
+                    </Col>
+
+                </Row>
                  <Row>
-                    <Col lg={5} >
+                    <Col md={{ span: 3, offset: 1 }}>
                         <GenreList />
                         <LanguageList />
                     </Col>
-                    <Col>
+                    <Col md={{ span: 7, pull: 1 }}>
                         <BookClubsList bookClubs={currentPagination} />
-                        <button 
-                            onClick={ ()=> decreasePagination() }
-                            disabled={state.currentFirstBookClub === 0} 
-                        >Back
-                        </button>
-                        <button 
-                            onClick={ ()=> increasePagination() } 
-                            disabled={state.currentPage === Math.ceil(state.bookClubs.length / state.bookClubsPerPage) -1}
-                        >Next
-                        </button>
+                        <div className="buttons-pagination" >
+                            <button className="btn btn-light btn-edit btn-pagination"
+                                onClick={ ()=> decreasePagination() }
+                                disabled={state.currentFirstBookClub === 0} 
+                            >Back
+                            </button>
+                            <button className="btn btn-light btn-edit btn-pagination"
+                                onClick={ ()=> increasePagination() } 
+                                disabled={state.currentPage === Math.ceil(state.bookClubs.length / state.bookClubsPerPage) -1}
+                            >Next
+                            </button>
+                        </div>
                     </Col>
                  </Row>
              </Container>
-        </div>
+        </>
     )
 }
 
