@@ -28,7 +28,7 @@ function Profile(props) {
     const [modalShow, setModalShow] = useState(false)
     
     useEffect(() => {
-        props.fetchUser()
+        // props.fetchUser()
         favoriteQuotes()
         bookClubsCreated()
         bookClubsJoined()
