@@ -22,11 +22,18 @@ module.exports = app => {
     passport.deserializeUser((id, next) => {
         User
             .findById(id, (err, user) => {
-                if (err) { return next(err); }
+
+                if (err) { 
+                    next(err); 
+                    return
+                }
                 else if (!user) {
                     Reader
                         .findById(id, (err, user) => {
-                        if (err) { return next(err); }
+                            if (err) { 
+                                next(err); 
+                                return
+                            }
                         next(null, user);
                     });
                 } else {
