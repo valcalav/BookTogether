@@ -93,77 +93,45 @@
 // }
 
 
-const express = require("express")
-const router = express.Router()
-const passport = require("passport")
+const session = require("express-session")
 const bcrypt = require("bcrypt")
+const passport = require("passport")
+const LocalStrategy = require("passport-local").Strategy
+const flash = require("connect-flash")
 
 const Reader = require("../models/reader.model")
 
-router.post('/signup', (req, res) => {
+module.exports = app => {
 
-    const { username, password } = req.body
+    app.use(session({
+        secret: "webmad0820",
+        resave: true,
+        saveUninitialized: true
+    }))
 
-    if (!username || !password) {
-        res.status(400).json({ message: 'Rellena todos los campos' })
-        return
-    }
+    passport.serializeUser((user, next) => next(null, user._id))
+    passport.deserializeUser((id, next) => {
+        Reader.findById(id)
+            .then(theUser => next(null, theUser))
+            .catch(err => next(err))
+    })
 
-    if (password.length < 2) {
-        res.status(400).json({ message: 'Contraseña insegura' })
-        return
-    }
+    app.use(flash())
 
-    Reader
-        .findOne({ username })
-        .then(foundUser => {
-            if (foundUser) {
-                res.status(400).json({ message: 'El usuario ya existe' })
-                return
-            }
+    passport.use(new LocalStrategy({ passReqToCallback: true }, (req, username, password, next) => {
+        Reader.findOne({ "userInfo.username": username })
+            .then(user => {
+                if (!user) {
+                    return next(null, false, { message: "Wrong username" })
+                }
+                if (!bcrypt.compareSync(password, user.userInfo.password)) {
+                    return next(null, false, { message: "Wrong password" })
+                }
+                return next(null, user)
+            })
+            .catch(err => res.status(500).json(err))
+    }))
 
-            const salt = bcrypt.genSaltSync(10)
-            const hashPass = bcrypt.hashSync(password, salt)
-
-            Reader
-                .create({ username, password: hashPass })
-                .then(newUser => req.login(newUser, err => err ? res.status(500).json({ message: 'Login error' }) : res.json(newUser)))
-                .catch(() => res.status(500).json({ message: 'Error saving user to DB' }))
-        })
-})
-
-
-
-
-
-router.post('/login', (req, res, next) => {
-
-    passport.authenticate('local', (err, theUser, failureDetails) => {
-
-        if (err) {
-            res.status(500).json({ message: 'Error authenticating user' });
-            return;
-        }
-
-        if (!theUser) {
-            res.status(401).json(failureDetails);
-            return;
-        }
-
-        req.login(theUser, err => err ? res.status(500).json({ message: 'Session error' }) : res.json(theUser))
-
-    })(req, res, next)
-})
-
-
-
-router.post('/logout', (req, res) => {
-    req.logout()
-    res.json({ message: 'Log out success!' });
-})
-
-
-router.get('/loggedin', (req, res) => req.isAuthenticated() ? res.json(req.user) : res.status(403).json({ message: 'Unauthorized' }))
-
-
-module.exports = router
+    app.use(passport.initialize())
+    app.use(passport.session())
+}
