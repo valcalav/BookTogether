@@ -7,10 +7,9 @@
     font-weight: 600;
 }
 
-a {
+.genres-container a {
     color: inherit;
     font-weight: 500;
-    
 }
 
 ul {

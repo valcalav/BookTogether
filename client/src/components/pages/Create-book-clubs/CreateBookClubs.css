@@ -7,3 +7,43 @@
     display: flex;
     justify-content: center;
 }
+
+.card-img-top {
+    width: 90px;
+}
+
+.search-card {
+    margin-top: 20px;
+}
+
+.search-card img {
+    height: 140px;
+    width: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    padding-top: 5px;
+}
+
+.search-card-body {
+    height: 280px;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-book-title {
+    font-size: 17px;
+}
+
+.search-book-buttons {
+    margin-bottom: 10px;
+}
+
+.search-book-btn {
+    margin-right: 10px;
+}
+
+.selected-book-card img {
+    width: 150px;
+}

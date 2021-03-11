@@ -12,7 +12,6 @@ import ReaderService from '../../../service/reader.service'
 function ClubDashboard(props) {
 
     const { loggedUser } = props
-    //Debo hacerlo aparte porque abajo paso props completo a otro componente
     
     const [bookClubInfo, setBookClubInfo] = useState('')
     const [loading, setLoading] = useState(false)

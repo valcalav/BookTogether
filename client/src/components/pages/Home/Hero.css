@@ -1,10 +1,10 @@
 .hero-container {
     width: 100%;
-    height: 980px;
+    height: 890px;
     background-image: url('../../../images/hero3.jpeg');
     background-repeat: no-repeat;
     background-position: right 95px bottom 0px;
-    background-size: 690px;
+    background-size: 640px;
 }
 
 .hero-title {
