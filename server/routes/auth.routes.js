@@ -78,7 +78,7 @@ router.post('/logout', (req, res) => {
 
 router.get('/loggedin', (req, res) => {
     
-    console.log(req)
+    console.log(req.user)
     req.isAuthenticated() ? res.status(200).json(req.user) : res.status(403).json({ message: 'Unauthorized' })})
 
 module.exports = router
