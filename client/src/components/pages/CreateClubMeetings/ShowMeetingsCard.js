@@ -2,13 +2,14 @@ import React, { useState } from 'react'
 import { Card, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
+import '../ClubDashboard/ClubDashboard.css'
 
 function ShowMeetingsCard({setModalShow, clubMeetings, owner, loggedUser}) {
 
     
     return (
         <div>
-            <Card>
+            <Card className="club-meetings-card">
                 <Card.Header>Club meetings</Card.Header>
                 <Card.Body>
                     <Card.Text>
@@ -21,7 +22,7 @@ function ShowMeetingsCard({setModalShow, clubMeetings, owner, loggedUser}) {
                         <small>Note: {elm.description}</small>
                         <br />
                         <div style={{ display: "flex" }}>
-                            <Link to={`/edit-meeting/${elm._id}`} style={{marginLeft: "auto"}} className="btn btn-secondary">Edit</Link>
+                            <Link to={`/edit-meeting/${elm._id}`} style={{marginLeft: "auto"}} className="btn btn-light btn-edit">Edit</Link>
                         </div>
                         <hr />
                     </div>)}
@@ -30,7 +31,7 @@ function ShowMeetingsCard({setModalShow, clubMeetings, owner, loggedUser}) {
                     {
                         owner === loggedUser._id ?
                         <>
-                        <Button block variant="primary" onClick={() => setModalShow(true)}>Create meeting</Button>
+                        <Button block variant="info" onClick={() => setModalShow(true)}>Create meeting</Button>
                         <small>Only you can create meetings for the Book Club</small>
                         </>
                         : null

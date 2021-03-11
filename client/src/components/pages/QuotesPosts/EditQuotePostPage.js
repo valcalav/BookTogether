@@ -26,7 +26,6 @@ function EditQuotePost(props) {
         quotesService.deleteQuote(quote_id)
         .then(() => {
             props.history.push('/profile')
-            console.log('quote deleted')
         })
         .catch(err => console.log(err))
     }
@@ -35,7 +34,6 @@ function EditQuotePost(props) {
         quotesService.editQuote(quote_id, quoteInfo)
         .then(() => {
             props.history.push('/profile')
-            console.log('quote edited')
         })
     }
 

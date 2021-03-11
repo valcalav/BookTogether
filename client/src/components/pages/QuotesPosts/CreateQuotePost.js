@@ -20,10 +20,8 @@ function CreateQuotePost({ closeModal, loggedUser }) {
         quotesService.newQuote(createQuote)
             .then(() => {
                 closeModal()
-                console.log('quote creada!')
             })
             .catch(err => {
-                console.log('error', err)
                 setError(err)
             })
     }

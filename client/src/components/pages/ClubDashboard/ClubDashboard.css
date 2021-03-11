@@ -1,0 +1,28 @@
+.btn-back {
+    margin-top: 20px;
+    margin-left: auto;
+    display: table;
+}
+
+.club-meetings-card.card {
+    margin-top: 10px;
+}
+
+.meeting-modal img {
+    margin-left: 0px;
+    margin-bottom: 50px;
+}
+
+.card-img-top.club-book-cover {
+    width: 190px;
+    margin: auto;
+    margin-top: 10px;
+}
+
+.find-book h2 {
+    margin: 30px 0px;
+}
+
+.dashboard-card p {
+    margin-bottom: 10px;
+}

@@ -21,9 +21,8 @@
 
 .btn-back {
     margin-top: 20px;
-    margin-left: auto;
+    /* margin: auto; */
     display: table;
-
 }
 
 .profile-card {
@@ -128,14 +127,14 @@
     margin-top: 9px;
 }
 
-.container-edit-profile {
+.container-edit {
     margin-top: 150px;
     padding: 30px;
     border: 1px solid rgb(238, 238, 238);
     box-shadow: 2px 2px 5px 0px rgb(219, 219, 219);
 }
 
-.container-edit-profile img {
+.container-edit img {
     width: 30px;
     margin-right: 15px;
 }

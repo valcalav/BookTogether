@@ -47,7 +47,7 @@ function EditProfile(props) {
         <div className="edit-body">
             <Container fluid>
                 <Row>
-                    <Col className="container-edit-profile align-items-center" lg={{ span: 8, offset: 2 }}>
+                    <Col className="container-edit align-items-center" lg={{ span: 8, offset: 2 }}>
 
                     <Form onSubmit={e => handleSubmit(e)}>
                     <h5><img src={editIcon} alt="edit-icon" />Edit profile</h5>

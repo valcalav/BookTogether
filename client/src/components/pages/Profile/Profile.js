@@ -127,7 +127,7 @@ function Profile(props) {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <CreateQuotePost closeModal={handleClose} loggedUser={loggedUser} />
+                    <CreateQuotePost closeModal={handleClose} loggedUser={loggedUser} {...props} />
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>Close</Button>

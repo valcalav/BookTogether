@@ -76,14 +76,14 @@ function CreateMeetingForm({closeModal, match}) {
 
                 <Form.Group>
                     <Form.Label>Note to members</Form.Label>
-                    <Form.Control as="textarea" name="description" value={createMeeting.description} onChange={(e) => setCreateMeeting({...createMeeting, description: e.target.value})} rows={3} />
+                    <Form.Control as="textarea" name="description" value={createMeeting.description} onChange={(e) => setCreateMeeting({...createMeeting, description: e.target.value})} rows={2} />
                 </Form.Group>
 
                 {
                     error && <span>Not able to create meeting</span>
                 }
-
-                <Button block variant="outline-success" type="submit">Create</Button>
+                <p><strong>Club members will receive and email with the details of the new meeting</strong></p>
+                <Button block variant="outline-info" type="submit">Create</Button>
             </Form>
         </div>
     )

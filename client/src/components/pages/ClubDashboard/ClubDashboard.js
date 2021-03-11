@@ -8,6 +8,7 @@ import BookClubService from '../../../service/bookclubs.service'
 import MeetingService from '../../../service/meeting.service'
 import ReaderService from '../../../service/reader.service'
 
+import './ClubDashboard.css'
 
 function ClubDashboard(props) {
 
@@ -70,25 +71,28 @@ function ClubDashboard(props) {
                 </div>
                 :
                 <div>
-                    <h3>Club Page: { bookClubInfo.bookClubName }</h3>
                     <Container>
+                        <Row>
+                            <Col className="find-book">    
+                                <h2>Book Club Page - { bookClubInfo.bookClubName }</h2>  
+                            </Col>
+                        </Row>
                         <Row>
                             <Col lg={4}>
                                 <Card>
-                                    <Card.Img variant="top" src={bookClubInfo.imgBookCover} />
-                                    <Card.Body>
-                                        <h4>Book: {bookClubInfo.bookTitle}</h4>
-                                        <p>Author(s): {bookClubInfo.bookAuthor.map((author, idx) => <p>- {author}</p>)}</p>
-                                        <p>Genre: {bookClubInfo.genre}</p>
-                                        <hr />
-                                        <p>Start date: {bookClubInfo.startDate.slice(0,10)}</p>
-                                        <p>Duration: {bookClubInfo.duration}</p>
-                                        <p>Members: </p>
+                                    <Card.Img className="club-book-cover" variant="top" src={bookClubInfo.imgBookCover} />
+                                    <Card.Body className="dashboard-card">
+                                        <h4>{bookClubInfo.bookTitle}</h4>
+                                        <p><strong>Author(s): </strong>{bookClubInfo.bookAuthor.map((author, idx) => <p>- {author}</p>)}</p>
+                                        <p><strong>Genre: </strong>{bookClubInfo.genre}</p>
+                                        <p><strong>Start date: </strong>{bookClubInfo.startDate.slice(0,10)}</p>
+                                        <p><strong>Duration: </strong>{bookClubInfo.duration}</p>
+                                        <p><strong>Members: </strong>{bookClubInfo.participants.length}</p>
 
                                         <ButtonGroup size="sm" style={{ width: '100%' }} >
                                         {
                                             bookClubInfo.owner === loggedUser._id ?
-                                            <Link to={`/edit-club/${bookClubInfo._id}`} className="btn btn-outline-danger">Edit club</Link>
+                                            <Link to={`/edit-club/${bookClubInfo._id}`} className="btn btn-light btn-edit">Edit club</Link>
                                             :
                                             <Link to='/bookclubs-list' className="btn btn-outline-danger" onClick={() => leaveClub()} >Leave club</Link> 
                                         }
@@ -96,7 +100,7 @@ function ClubDashboard(props) {
 
                                     </Card.Body>
                                 </Card>
-                                        <Link to='/profile' className="btn btn-dark">Back to profile</Link>
+                                    <Link to='/profile' className="btn btn-outline-secondary btn-back">Back to profile</Link>
                             </Col>
 
                             <Col lg={8}>
