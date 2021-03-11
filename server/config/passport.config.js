@@ -98,7 +98,7 @@ const router = express.Router()
 const passport = require("passport")
 const bcrypt = require("bcrypt")
 
-const { User } = require('../models/user.model')
+const Reader = require("../models/reader.model")
 
 router.post('/signup', (req, res) => {
 
@@ -114,7 +114,7 @@ router.post('/signup', (req, res) => {
         return
     }
 
-    User
+    Reader
         .findOne({ username })
         .then(foundUser => {
             if (foundUser) {
@@ -125,7 +125,7 @@ router.post('/signup', (req, res) => {
             const salt = bcrypt.genSaltSync(10)
             const hashPass = bcrypt.hashSync(password, salt)
 
-            User
+            Reader
                 .create({ username, password: hashPass })
                 .then(newUser => req.login(newUser, err => err ? res.status(500).json({ message: 'Login error' }) : res.json(newUser)))
                 .catch(() => res.status(500).json({ message: 'Error saving user to DB' }))
