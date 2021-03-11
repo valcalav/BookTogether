@@ -21,13 +21,9 @@ class App extends Component {
   }
 
   fetchUser() {
-    console.log(this)
     this.authService
       .isLoggedIn()
-      .then(response => {
-        this.storeUser(response.data)
-     
-      })
+      .then(response => this.storeUser(response.data))
       .catch(() => this.storeUser(undefined))
   }
 
