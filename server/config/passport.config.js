@@ -17,7 +17,9 @@ module.exports = app => {
         saveUninitialized: true
     }))
 
-    passport.serializeUser((user, next) => next(null, user._id))
+    passport.serializeUser((user, next) => {
+        console.log(user)
+        next(null, user._id)})
     
     passport.deserializeUser((id, next) => {
         console.log(id, "----------------------------------------------------------------------------- deseriliaze")
