@@ -30,7 +30,6 @@ class BookClubForm extends Component {
 
     componentDidMount() {
         const bookClub_id = this.props.match.params.bookClub_id
-        console.log('bookClub_id', bookClub_id)
 
         this.setState({ loading: true })
 
@@ -52,7 +51,6 @@ class BookClubForm extends Component {
                     imgBookCover: response.data.imgBookCover,
                     loading: false
                 })
-                console.log(this.state.bookClub)
             })
             .catch(err => this.setState({ error: err }))
     }

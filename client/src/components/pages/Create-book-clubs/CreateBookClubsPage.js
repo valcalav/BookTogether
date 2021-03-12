@@ -172,7 +172,14 @@ export default function CreateBookClubs(props) {
                                                         return <p key={idx} >- {author}</p>
                                                     })}
                                                 </Card.Text>
-                                                <Button variant="info" onClick={() => setStep('FindBook')} >Change Book</Button>
+                                                <Button variant="info" onClick={() => {
+                                                    setStep('FindBook')
+                                                    setChosenBook({
+                                                        bookTitle:'',
+                                                        bookAuthor:'',
+                                                        imgBookCover:'',
+                                                    })
+                                                    }} >Change Book</Button>
                                             </Card.Body>
                                         </Col>
                                     </Row>

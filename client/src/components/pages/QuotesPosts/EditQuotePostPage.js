@@ -3,6 +3,10 @@ import { Container, Form, Row, Col, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 import QuotesService from '../../../service/quotes.service'
+import editIcon from '../../../images/edit-icon.jpg'
+
+
+import './EditQuotePost.css'
 
 function EditQuotePost(props) {
 
@@ -38,39 +42,46 @@ function EditQuotePost(props) {
     }
 
     return (
-        <Container>
-            <h5>Edit Quote</h5>
+        <Container fluid>
+            <Row>
 
-            <Form onSubmit={e => handleSubmit(e)}>
-                <Form.Group>
-                    <Form.Label>Quote</Form.Label>
-                        <Form.Control as="textarea" name="quote" value={quoteInfo.quote} onChange={(e) => setQuoteInfo({...quoteInfo, quote: e.target.value})} rows={3} />
-                </Form.Group>
+            <Col className="container-edit align-items-center" lg={{ span: 8, offset: 2 }}>
 
-                <Row>
-                    <Col>
-                        <Form.Group>
-                            <Form.Label>Author</Form.Label>
-                            <Form.Control type="text" name="author" value={quoteInfo.author} onChange={(e) => setQuoteInfo({...quoteInfo, author: e.target.value})} />
-                        </Form.Group>
-                    </Col>
-                    <Col>
-                        <Form.Group>
-                            <Form.Label>Source</Form.Label>
-                            <Form.Control type="text" name="source" value={quoteInfo.source} onChange={(e) => setQuoteInfo({...quoteInfo, source: e.target.value})} />
-                        </Form.Group>   
-                    </Col>
-                </Row>
+                <Form onSubmit={e => handleSubmit(e)}>
+                <h5><img src={editIcon} alt="edit-icon" />Edit Quote</h5>
+                        <hr />
+                    <Form.Group>
+                        <Form.Label>Quote</Form.Label>
+                            <Form.Control as="textarea" name="quote" value={quoteInfo.quote} onChange={(e) => setQuoteInfo({...quoteInfo, quote: e.target.value})} rows={3} />
+                    </Form.Group>
 
-                {
-                    error && <span>Not able to create meeting</span>
-                }
+                    <Row>
+                        <Col>
+                            <Form.Group>
+                                <Form.Label>Author</Form.Label>
+                                <Form.Control type="text" name="author" value={quoteInfo.author} onChange={(e) => setQuoteInfo({...quoteInfo, author: e.target.value})} />
+                            </Form.Group>
+                        </Col>
+                        <Col>
+                            <Form.Group>
+                                <Form.Label>Source</Form.Label>
+                                <Form.Control type="text" name="source" value={quoteInfo.source} onChange={(e) => setQuoteInfo({...quoteInfo, source: e.target.value})} />
+                            </Form.Group>   
+                        </Col>
+                    </Row>
 
-                <Button block variant="dark" type="submit">Edit</Button>
-            </Form>
+                    {
+                        error && <span>Not able to edit quote</span>
+                    }
 
-            <Button block variant="outline-danger" onClick={() => deleteQuote()}>Delete</Button>
-            <Link to={`/profile`} className="btn btn-dark">Go back</Link>
+                    <Button block className="btn-edit" variant="light" type="submit">Edit</Button>
+                    <Button block variant="outline-danger" onClick={() => deleteQuote()}>Delete</Button>
+                    <Link to={`/profile`} className="btn btn-info btn-back">Go back</Link>
+                </Form>
+            </Col>
+
+            </Row>
+
 
         </Container>
     )

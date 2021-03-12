@@ -14,7 +14,6 @@ const NavBar = ({ storeUser, loggedUser }) => {
         authService
             .logout()
             .then(() => storeUser(undefined))
-            .catch(err => console.log(err))
     }
 
     return (
@@ -31,9 +30,6 @@ const NavBar = ({ storeUser, loggedUser }) => {
                 </NavLink>
                 <NavLink to="/bestsellers">
                     <Nav.Link as="span">Bestsellers</Nav.Link>
-                </NavLink>
-                <NavLink to="/">
-                    <Nav.Link as="span">About us</Nav.Link>
                 </NavLink>
 
                 {

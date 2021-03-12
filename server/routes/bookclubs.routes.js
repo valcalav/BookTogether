@@ -54,7 +54,6 @@ router.get('/details/:bookClub_id', (req, res) => {
 //New Book club
 router.post('/newBookClub', (req, res) => {
 
-    console.log('ESTE ES EL REQ USER', req.user)
     const club = { ...req.body, owner: req.user._id }
     const userId = req.user._id
 

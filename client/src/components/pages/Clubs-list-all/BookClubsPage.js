@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 import GenreList from '../Genres-list/GenresList'
@@ -16,27 +16,32 @@ export default function BookClubs() {
 
     const [state, setState] = useState({
         bookClubs: [],
+        currentBookCLubs: [],
         searchedBookClubs: [], // FALTA HACER EL SEARCH BAR !
         bookClubsPerPage: 12,
         currentFirstBookClub: 0,
         currentPage: 0,
         loading: false,
-        error: null
+        error: null,
+        bookClubsByGenre: [],
+        bookClubsByLanguage: []
     })
+    const [searchedBook, setSearchedBook] = useState('')
 
-    const currentPagination = state.bookClubs ? state.bookClubs.slice(state.currentFirstBookClub, state.currentFirstBookClub + state.bookClubsPerPage) : []
-
-    
-    const [searchTerm, setSearchTerm] = useState('')
+     const currentPagination = state.currentBookCLubs ? state.currentBookCLubs.slice(state.currentFirstBookClub, state.currentFirstBookClub + state.bookClubsPerPage) : []
     
     useEffect(() => {
         function loadClubs() {
             bookClubsService
             .getAllBookClubs()
-            .then(response => setState({ ...state, bookClubs: response.data.allEvents }))
+            .then(response => setState({ ...state, 
+                bookClubs: response.data.allEvents, 
+                currentBookCLubs: response.data.allEvents  }))
             .catch(err => console.log(err))
         }
         loadClubs()
+  
+
     }, [])
     
     const increasePagination = () => setState({ ...state,
@@ -49,6 +54,51 @@ export default function BookClubs() {
     currentFirstBookClub: state.currentFirstBookClub - state.bookClubsPerPage
     })
 
+    const handleSearch = (e)  => {
+        e.preventDefault()
+        const searchedBooks = state.bookClubs.filter((club) => club.bookTitle.toLowerCase().includes(searchedBook.toLowerCase()))
+        setState({ ...state,
+            currentBookCLubs: searchedBooks
+        })
+        setSearchedBook('')
+    }
+
+    function handleGenre(genre) {
+  
+       return bookClubsService
+            .getAllBookClubsByGenre(genre.target.innerText.toLowerCase())
+            .then(response => {
+                // console.log('response from api', response.data)
+                setState({...state, bookClubsByGenre: response.data })
+                if (response) {
+                    setState({ ...state,
+                        currentBookCLubs:  response.data
+                    })
+                }
+            })
+            .catch(err => console.log(err))
+    }
+
+    function handleLanguage(language) {
+        console.log('language', language.target.innerText.toLowerCase())
+    
+        return bookClubsService
+            .getAllBookClubsByLanguage(language.target.innerText.toLowerCase())
+            .then(response => {
+                console.log('response', response.data)
+                
+                setState({...state, bookClubsByLanguage: response.data })
+                if (response) {
+                    setState({ ...state,
+                        currentBookCLubs: response.data
+                    })
+                }
+            })
+            .catch(err => console.log(err))
+     }
+
+    
+
     return (
         <>
              <Container fluid>
@@ -57,12 +107,27 @@ export default function BookClubs() {
                         <h1>Find and Join a Book club</h1>
                         <Link to='/create-club' className="btn btn-outline-info create-btn">Create a Book Club</Link>
                     </Col>
-
                 </Row>
+
+                <Row>
+                    <Col md={{ span: 7, offset: 4, pull: 1 }}>
+
+                        <Form onSubmit={e => handleSearch(e)}>
+                        <Form.Group className="search-bar">
+                            <Form.Control type='text' value={searchedBook} onChange={(e) => setSearchedBook(e.target.value)} />
+                            <Button variant="info" type="submit">Search</Button>
+                        </Form.Group>
+                        </Form>
+                    </Col>
+                    
+                </Row>
+
+
+
                  <Row>
                     <Col md={{ span: 3, offset: 1 }}>
-                        <GenreList />
-                        <LanguageList />
+                        <GenreList handleGenre={handleGenre} />
+                        <LanguageList handleLanguage={handleLanguage}/>
                     </Col>
                     <Col md={{ span: 7, pull: 1 }}>
                         <BookClubsList bookClubs={currentPagination} />
@@ -74,7 +139,7 @@ export default function BookClubs() {
                             </button>
                             <button className="btn btn-light btn-edit btn-pagination"
                                 onClick={ ()=> increasePagination() } 
-                                disabled={state.currentPage === Math.ceil(state.bookClubs.length / state.bookClubsPerPage) -1}
+                                disabled={state.currentPage === Math.ceil(state.currentBookCLubs.length / state.bookClubsPerPage) -1}
                             >Next
                             </button>
                         </div>

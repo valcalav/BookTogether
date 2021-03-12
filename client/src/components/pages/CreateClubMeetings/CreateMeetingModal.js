@@ -8,8 +8,9 @@ import '../ClubDashboard/ClubDashboard.css'
 
 
 function CreateMeetingModal(props) {
-
+    
     const {
+        refreshList,
         setModalShow,
         onHide
     } = props
@@ -26,7 +27,7 @@ function CreateMeetingModal(props) {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <CreateMeetingForm closeModal={closeModal} {...props} />
+                <CreateMeetingForm closeModal={closeModal} refreshList={refreshList} {...props} />
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="outline-secondary" onClick={onHide}>Cancel</Button>

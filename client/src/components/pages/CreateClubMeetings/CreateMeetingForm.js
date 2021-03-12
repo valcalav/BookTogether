@@ -5,7 +5,7 @@ import { Form, Row, Col, Button } from 'react-bootstrap'
 import MeetingService from '../../../service/meeting.service'
 
 
-function CreateMeetingForm({closeModal, match}) {
+function CreateMeetingForm({refreshList, closeModal, match}) {
 
     const meetingService = new MeetingService()
 
@@ -25,8 +25,8 @@ function CreateMeetingForm({closeModal, match}) {
         
         meetingService.newMeeting(match.params.bookClub_id, createMeeting)
             .then(() => {
+                refreshList()
                 closeModal()
-                console.log('meeting creada !')
             })
             .catch(err => {
                 console.log("error", err)

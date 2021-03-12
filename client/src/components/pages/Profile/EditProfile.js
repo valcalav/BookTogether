@@ -38,7 +38,6 @@ function EditProfile(props) {
         readerService.editProfile(reader_id, myInfo)
             .then(() => {
                 props.history.push('/profile')
-                console.log('profile edited')
             })
             .catch(err => console.log(err))
     }
@@ -87,7 +86,7 @@ function EditProfile(props) {
                         </Form.Group>
 
                         {
-                            error && <span>Not able to create meeting</span>
+                            error && <span>Not able to edit profile</span>
                         }
 
                         <Button block className="btn-edit" variant="light" type="submit">Edit</Button>

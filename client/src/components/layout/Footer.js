@@ -1,5 +1,5 @@
 import './Footer.css'
 
-const Footer = () => <footer><small>© {new Date().getFullYear()}, BookTogether. All rights reserved.</small></footer>
+const Footer = () => <footer className="footer-container">© {new Date().getFullYear()}, BookTogether. All rights reserved.</footer>
 
 export default Footer

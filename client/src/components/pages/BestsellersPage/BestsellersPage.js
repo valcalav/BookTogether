@@ -20,7 +20,6 @@ function BestsellersPage() {
             .then(response => {
                 setBestsellersFiction(response.data.results)
                 setLoading(false)
-                console.log("FICTION BOOKS", response.data.results)
             })
             .catch(err => setError(err))
 
@@ -28,7 +27,6 @@ function BestsellersPage() {
             .then(response => {
                 setBestsellersNonFiction(response.data.results)
                 setLoading(false)
-                console.log("NON-FICTION BOOKS", response.data.results)
             })
             .catch(err => setError(err))
 

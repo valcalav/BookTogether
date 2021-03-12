@@ -58,13 +58,16 @@
 
 .clubs-list-header h1 {
     margin-top: 60px;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
 }
 
 .clubs-list-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
 }
 
+.search-bar.form-group {
+    display: flex;
+    margin-bottom: 30px;
+}

@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom'
 
 const Hero = ({loggedUser}) => {
 
-    console.log("LOGGED USER:", loggedUser)
     
     return (
         <div className="hero-container">

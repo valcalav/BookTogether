@@ -52,7 +52,6 @@ function ClubDashboard(props) {
     function leaveClub() {
         readerService.leaveBookClub(bookClub_id)
             .then(response => {
-                console.log('Left bokclub')
                 props.fetchUser()
                 props.history.push('/bookclubs-list')
             })
@@ -124,7 +123,7 @@ function ClubDashboard(props) {
                     </Container>
 
                     {
-                        modalShow && <CreateMeetingModal {...props} show={modalShow} setModalShow={setModalShow} onHide={() => setModalShow(false)}/>
+                        modalShow && <CreateMeetingModal refreshList={() => findMeetings()} {...props} show={modalShow} setModalShow={setModalShow} onHide={() => setModalShow(false)}/>
                     }
 
                 </div>

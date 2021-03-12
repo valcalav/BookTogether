@@ -64,7 +64,6 @@ class BookClubsByGenre extends Component {
 
     render() {
         const { bookClubs } = this.state
-        // console.log("EL STATE 2!!!", bookClubs)
 
         return (
             <>

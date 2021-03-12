@@ -3,7 +3,7 @@ import {Form, Row, Col, Button} from 'react-bootstrap'
 
 import QuotesService from '../../../service/quotes.service'
 
-function CreateQuotePost({ closeModal, loggedUser }) {
+function CreateQuotePost({ refreshList, closeModal, loggedUser }) {
 
     const quotesService = new QuotesService()
 
@@ -20,6 +20,7 @@ function CreateQuotePost({ closeModal, loggedUser }) {
         quotesService.newQuote(createQuote)
             .then(() => {
                 closeModal()
+                refreshList()
             })
             .catch(err => {
                 setError(err)

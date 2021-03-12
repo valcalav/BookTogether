@@ -28,7 +28,7 @@ function Profile(props) {
     const [modalShow, setModalShow] = useState(false)
     
     useEffect(() => {
-        // props.fetchUser()
+        props.fetchUser()
         favoriteQuotes()
         bookClubsCreated()
         bookClubsJoined()
@@ -127,7 +127,7 @@ function Profile(props) {
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <CreateQuotePost closeModal={handleClose} loggedUser={loggedUser} {...props} />
+                    <CreateQuotePost refreshList={() => favoriteQuotes()} closeModal={handleClose} loggedUser={loggedUser} {...props} />
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="secondary" onClick={handleClose}>Close</Button>
@@ -138,5 +138,6 @@ function Profile(props) {
         </>
     )
 }
+
 
 export default Profile

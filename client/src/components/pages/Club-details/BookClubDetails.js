@@ -66,11 +66,8 @@ joinClub() {
 
                 </Row>
                 <Row>
-                    <Col md={{ span: 3, offset: 1 }}>
-                        <GenreList />
-                        <LanguageList />
-                    </Col>
-                    <Col md={6} >
+                    
+                    <Col md={{ span: 7, offset: 3, pull: 1 }} >
 
                     <Row>
                         { this.state.bookClub
