@@ -1,26 +1,42 @@
-# Book-Club-Project
+# BookTogether
 
-Search bookclubs to join, meet new pleople and read together !
+Search Book Clubs to join, meet new pleople and read together !
+
+This is my Final Project for Ironhack Madrid.
+
+## Technologies
+
+- React.js
+- Node.js
+- Express.js
+- React Bootstrap
 
 ## API's used
 
-- Goodreads API
+- Google Book API
+- New York Times Book API
 
-## Routes
+## Key Features
 
-| Route  | Http verb | Description |
-| ------------- | ------------- | ------------- |
-| `/api/bookclubs/allBookClubs`  | GET  | All book clubs list  |
-| `/api/bookclubs/:genre`  | GET  | All book clubs list by genre |
-| `/api/bookclubs/:bookClub_id`  | GET  | Book club details |
-| `/api/bookclubs/newBookClub`  | POST  | Create Book club |
-| `/api/bookclubs/editBookClub/:bookClub_id`  | PUT  | Edit Book club |
-| `/api/bookclubs/delete/:bookClub_id`  | DELETE  | Delete Book club |
-| `/api/quotes/newQuote`  | POST  | Create quotes post |
-| `/api/quotes/:user_id`  | GET  | All quotes post filtered by user |
-| `/api/quotes/newQuote`  | PUT  | Edit quotes post |
-| `/api/quotes/newQuote`  | DELETE  | Delete quotes post |
-| `/api/auth/signup`  | POST  | Sign up |
-| `/api/auth/login`  | POST  | Log in |
-| `/api/auth/logout`  | POST  | Log out |
-| `/api/auth/loggedin`  | GET  | Is user logged in |
+- Allows the user to search for a book in the Google Book API before creating a Book Club.
+- Allows a user to create, join or leave a Book Club.
+- Shows updated bestsellers lists for Fiction and Non-Fiction using the NYTimes Books API.
+- Notifies via email when a Book Club organizer programs a meeting.
+- Every user has a profile page where they can see their created and joined Book Clubs and where they can store their favorite quotes.
+
+## Site
+
+- Landing page:
+![homepage](https://user-images.githubusercontent.com/75569696/111156175-b9dfb800-8595-11eb-9dca-736b60dee7ac.png)
+
+- Searching a book with the Google Book API:
+![search-book](https://user-images.githubusercontent.com/75569696/111156795-720d6080-8596-11eb-97a1-3667d4ef0810.png)
+
+- Form to create a Book Club:
+![create-book-club](https://user-images.githubusercontent.com/75569696/111156814-75085100-8596-11eb-8f6d-196a097098cc.png)
+
+- Profile:
+![profile](https://user-images.githubusercontent.com/75569696/111160898-d6caba00-859a-11eb-9549-08fd846b6594.png)
+
+- Book Club page (only the club's creator can edit the club and create meetings):
+![club-dashboard-creator](https://user-images.githubusercontent.com/75569696/111161273-417bf580-859b-11eb-86b6-6cff5d59b199.png)
