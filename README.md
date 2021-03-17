@@ -1,6 +1,6 @@
 # BookTogether
 
-Search Book Clubs to join, meet new pleople and read together !
+Search Book Clubs to join, meet new people and read together !
 
 This is my Final Project for Ironhack Madrid.
 
