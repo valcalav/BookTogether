@@ -9,6 +9,7 @@ This is my Final Project for Ironhack Madrid.
 - React.js
 - Node.js
 - Express.js
+- MongoDB
 - React Bootstrap
 
 ## API's used
