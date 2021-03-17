@@ -1,6 +1,6 @@
 # BookTogether
 
-Search Book Clubs to join, meet new pleople and read together !
+Search Book Clubs to join, meet new people and read together !
 
 This is my Final Project for Ironhack Madrid.
 
@@ -9,6 +9,7 @@ This is my Final Project for Ironhack Madrid.
 - React.js
 - Node.js
 - Express.js
+- MongoDB
 - React Bootstrap
 
 ## API's used
