@@ -1,1 +1,0 @@
-{"_id":{"$oid":"603a74790bba8a6298686e8a"},"role":"ADMIN","email":"catboss@catboss.com","username":"catboss","password":"catboss","createdAt":{"$date":"2021-02-27T16:34:01.841Z"},"updatedAt":{"$date":"2021-02-27T16:34:01.841Z"},"__v":0}

@@ -3,6 +3,7 @@
     color: white;
     text-align: center;
     padding: 3px;
+    position: fixed;
     width: 100%;
     bottom: 0;
 }

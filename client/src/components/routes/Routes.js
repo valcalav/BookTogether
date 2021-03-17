@@ -4,8 +4,6 @@ import Home from '../pages/Home/Home'
 import Login from '../pages/Login/Login'
 import Signup from '../pages/Signup/Signup'
 import BookClubs from '../pages/Clubs-list-all/BookClubsPage'
-import BookClubsByGenre from '../pages/Clubs-list-by-genre/ClubsListByGenre'
-import BookClubsByLanguage from '../pages/ClubsListByLanguage/ClubsListByLanguage'
 import BookClubDetails from '../pages/Club-details/BookClubDetails'
 import CreateBookClubsPage from '../pages/Create-book-clubs/CreateBookClubsPage'
 import BookClubEditForm from "../pages/Edit-book-clubs/BookClubEditForm"
@@ -31,10 +29,6 @@ const Routes = ({ storeUser, loggedUser, fetchUser }) => {
                     <Route path="/bestsellers" render={props => <BestsellersPage {...props} />} />
         
                     <Route path="/bookclubs-list" render={() => <BookClubs loggedUser={loggedUser} />} />
-        
-                    <Route path="/bookclubs-genre-list/:genre" render={props => <BookClubsByGenre loggedUser={loggedUser} {...props} /> } />
-
-                    <Route path="/bookclubs-language-list/:language" render={props => <BookClubsByLanguage loggedUser={loggedUser} {...props} /> } />
         
                     <Route path="/club-details/:bookClub_id" render={props => <BookClubDetails fetchUser={fetchUser} loggedUser={loggedUser} {...props} /> } />
         

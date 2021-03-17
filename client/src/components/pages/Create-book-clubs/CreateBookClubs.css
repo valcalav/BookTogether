@@ -47,3 +47,7 @@
 .selected-book-card img {
     width: 150px;
 }
+
+.book-spinner {
+    margin: 200px 550px;
+}

@@ -17,7 +17,7 @@ export default function BookClubs() {
     const [state, setState] = useState({
         bookClubs: [],
         currentBookCLubs: [],
-        searchedBookClubs: [], // FALTA HACER EL SEARCH BAR !
+        searchedBookClubs: [],
         bookClubsPerPage: 12,
         currentFirstBookClub: 0,
         currentPage: 0,
@@ -68,7 +68,6 @@ export default function BookClubs() {
        return bookClubsService
             .getAllBookClubsByGenre(genre.target.innerText.toLowerCase())
             .then(response => {
-                // console.log('response from api', response.data)
                 setState({...state, bookClubsByGenre: response.data })
                 if (response) {
                     setState({ ...state,
@@ -115,7 +114,7 @@ export default function BookClubs() {
                         <Form onSubmit={e => handleSearch(e)}>
                         <Form.Group className="search-bar">
                             <Form.Control type='text' value={searchedBook} onChange={(e) => setSearchedBook(e.target.value)} />
-                            <Button variant="info" type="submit">Search</Button>
+                            <Button variant="info" type="submit" className="book-title-btn" >Search by book title</Button>
                         </Form.Group>
                         </Form>
                     </Col>

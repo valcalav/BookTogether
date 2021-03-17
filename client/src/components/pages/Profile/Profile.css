@@ -107,6 +107,11 @@
     position: absolute;
 }
 
+.card-quotes {
+    margin-bottom: 60px;
+    margin-top: 10px;
+}
+
 .card-quotes img {
     width: 40px;
     margin-right: 15px;

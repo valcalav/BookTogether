@@ -3,6 +3,8 @@ import { Container, Row, Col } from 'react-bootstrap'
 
 import './BestsellersPage.css'
 
+import BookSpinner from '../../shared/bookSpinner/BookSpinner'
+
 import NYTBooksService from '../../../service/NYTimesBooks.service'
 
 function BestsellersPage() {
@@ -15,7 +17,7 @@ function BestsellersPage() {
     const nytBooksService = new NYTBooksService()
 
     useEffect(() => {
-
+        setLoading(true)
         nytBooksService.getFictionBestsellers()
             .then(response => {
                 setBestsellersFiction(response.data.results)
@@ -38,6 +40,13 @@ function BestsellersPage() {
             <h1 className="bestseller-title">NYTimes Best sellers</h1>
             <Container>
                 <Row>
+                {
+                    loading ?
+                        <div className="bestsellers-spinner-one">
+                            <BookSpinner />
+                        </div>
+                    :
+                    <>
                     <Col>
                         <h3>Fiction Best sellers:</h3>
                         {
@@ -55,6 +64,7 @@ function BestsellersPage() {
                     </Col>
                     <Col>
                     <h3>Non-Fiction Best sellers:</h3>
+                    
                     {
                         bestsellersNonFiction && bestsellersNonFiction.map((elm, idx) => {
                             return <article key={idx} >
@@ -67,8 +77,11 @@ function BestsellersPage() {
                             </article>
                         })
                     }
-                        
                     </Col>
+                    </>
+                }
+                    
+
                 </Row>
             </Container>
 

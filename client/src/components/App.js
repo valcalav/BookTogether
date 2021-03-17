@@ -39,7 +39,7 @@ class App extends Component {
         <main>
           <Routes fetchUser={()=> this.fetchUser()} storeUser={user => this.storeUser(user)} loggedUser={this.state.loggedUser} />
         </main>
-        {/* <Footer /> */}
+        <Footer />
       </>
     )
   }

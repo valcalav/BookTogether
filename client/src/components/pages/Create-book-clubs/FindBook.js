@@ -2,6 +2,7 @@ import React from 'react'
 import { Container, Row, Col, Form, Button, Card, Spinner, ButtonGroup } from 'react-bootstrap'
 
 import './CreateBookClubs.css'
+import BookSpinner from '../../shared/bookSpinner/BookSpinner'
 
 export default function FindBook(props) {
 
@@ -54,9 +55,9 @@ export default function FindBook(props) {
                 <Row>
                     {
                     loading ?
-                    <Spinner animation="border" role="status">
-                        <span className="sr-only">Loading...</span>
-                    </Spinner>
+                    <Col className="book-spinner">
+                        <BookSpinner  />
+                    </Col>
                     :
                     <>
                         {books && books.map((book, idx)=> {

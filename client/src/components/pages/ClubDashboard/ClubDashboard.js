@@ -7,6 +7,7 @@ import CreateMeetingModal from '../CreateClubMeetings/CreateMeetingModal'
 import BookClubService from '../../../service/bookclubs.service'
 import MeetingService from '../../../service/meeting.service'
 import ReaderService from '../../../service/reader.service'
+import bookSpinner from '../../shared/bookSpinner/BookSpinner'
 
 import './ClubDashboard.css'
 
@@ -64,9 +65,12 @@ function ClubDashboard(props) {
                 !loading ?
                 <div>
 
-                <Spinner animation="border" role="status">
+                <bookSpinner></bookSpinner>
+
+                {/* <Spinner animation="border" role="status">
                     <span className="sr-only">Loading...</span>
-                </Spinner> 
+                </Spinner>  */}
+
                 </div>
                 :
                 <div>

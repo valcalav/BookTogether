@@ -71,3 +71,13 @@
     display: flex;
     margin-bottom: 30px;
 }
+
+.book-title-btn {
+    width: 240px;
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+.buttons-pagination {
+    margin-bottom: 50px;
+}
