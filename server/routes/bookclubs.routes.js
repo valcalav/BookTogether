@@ -6,11 +6,10 @@ const Reader = require('./../models/reader.model')
 
 //Endpoints
 
+const today = new Date()
 
 //Book clubs list
 router.get('/allBookClubs', (req, res) => {
-
-    const today = new Date()
 
     Event
         .find({ startDate: { $gte: today } }).sort({startDate: 1})
@@ -26,7 +25,7 @@ router.get('/allBookClubs/:genre', (req, res) => {
     const genre = req.params.genre
 
     Event
-        .find({genre})
+        .find({ genre, startDate: { $gte: today } }).sort({startDate: 1})
         .then(bookClubs => { res.json(bookClubs) })
         .catch(err => res.status(500).json({code: 500, message: 'Error fetching Book Clubs', err}))
 })
@@ -37,7 +36,7 @@ router.get('/allBookClubs/language/:language', (req, res) => {
     const language = req.params.language
 
     Event
-        .find({language})
+        .find({ language, startDate: { $gte: today } }).sort({startDate: 1})
         .then(bookClubs => { res.json(bookClubs) })
         .catch(err => res.status(500).json({code: 500, message: 'Error fetching Book Clubs', err}))
 })

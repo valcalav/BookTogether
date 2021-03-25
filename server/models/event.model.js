@@ -60,7 +60,11 @@ const eventSchema = new Schema({
     meetings: [{
         type: Schema.Types.ObjectId,
         ref: 'Meeting'
-    }]
+    }],
+    bookRating: {
+        type: Schema.Types.ObjectId,
+        ref: 'Reader', 
+    }
 }, {
     timestamps: true
 })

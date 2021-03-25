@@ -36,7 +36,6 @@ router.post('/:event_id/createMeeting', (req, res) => {
 })
 
 //Edit meeting
-
 router.put('/editMeeting/:meeting_id', (req, res) => {
 
     Meeting
@@ -74,6 +73,5 @@ router.delete('/delete/:meeting_id', (req, res) => {
         .then(() => res.json({message: 'Meeting deleted'}))
         .catch(err => res.status(500).json({ code: 500, message: 'Error deleting post'}))
 })
-
 
 module.exports = router
