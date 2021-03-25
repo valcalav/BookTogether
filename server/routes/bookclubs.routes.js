@@ -11,7 +11,7 @@ const Reader = require('./../models/reader.model')
 router.get('/allBookClubs', (req, res) => {
 
     Event
-        .find()
+        .find().sort({startDate: 1})
         .select('bookClubName bookTitle bookAuthor startDate participants imgBookCover')
         .then(allEvents => res.json({allEvents}))
         .catch(err => res.status(500).json({code: 500, message: 'Error fetching Book Clubs', err}))

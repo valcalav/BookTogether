@@ -31,9 +31,7 @@ function BestsellersPage() {
                 setLoading(false)
             })
             .catch(err => setError(err))
-
     }, [])
-
 
     return (
         <div>
@@ -62,6 +60,7 @@ function BestsellersPage() {
                             })
                         }
                     </Col>
+
                     <Col>
                     <h3>Non-Fiction Best sellers:</h3>
                     
@@ -81,7 +80,6 @@ function BestsellersPage() {
                     </>
                 }
                     
-
                 </Row>
             </Container>
 

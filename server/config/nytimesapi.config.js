@@ -18,4 +18,4 @@ class NYTimesApi {
 
 }
 
-module.exports = NYTimesApi
+module.exports = NYTimesApi 

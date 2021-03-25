@@ -79,13 +79,12 @@ export default function BookClubs() {
     }
 
     function handleLanguage(language) {
-        console.log('language', language.target.innerText.toLowerCase())
+        // console.log('language', language.target.innerText.toLowerCase())
     
         return bookClubsService
             .getAllBookClubsByLanguage(language.target.innerText.toLowerCase())
             .then(response => {
-                console.log('response', response.data)
-                
+                // console.log('response', response.data)
                 setState({...state, bookClubsByLanguage: response.data })
                 if (response) {
                     setState({ ...state,
