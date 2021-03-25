@@ -10,8 +10,10 @@ const Reader = require('./../models/reader.model')
 //Book clubs list
 router.get('/allBookClubs', (req, res) => {
 
+    const today = new Date()
+
     Event
-        .find().sort({startDate: 1})
+        .find({ startDate: { $gte: today } }).sort({startDate: 1})
         .select('bookClubName bookTitle bookAuthor startDate participants imgBookCover')
         .then(allEvents => res.json({allEvents}))
         .catch(err => res.status(500).json({code: 500, message: 'Error fetching Book Clubs', err}))
