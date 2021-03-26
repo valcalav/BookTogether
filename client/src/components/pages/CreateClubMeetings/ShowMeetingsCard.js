@@ -29,13 +29,11 @@ function ShowMeetingsCard({setModalShow, clubMeetings, owner, loggedUser}) {
                     
                     </Card.Text>
                     {
-                        owner === loggedUser._id ?
+                        owner === loggedUser._id &&
                         <>
                         <Button block variant="info" onClick={() => setModalShow(true)}>Create meeting</Button>
                         <small>Only you can create meetings for the Book Club</small>
                         </>
-                        : null
-
                     }
                 </Card.Body>
             </Card>

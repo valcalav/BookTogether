@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { Container, Row, Col, Card, ButtonGroup, Spinner } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+
+import BookRatings from '../Ratings/Ratings'
 import ShowMeetingsCard from '../CreateClubMeetings/ShowMeetingsCard'
 import CreateMeetingModal from '../CreateClubMeetings/CreateMeetingModal'
 
@@ -65,11 +67,7 @@ function ClubDashboard(props) {
                 !loading ?
                 <div>
 
-                <bookSpinner></bookSpinner>
-
-                {/* <Spinner animation="border" role="status">
-                    <span className="sr-only">Loading...</span>
-                </Spinner>  */}
+                <bookSpinner />
 
                 </div>
                 :
@@ -108,6 +106,7 @@ function ClubDashboard(props) {
 
                             <Col lg={8}>
                                 <Row>
+                                    
                                     <Col lg={12}>
                                         <Card>
                                             <Card.Header>About the club</Card.Header>
@@ -118,8 +117,11 @@ function ClubDashboard(props) {
                                             </Card.Body>
                                         </Card>
                                     </Col>
-                                    <Col>
+                                    <Col lg={12}>
                                         <ShowMeetingsCard owner={bookClubInfo.owner} loggedUser={loggedUser} clubMeetings={clubMeetings} setModalShow={setModalShow} />
+                                    </Col>
+                                    <Col lg={12}>
+                                        <BookRatings owner={bookClubInfo.owner} loggedUser={loggedUser} bookTitle={bookClubInfo.bookTitle} />
                                     </Col>
                                 </Row>
                             </Col>

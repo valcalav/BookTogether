@@ -63,7 +63,8 @@ const eventSchema = new Schema({
     }],
     bookRating: {
         type: Schema.Types.ObjectId,
-        ref: 'Reader', 
+        ref: 'Reader',
+        default: undefined
     }
 }, {
     timestamps: true
