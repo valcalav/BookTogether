@@ -40,8 +40,6 @@ export default function BookClubs() {
             .catch(err => console.log(err))
         }
         loadClubs()
-  
-
     }, [])
     
     const increasePagination = () => setState({ ...state,
@@ -50,8 +48,8 @@ export default function BookClubs() {
      })
     
     const decreasePagination = () => setState({ ...state,
-    currentPage: state.currentPage -1,
-    currentFirstBookClub: state.currentFirstBookClub - state.bookClubsPerPage
+        currentPage: state.currentPage -1,
+        currentFirstBookClub: state.currentFirstBookClub - state.bookClubsPerPage
     })
 
     const handleSearch = (e)  => {
@@ -64,13 +62,15 @@ export default function BookClubs() {
     }
 
     function handleGenre(genre) {
-  
+        
        return bookClubsService
             .getAllBookClubsByGenre(genre.target.innerText.toLowerCase())
             .then(response => {
                 setState({...state, bookClubsByGenre: response.data })
                 if (response) {
                     setState({ ...state,
+                        currentPage: 0,
+                        currentFirstBookClub: 0,
                         currentBookCLubs:  response.data
                     })
                 }
@@ -79,23 +79,21 @@ export default function BookClubs() {
     }
 
     function handleLanguage(language) {
-        // console.log('language', language.target.innerText.toLowerCase())
     
         return bookClubsService
             .getAllBookClubsByLanguage(language.target.innerText.toLowerCase())
             .then(response => {
-                // console.log('response', response.data)
                 setState({...state, bookClubsByLanguage: response.data })
                 if (response) {
                     setState({ ...state,
+                        currentPage: 0,
+                        currentFirstBookClub: 0,
                         currentBookCLubs: response.data
                     })
                 }
             })
             .catch(err => console.log(err))
      }
-
-    
 
     return (
         <>

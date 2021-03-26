@@ -19,4 +19,5 @@ ul {
 
 li {
     margin-top: 5px;
+    cursor: pointer;
 }

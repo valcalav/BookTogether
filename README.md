@@ -11,6 +11,7 @@ This is my Final Project for Ironhack Madrid.
 - Express.js
 - MongoDB
 - React Bootstrap
+- CSS
 
 ## API's used
 

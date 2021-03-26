@@ -22,13 +22,24 @@ router.get('/getRatings/:club_id', (req, res) => {
 router.put('/editRatings/:rating_id', (req, res) => {
 
     const user_id = req.user._id
+    const rating_id = req.params.rating_id
     //console.log(req.body)
-    //TO DO: IF USER ALREADY VOTED HE CANT VOTE AGAIN.
 
     Ratings
-        .findByIdAndUpdate(req.params.rating_id, req.body, { $push: {voters: user_id}})
-        .then(rating => res.json(rating))
-        .catch(err => res.status(500).json({ code: 500, message: 'Error editing rating'}))
+        .findById(rating_id)
+        .then(rating => {
+            const voters = rating.voters.map(elm => {
+                if (elm.includes(user_id)) {
+                    res.json({ message: 'Sorry, this book was already rated.'})
+                } else {
+                    Ratings
+                        .findByIdAndUpdate(req.params.rating_id, req.body, { $push: {voters: user_id}})
+                        .then(rating => res.json(rating))
+                        .catch(() => res.status(500).json({ code: 500, message: 'Error editing rating'}))
+                }
+            })
+        })
+        .catch(err => res.status(500).json({code: 500, message: 'Error'}))
 })
 
 //Create ratings
