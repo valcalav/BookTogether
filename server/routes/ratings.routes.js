@@ -23,7 +23,6 @@ router.put('/editRatings/:rating_id', (req, res) => {
 
     const user_id = req.user._id
     const rating_id = req.params.rating_id
-    //console.log(req.body)
 
     Ratings
         .findById(rating_id)
@@ -33,7 +32,7 @@ router.put('/editRatings/:rating_id', (req, res) => {
                     res.json({ message: 'Sorry, this book was already rated.'})
                 } else {
                     Ratings
-                        .findByIdAndUpdate(req.params.rating_id, req.body, { $push: {voters: user_id}})
+                        .findByIdAndUpdate(rating_id, req.body, { $push: {voters: user_id}})
                         .then(rating => res.json(rating))
                         .catch(() => res.status(500).json({ code: 500, message: 'Error editing rating'}))
                 }
