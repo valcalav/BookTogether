@@ -26,3 +26,12 @@
 .dashboard-card p {
     margin-bottom: 10px;
 }
+
+.rating-stars {
+    margin: auto;
+}
+
+.ratings-card.card {
+    margin-top: 10px;
+    margin-bottom: 50px;
+}

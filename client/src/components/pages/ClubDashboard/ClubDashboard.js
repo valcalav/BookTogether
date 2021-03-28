@@ -121,7 +121,7 @@ function ClubDashboard(props) {
                                         <ShowMeetingsCard owner={bookClubInfo.owner} loggedUser={loggedUser} clubMeetings={clubMeetings} setModalShow={setModalShow} />
                                     </Col>
                                     <Col lg={12}>
-                                        <BookRatings owner={bookClubInfo.owner} loggedUser={loggedUser} bookTitle={bookClubInfo.bookTitle} />
+                                        <BookRatings owner={bookClubInfo.owner} loggedUser={loggedUser} bookTitle={bookClubInfo.bookTitle} clubStatus={bookClubInfo.clubClosed} clubId={bookClub_id} />
                                     </Col>
                                 </Row>
                             </Col>

@@ -65,6 +65,11 @@ const eventSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'Reader',
         default: undefined
+    },
+    clubClosed: {
+        type: Boolean,
+        required: true,
+        default: false
     }
 }, {
     timestamps: true

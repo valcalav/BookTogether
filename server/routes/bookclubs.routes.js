@@ -87,5 +87,15 @@ router.delete('/delete/:bookClub_id', (req, res) => {
         .catch(err => res.status(500).json({ code: 500, message: 'Error deleting BookClub', err}))
 })
 
+//Edit club status
+
+router.put('/editStatus/:bookClub_id', (req, res) => {
+
+    Event
+        .findByIdAndUpdate(req.params.bookClub_id, { clubClosed: true })
+        .then((response) => res.json(response))
+        .catch(err => res.status(500).json({ code:500, message: 'Error changing book status'}))
+})
+
 
 module.exports = router

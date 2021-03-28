@@ -25,6 +25,8 @@ class BookClubService {
 
     editBookClub = (bookClub_id, bookClubDetails) => this.api.put(`/editBookClub/${bookClub_id}`, bookClubDetails)
 
+    editClubStatus = (bookClub_id) => this.api.put(`/editStatus/${bookClub_id}`)
+
     deleteBookClub = (bookClub_id) => this.api.delete(`/delete/${bookClub_id}`)
 
 }

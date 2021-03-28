@@ -4,6 +4,6 @@ module.exports = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
         user: 'project.booktogether@gmail.com',
-        pass: 'Ironhack0121'
+        pass: `${process.env.NODEMAILER_PW}`
     }
 })
