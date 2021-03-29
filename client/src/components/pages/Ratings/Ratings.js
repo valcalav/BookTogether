@@ -5,31 +5,40 @@ import ReactStars from "react-rating-stars-component";
 import '../ClubDashboard/ClubDashboard.css'
 
 import BookClubService from '../../../service/bookclubs.service'
+import RatingsService from '../../../service/ratings.service'
 
-function BookRatings({ bookTitle, loggedUser, owner, clubId, clubStatus }) {
+function BookRatings({ bookTitle, loggedUser, owner, clubId, clubStatus, setBookClubInfo, bookClubInfo, match }) {
     
     const [ratingEnabled, setRatingEnabled] = useState(undefined)
-    const [rating, setRating] = useState(0)
 
     const bookClubService = new BookClubService()
-
-    const ratingChanged = (newRating) => {
-        console.log(newRating);
-    };
-
+    const ratingService = new RatingsService()
+    
     useEffect(() => {
         setRatingEnabled(clubStatus)
     })
+
+    const ratingChanged = (newRating) => {
+        console.log(newRating);
+        
+    };
 
     const enableRating = () => {
         bookClubService
             .editClubStatus(clubId)
             .then(response => {
                 console.log('esta es la respuesta del edit status', response)
-            })
+                setBookClubInfo({...bookClubInfo, clubClosed: true })
+                })
+            .catch(err => console.log(err))
+
+        ratingService
+            .newRatings(match.params.bookClub_id)
+            .then(response => console.log(response))
             .catch(err => console.log(err))
     }
     
+
 
     return (
         <div>

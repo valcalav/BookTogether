@@ -16,7 +16,6 @@ class App extends Component {
   }
 
   storeUser(loggedUser) {
-    console.log(loggedUser)
     this.setState({ loggedUser }, () => console.log("User:", this.state.loggedUser))
   }
 

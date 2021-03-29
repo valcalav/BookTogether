@@ -9,7 +9,7 @@ import CreateMeetingModal from '../CreateClubMeetings/CreateMeetingModal'
 import BookClubService from '../../../service/bookclubs.service'
 import MeetingService from '../../../service/meeting.service'
 import ReaderService from '../../../service/reader.service'
-import bookSpinner from '../../shared/bookSpinner/BookSpinner'
+import BookSpinner from '../../shared/bookSpinner/BookSpinner'
 
 import './ClubDashboard.css'
 
@@ -38,6 +38,7 @@ function ClubDashboard(props) {
     function findClub() {
         bookClubService.getBookClubDetails(bookClub_id)
             .then(response => {
+                console.log('Esta es la info del club !', response.data)
                 setBookClubInfo(response.data)
                 setLoading({loading: true})
             })
@@ -67,7 +68,7 @@ function ClubDashboard(props) {
                 !loading ?
                 <div>
 
-                <bookSpinner />
+                <BookSpinner />
 
                 </div>
                 :
@@ -121,7 +122,7 @@ function ClubDashboard(props) {
                                         <ShowMeetingsCard owner={bookClubInfo.owner} loggedUser={loggedUser} clubMeetings={clubMeetings} setModalShow={setModalShow} />
                                     </Col>
                                     <Col lg={12}>
-                                        <BookRatings owner={bookClubInfo.owner} loggedUser={loggedUser} bookTitle={bookClubInfo.bookTitle} clubStatus={bookClubInfo.clubClosed} clubId={bookClub_id} />
+                                        <BookRatings owner={bookClubInfo.owner} loggedUser={loggedUser} bookTitle={bookClubInfo.bookTitle} clubStatus={bookClubInfo.clubClosed} clubId={bookClub_id} setBookClubInfo={setBookClubInfo} bookClubInfo={bookClubInfo} {...props} />
                                     </Col>
                                 </Row>
                             </Col>

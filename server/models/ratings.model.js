@@ -5,6 +5,7 @@ const Schema = mongoose.Schema
 const ratingSchema = new Schema({
     rating: {
         type: Number,
+        default: 0,
         required: true,
     },
     voters: {
@@ -14,18 +15,18 @@ const ratingSchema = new Schema({
     bookClub: {
         type: Schema.Types.ObjectId,
         ref: 'Event',
-        required: true,
     }
 }, {
     timestamps: true
 })
 
-ratingSchema.statics.createAndAssingToEvent = function(ratingData, event_id, emailList, user_id) {
+ratingSchema.statics.createAndAssingToEvent = function(event_id, emailList) {
     return this
-        .create(ratingData, { $push: { voters: user_id }})
+        .create({ bookClub: event_id })
         .then(rating => {
+            console.log('esto es lo que crea rating', rating)
             return mongoose.model('Event')
-                .findByIdAndUpdate(event_id, { bookRating: rating }, { new: true })
+                .findByIdAndUpdate(event_id, { bookRating: rating._id }, { new: true })
         })
         .then(() => {
             let emails = emailList.join(', ')

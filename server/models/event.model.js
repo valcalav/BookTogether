@@ -63,8 +63,7 @@ const eventSchema = new Schema({
     }],
     bookRating: {
         type: Schema.Types.ObjectId,
-        ref: 'Reader',
-        default: undefined
+        ref: 'Rating',
     },
     clubClosed: {
         type: Boolean,

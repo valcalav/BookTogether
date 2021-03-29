@@ -43,21 +43,25 @@ router.put('/editRatings/:rating_id', (req, res) => {
 
 //Create ratings
 
-router.post(':event_id/createRating', (req, res) =>{
+router.post('/:event_id/createRatings', (req, res) =>{
     const event_id = req.params.event_id
     const user_id = req.user._id
-    const ratingData = { ...req.body, bookClub: event_id }
+
+    console.log('esto es el event id', req.params.event_id)
 
     Event
         .findById(event_id)
         .then(response => {
+            console.log('primera parte bien')
             let emailList = response.participantsEmails
             return emailList
         })
         .then(emailList => {
             Ratings
-                .createAndAssingToEvent(ratingData, event_id, emailList, user_id)
-                .then(rating => res.json(rating))
+                .createAndAssingToEvent(event_id, emailList, user_id)
+                .then(rating => {
+                    console.log('segunda parte bien')
+                    res.json(rating)})
                 .catch(err => res.status(500).json({code: 500, message: 'Error'}))
         })
         .catch(err => {

@@ -14,13 +14,8 @@ function GenresList({handleGenre}) {
             <h5>Search by genre</h5>
             <hr />
             <ul>
-                {/* {
-                    Object.keys(GenresObj).map((key, idx) => ( <li key={idx}><a href={`/bookclubs-genre-list/${key}`}>{GenresObj[key]}</a></li>))
-                } */}
                 {
                     Object.keys(GenresObj).map((genre, idx) => {
-
-                        {/* console.log('key solo key ', genre) */}
                        return  <li onClick={(genre)=> handleGenre(genre)} key={idx}>{GenresObj[genre]}</li>
                     })
                 }
