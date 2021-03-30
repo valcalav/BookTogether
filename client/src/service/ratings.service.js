@@ -10,9 +10,9 @@ class RatingsService {
 
     newRatings = (bookClub_id) => this.api.post(`/${bookClub_id}/createRatings`)
     
-    editRatings = (rating_id, ratingsDetails) => this.api.put(`/editRatings/${rating_id}`, ratingsDetails)
+    editRatings = (rating_id, newRating) => this.api.put(`/editRatings/${rating_id}`, newRating)
 
-    findRatings = bookClub_id => this.api.get(`/findRatings/${bookClub_id}`)
+    findRatings = bookClub_id => this.api.get(`/getRatings/${bookClub_id}`)
 
 }
 

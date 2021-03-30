@@ -8,12 +8,12 @@ const Event = require('./../models/event.model')
 
 //Find ratings by Book Club
 
-router.get('/getRatings/:club_id', (req, res) => {
-    const bookClub = req.params.bookClub
+router.get('/getRatings/:event_id', (req, res) => {
+    const event_id = req.params.event_id
 
     Ratings
-        .find({bookClub})
-        .then(rating => {res.json(rating)})
+        .find({ bookClub: event_id })
+        .then(rating => res.json(rating))
         .catch(err => res.status(500).json({code: 500, message: 'Error fetching Rating', err}))
 })
 
@@ -21,23 +21,47 @@ router.get('/getRatings/:club_id', (req, res) => {
 
 router.put('/editRatings/:rating_id', (req, res) => {
 
+    console.log("this is req.body", req.body)
+    console.log('this is req.user', req.user)
+    console.log('este es el id del rating', req.params.rating_id)
+
     const user_id = req.user._id
     const rating_id = req.params.rating_id
+
+    // Ratings
+    //     .findByIdAndUpdate(rating_id, {$set: req.body, $push: {voters: user_id}})
+    //     .then(rating => {
+    //         console.log('funciona', rating)
+    //         res.json(rating)})
+    //     .catch(() => res.status(500).json({ code: 500, message: 'Error editing rating'}))
 
     Ratings
         .findById(rating_id)
         .then(rating => {
-            const voters = rating.voters.map(elm => {
+            console.log('esta es la primera respuesta', rating)
+
+            if (rating.voters.length === 0) {
+                Ratings
+                        .findByIdAndUpdate(rating_id, {$set: req.body, $push: {voters: user_id}})
+                        .then(editedRating => {
+                            console.log('funciona', editedRating)
+                            res.json(editedRating)})
+                        .catch(() => res.status(500).json({ code: 500, message: 'Error editing rating'}))
+            } else {
+                rating.voters.map(elm => {
                 if (elm.includes(user_id)) {
                     res.json({ message: 'Sorry, this book was already rated.'})
                 } else {
                     Ratings
-                        .findByIdAndUpdate(rating_id, req.body, { $push: {voters: user_id}})
-                        .then(rating => res.json(rating))
+                        .findByIdAndUpdate(rating_id, {$set: req.body, $push: {voters: user_id}})
+                        .then(editedRating => {
+                            console.log('funciona', editedRating)
+                            res.json(editedRating)})
                         .catch(() => res.status(500).json({ code: 500, message: 'Error editing rating'}))
                 }
             })
-        })
+            }
+        }) 
         .catch(err => res.status(500).json({code: 500, message: 'Error'}))
 })
 
@@ -47,12 +71,9 @@ router.post('/:event_id/createRatings', (req, res) =>{
     const event_id = req.params.event_id
     const user_id = req.user._id
 
-    console.log('esto es el event id', req.params.event_id)
-
     Event
         .findById(event_id)
         .then(response => {
-            console.log('primera parte bien')
             let emailList = response.participantsEmails
             return emailList
         })
@@ -60,7 +81,6 @@ router.post('/:event_id/createRatings', (req, res) =>{
             Ratings
                 .createAndAssingToEvent(event_id, emailList, user_id)
                 .then(rating => {
-                    console.log('segunda parte bien')
                     res.json(rating)})
                 .catch(err => res.status(500).json({code: 500, message: 'Error'}))
         })

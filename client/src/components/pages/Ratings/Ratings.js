@@ -7,38 +7,78 @@ import '../ClubDashboard/ClubDashboard.css'
 import BookClubService from '../../../service/bookclubs.service'
 import RatingsService from '../../../service/ratings.service'
 
-function BookRatings({ bookTitle, loggedUser, owner, clubId, clubStatus, setBookClubInfo, bookClubInfo, match }) {
+function BookRatings(props) {
     
+    const { bookTitle, loggedUser, owner, clubStatus, setBookClubInfo, bookClubInfo, match, params } = props
+
     const [ratingEnabled, setRatingEnabled] = useState(undefined)
+    const [ratingScore, setRatingScore] = useState(0)
+    const [ratingLoading, setRatignLoading] = useState(true)
+    const [ratingInfo, setRatingInfo] = useState([])
 
     const bookClubService = new BookClubService()
     const ratingService = new RatingsService()
     
     useEffect(() => {
         setRatingEnabled(clubStatus)
-    })
+        findCurrentRating()
+    }, [clubStatus])
 
-    const ratingChanged = (newRating) => {
-        console.log(newRating);
-        
-    };
+    const findCurrentRating = () => {
+        if (!clubStatus) {
+            setRatingScore(0)
+        } else if (clubStatus) {
+            setRatignLoading(true)
+            ratingService
+                .findRatings(match.params.bookClub_id)
+                .then(response => {
+                    setRatingInfo(response.data[0])
+                    setRatingScore(response.data[0].rating)
+                    setRatignLoading(false)
+                })
+                .catch(err => {
+                    setRatignLoading(false)
+                    console.log(err)
+                })
+        }
+    }
 
     const enableRating = () => {
         bookClubService
-            .editClubStatus(clubId)
-            .then(response => {
-                console.log('esta es la respuesta del edit status', response)
-                setBookClubInfo({...bookClubInfo, clubClosed: true })
-                })
-            .catch(err => console.log(err))
-
+        .editClubStatus(match.params.bookClub_id)
+        .then(() => {
+            setBookClubInfo({...bookClubInfo, clubClosed: true })
+        })
+        .catch(err => console.log(err))
+        
         ratingService
-            .newRatings(match.params.bookClub_id)
-            .then(response => console.log(response))
-            .catch(err => console.log(err))
+        .newRatings(match.params.bookClub_id)
+        .then(response => console.log(response))
+        .catch(err => console.log(err))
     }
     
+    const ratingChanged = (score) => {
+        let newScore = 0
+        console.log("esto es el rating info", ratingInfo)
+        console.log("esto es el rating info voters", ratingInfo.voters)
+        console.log("este es el id del rating", bookClubInfo.bookRating)
 
+        if (ratingInfo.voters.length === 0) {
+            newScore = score + ratingScore
+        } else {
+            newScore = score + ratingScore / ratingInfo.voters.length
+        }
+        console.log("nueva puntuacion", newScore)
+
+        const newRating = {
+            rating: newScore
+        }
+
+        ratingService
+            .editRatings(bookClubInfo.bookRating, newRating)
+            .then(() => console.log('se hizo el edit'))
+            .catch(err => console.log(err))
+    };
 
     return (
         <div>
@@ -52,7 +92,7 @@ function BookRatings({ bookTitle, loggedUser, owner, clubId, clubStatus, setBook
                             <Card.Body>
                                 <Card.Text>
                                     When done reading the book, enable this section so that all participants rate <strong>"{bookTitle}"</strong>.
-                                    <hr />
+                                <hr />
                                 </Card.Text>
                                 <Button block variant="outline-danger" onClick={() => enableRating()}>Finished book, enable book rating</Button>
                                 <small>Once this section is enabled, the Club will be categorized as "Closed"</small>
@@ -67,15 +107,17 @@ function BookRatings({ bookTitle, loggedUser, owner, clubId, clubStatus, setBook
                     <Card.Header>Done reading? Rate <strong>"{bookTitle}"</strong> !</Card.Header>
                     <Card.Body className="rating-stars">
                         <Card.Text >
+                        { !ratingLoading && 
                             <ReactStars count={5}
                             onChange={ratingChanged}
+                            value={ratingScore}
                             size={64}
                             isHalf={true}
                             emptyIcon={<i className="far fa-star"></i>}
                             halfIcon={<i className="fa fa-star-half-alt"></i>}
                             fullIcon={<i className="fa fa-star"></i>}
-                            activeColor="#ffbf00"/>
-                        </Card.Text>
+                            activeColor="#ffbf00"/> }
+                        </Card.Text> 
                         
                     </Card.Body>
                 </Card>

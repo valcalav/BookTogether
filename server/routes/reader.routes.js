@@ -38,6 +38,9 @@ router.put('/leaveBookClub/:bookClub_id', (req, res, next) => {
 //Edit Reader info
 router.put('/edit-profile/:reader_id', (req, res) => {
 
+    console.log("el req body del profile", req.body)
+    console.log("el req user id", req.user._id)
+
     Reader
         .findByIdAndUpdate(req.user._id, req.body)
         .then(response => res.json(response))
