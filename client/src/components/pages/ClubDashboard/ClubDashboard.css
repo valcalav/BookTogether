@@ -35,3 +35,8 @@
     margin-top: 10px;
     margin-bottom: 50px;
 }
+
+.ratings-card small {
+    display: flex;
+    justify-content: center;
+}

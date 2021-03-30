@@ -48,7 +48,7 @@ export class Signup extends Component {
                 <Col className="login-container align-items-center" lg={{ span: 6, offset: 3 }}>
 
                 <Form onSubmit={e => this.handleSubmit(e)}>
-                    <img className="openBook" src={openBook} />
+                    <img className="openBook" src={openBook} alt="open book"/>
                     <Form.Group>
                         <Form.Label>Username</Form.Label>
                         <Form.Control className="input" type="text" name="username" value={this.state.username} onChange={e => this.handleInputChange(e)} />

@@ -13,13 +13,9 @@ function LanguageList({handleLanguage}) {
             <h5>Search by language</h5>
             <hr />
             <ul>
-                {/* {
-                    Object.keys(LanguagesObj).map((key, idx) => ( <li key={idx}><a href={`/bookclubs-language-list/${key}`}>{LanguagesObj[key]}</a></li>))
-                } */}
                 {
                     Object.keys(LanguagesObj).map((language, idx) => {
 
-                        {/* console.log('key solo key ', genre) */}
                        return  <li onClick={(language)=> handleLanguage(language)} key={idx}>{LanguagesObj[language]}</li>
                     })
                 }

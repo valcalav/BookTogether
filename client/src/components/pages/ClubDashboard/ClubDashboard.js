@@ -38,7 +38,6 @@ function ClubDashboard(props) {
     function findClub() {
         bookClubService.getBookClubDetails(bookClub_id)
             .then(response => {
-                console.log('Esta es la info del club !', response.data)
                 setBookClubInfo(response.data)
                 setLoading({loading: true})
             })

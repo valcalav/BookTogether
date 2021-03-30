@@ -59,16 +59,12 @@ function BookRatings(props) {
     
     const ratingChanged = (score) => {
         let newScore = 0
-        console.log("esto es el rating info", ratingInfo)
-        console.log("esto es el rating info voters", ratingInfo.voters)
-        console.log("este es el id del rating", bookClubInfo.bookRating)
 
         if (ratingInfo.voters.length === 0) {
             newScore = score + ratingScore
         } else {
             newScore = score + ratingScore / ratingInfo.voters.length
         }
-        console.log("nueva puntuacion", newScore)
 
         const newRating = {
             rating: newScore
@@ -76,7 +72,7 @@ function BookRatings(props) {
 
         ratingService
             .editRatings(bookClubInfo.bookRating, newRating)
-            .then(() => console.log('se hizo el edit'))
+            .then(() => console.log('Edit done'))
             .catch(err => console.log(err))
     };
 
@@ -108,6 +104,7 @@ function BookRatings(props) {
                     <Card.Body className="rating-stars">
                         <Card.Text >
                         { !ratingLoading && 
+                        <>
                             <ReactStars count={5}
                             onChange={ratingChanged}
                             value={ratingScore}
@@ -116,7 +113,10 @@ function BookRatings(props) {
                             emptyIcon={<i className="far fa-star"></i>}
                             halfIcon={<i className="fa fa-star-half-alt"></i>}
                             fullIcon={<i className="fa fa-star"></i>}
-                            activeColor="#ffbf00"/> }
+                            activeColor="#ffbf00"/>
+                            <small>Participants average rating of the book</small>
+                        </>
+                        }
                         </Card.Text> 
                         
                     </Card.Body>
