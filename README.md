@@ -41,4 +41,10 @@ This is my Final Project for Ironhack Madrid.
 ![profile](https://user-images.githubusercontent.com/75569696/111160898-d6caba00-859a-11eb-9549-08fd846b6594.png)
 
 - Book Club page (only the club's creator can edit the club and create meetings):
-![club-dashboard-creator](https://user-images.githubusercontent.com/75569696/111161273-417bf580-859b-11eb-86b6-6cff5d59b199.png)
+![ClubDashboard](https://user-images.githubusercontent.com/75569696/113015519-eabb1200-917d-11eb-9d77-58dee379300f.png)
+
+- Book Club's rating system enabled once participants finished reading and discussing the book
+![BookRating](https://user-images.githubusercontent.com/75569696/113015134-85672100-917d-11eb-97a2-c762d694538f.png)
+
+## Author
+- Verónica Alcalá Vera | [GitHub profile](https://github.com/valcalav) | [LinkedIn](https://www.linkedin.com/in/veronicaalcalav/)
