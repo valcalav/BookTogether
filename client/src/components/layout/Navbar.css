@@ -2,22 +2,47 @@
 
 .navbar {
     font-family: 'Montserrat', sans-serif;
-    height: 90px;
 }
 
-.navbar-brand {
-    font-size: 33px;
-    letter-spacing: 2.5px;
-    margin-left: 80px;
-    font-weight: 300;
+@media (min-width:1230px) {
+    .navbar {
+        height: 90px;
+    }
+    
+    .navbar-brand {
+        font-size: 33px;
+        letter-spacing: 2.5px;
+        margin-left: 80px;
+        font-weight: 300;
+    }
+    
+    .nav-link {
+        margin-left: 90px;
+        font-size: 17px;
+        font-weight: 500;
+    }
+    
+    .navbar-collapse {
+        margin-right: 100px;
+    }   
 }
 
-.nav-link {
-    margin-left: 90px;
-    font-size: 17px;
-    font-weight: 500;
-}
-
-.navbar-collapse {
-    margin-right: 100px;
+@media (min-width:992px) {
+    
+    .navbar-brand {
+        font-size: 25px;
+        letter-spacing: 2px;
+        margin-left: 80px;
+        font-weight: 300;
+    }
+    
+    .nav-link {
+        margin-left: 50px;
+        font-size: 16px;
+        font-weight: 500;
+    }
+    
+    .navbar-collapse {
+        margin-right: 100px;
+    }   
 }
