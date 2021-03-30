@@ -8,7 +8,7 @@ import './bookClubs.css'
 function BookClubsCard({ bookClubName, bookTitle, bookAuthor, startDate, participants, imgBookCover, _id }) {
 
     return (
-        <Col md={3} >
+        <Col lg={3} md={6} sm={4} xs={6} >
                 <Card className="clubs-card">
                     <div>
                     <Card.Img variant="top" src={imgBookCover} />

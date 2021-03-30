@@ -99,7 +99,7 @@ export default function BookClubs() {
         <>
              <Container fluid>
                 <Row>
-                    <Col className="clubs-list-header" md={{ span: 10, offset: 1, pull: 1 }}>
+                    <Col className="clubs-list-header" md={{ span: 10, offset: 1, pull: 1 }} xs={12} >
                         <h1>Find and Join a Book club</h1>
                         <Link to='/create-club' className="btn btn-outline-info create-btn">Create a Book Club</Link>
                     </Col>
@@ -115,10 +115,7 @@ export default function BookClubs() {
                         </Form.Group>
                         </Form>
                     </Col>
-                    
                 </Row>
-
-
 
                  <Row>
                     <Col md={{ span: 3, offset: 1 }}>

@@ -22,3 +22,10 @@ form {
 .input {
     box-shadow: 2px 2px 5px 0px rgb(219, 219, 219);
 }
+
+@media (max-width:540px) {
+    .login-container{
+        height: 600px;
+        display: flex;
+    }
+}
