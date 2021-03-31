@@ -37,7 +37,7 @@ function BestsellersPage() {
         <div>
             <h1 className="bestseller-title">NYTimes Best sellers</h1>
             <Container>
-                <Row>
+                <Row className="bestseller-list">
                 {
                     loading ?
                         <div className="bestsellers-spinner-one">
@@ -61,7 +61,7 @@ function BestsellersPage() {
                         }
                     </Col>
 
-                    <Col>
+                    <Col  lg={6} md={6}>
                     <h3>Non-Fiction Best sellers:</h3>
                     
                     {

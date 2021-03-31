@@ -85,7 +85,9 @@ function Profile(props) {
                     </div>
                     <hr />
                     <Row>
-                        {userClubs && userClubs.map((userClub, idx)=> <MyClubsCard clubInfo={userClub} key={idx} />)}
+                        {
+                            userClubs && userClubs.slice(0, 4).map((userClub, idx)=> <MyClubsCard clubInfo={userClub} key={idx} />)
+                        }
                     </Row>
 
                     <div className="my-clubs-header">
@@ -94,7 +96,9 @@ function Profile(props) {
                     </div>
                     <hr />
                     <Row>
-                        {userJoinedClubs && userJoinedClubs.map((userClub, idx)=> <MyClubsCard clubInfo={userClub} key={idx} />)}
+                        {
+                            userJoinedClubs && userJoinedClubs.slice(0, 4).map((userClub, idx)=> <MyClubsCard clubInfo={userClub} key={idx} />)
+                        }
                     </Row>
                     <Row>
                         <Card className="card-quotes" >

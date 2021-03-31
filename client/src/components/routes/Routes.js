@@ -9,11 +9,11 @@ import CreateBookClubsPage from '../pages/Create-book-clubs/CreateBookClubsPage'
 import BookClubEditForm from "../pages/Edit-book-clubs/BookClubEditForm"
 import Profile from '../pages/Profile/Profile'
 import EditProfile from '../pages/Profile/EditProfile'
+import AllMyClubsPage from '../pages/AllMyClubs/AllMyClubsPage'
 import ClubDashboard from '../pages/ClubDashboard/ClubDashboard'
 import EditMeetingPage from '../pages/EditMeetings/EditMeetingPage'
 import EditQuotePost from '../pages/QuotesPosts/EditQuotePostPage'
 import BestsellersPage from '../pages/BestsellersPage/BestsellersPage'
-
 
 const Routes = ({ storeUser, loggedUser, fetchUser }) => {
 
@@ -37,6 +37,8 @@ const Routes = ({ storeUser, loggedUser, fetchUser }) => {
                     <Route path="/create-club" render={props => loggedUser ? <CreateBookClubsPage fetchUser={fetchUser} loggedUser={loggedUser} {...props} /> : <Redirect to="/login" />} />
         
                     <Route path="/profile" exact render={(props) => loggedUser ? <Profile fetchUser={fetchUser} loggedUser={loggedUser} {...props}/> : <Redirect to="/" />}/>
+
+                    <Route path="/my-clubs" exact render={(props) => loggedUser ? <AllMyClubsPage fetchUser={fetchUser} loggedUser={loggedUser} {...props}/> : <Redirect to="/" />}/>
 
                     <Route path="/edit-profile/:reader_id" render={(props) => loggedUser ? <EditProfile fetchUser={fetchUser} loggedUser={loggedUser} {...props}/> : <Redirect to="/" />}/>
         

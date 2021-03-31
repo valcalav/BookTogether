@@ -81,3 +81,25 @@
 .buttons-pagination {
     margin-bottom: 50px;
 }
+
+@media (max-width:450px) {
+    
+    .clubs-list-header {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        margin-bottom: 60px;
+    }
+
+    .search-bar.form-group {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .search-bar button {
+        margin: 5px auto;
+        width: 100%;
+    }
+
+}

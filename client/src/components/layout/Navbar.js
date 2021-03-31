@@ -39,6 +39,9 @@ const NavBar = ({ storeUser, loggedUser }) => {
                             <NavLink to="/profile">
                                 <NavDropdown.Item as="span">Profile</NavDropdown.Item>
                             </NavLink>
+                            <NavLink to="/my-clubs">
+                                <NavDropdown.Item as="span">All My Clubs</NavDropdown.Item>
+                            </NavLink>
                             <NavLink to="/create-club">
                                 <NavDropdown.Item as="span">Create Book Club</NavDropdown.Item>
                             </NavLink>
