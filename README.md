@@ -13,7 +13,9 @@ This is my Final Project for Ironhack Madrid.
 - React Bootstrap
 - CSS
 
-## API's used
+Also used MongoDB Compass and Postman for REST API testing.
+
+## External APIs
 
 - Google Book API
 - New York Times Book API
