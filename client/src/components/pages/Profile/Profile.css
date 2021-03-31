@@ -16,7 +16,7 @@
 
 .btn-edit {
     margin-top: 20px;
-    border: 1px solid rgb(212, 212, 212);;
+    border: 1px solid rgb(212, 212, 212);
 }
 
 .btn-back {
@@ -27,6 +27,7 @@
 
 .profile-card {
     height: 540px;
+    margin-bottom: 10px;
 }
 
 .profile-card h5 {
@@ -144,3 +145,11 @@
     margin-right: 15px;
 }
 
+@media (max-width:400px) {
+    
+    .my-clubs-header {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+    }
+}

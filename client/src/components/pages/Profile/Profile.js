@@ -3,8 +3,7 @@ import { Container, Row, Col, Card, Button, Modal } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 
 import ProfileCard from './ProfileCard'
-import MyClubsCard from './CreatedClubCard'
-import JoinedClubsCard from './JoinedClubCard'
+import MyClubsCard from './ProfileClubCard'
 import QuotesPostsCard from '../QuotesPosts/QuotePostsCard'
 import CreateQuotePost from '../QuotesPosts/CreateQuotePost'
 
@@ -67,11 +66,8 @@ function Profile(props) {
     }
 
     function handleClose(){
-        setModalShow(false);}
-
-    function handleShow(){
-        setModalShow(true);
-    } 
+        setModalShow(false)
+    }
     
 
     return (
@@ -79,10 +75,10 @@ function Profile(props) {
         <Container className="profile-container" fluid>
             
             <Row>
-                <Col md={{ span: 3, offset: 1 }}>
+                <Col lg={{ span: 3, offset: 1 }}>
                     <ProfileCard {...loggedUser} />
                 </Col>
-                <Col md={{ span: 7, pull: 1 }}>
+                <Col lg={{ span: 7, pull: 1 }}>
                     <div className="my-clubs-header">
                         <h5>Created clubs</h5>
                         <Link to='/create-club' className="btn btn-outline-info">Create a Book Club</Link>
@@ -98,7 +94,7 @@ function Profile(props) {
                     </div>
                     <hr />
                     <Row>
-                        {userJoinedClubs && userJoinedClubs.map((userClub, idx)=> <JoinedClubsCard clubInfo={userClub} key={idx} />)}
+                        {userJoinedClubs && userJoinedClubs.map((userClub, idx)=> <MyClubsCard clubInfo={userClub} key={idx} />)}
                     </Row>
                     <Row>
                         <Card className="card-quotes" >

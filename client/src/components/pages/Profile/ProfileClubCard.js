@@ -5,7 +5,7 @@ import './Profile.css'
 function MyClubsCard({clubInfo}) {
     const {bookAuthor, imgBookCover, bookClubName, bookTitle, startDate, _id} = clubInfo
     return (
-        <Col lg={3}>
+        <Col lg={3} md={6}>
             <Card className="profile-clubs-card">
                 <Card.Img variant="top" src={imgBookCover} />
                 <Card.Body className="club-card-body">
