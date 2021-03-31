@@ -45,7 +45,7 @@ function BestsellersPage() {
                         </div>
                     :
                     <>
-                    <Col>
+                    <Col lg={6} md={6} >
                         <h3>Fiction Best sellers:</h3>
                         {
                             bestsellersFiction && bestsellersFiction.map((elm, idx) => {

@@ -25,7 +25,20 @@ form {
 
 @media (max-width:540px) {
     .login-container{
-        height: 600px;
+        height: 667px;
         display: flex;
+    }
+
+    small.note-to-user {
+        font-size: 1rem;
+        font-weight: 500;
+        padding-bottom: 50px;
+    }
+}
+
+@media (max-width:300px) {
+
+    small.note-to-user {
+        padding-bottom: 70px;
     }
 }
