@@ -8,4 +8,6 @@ module.exports = app => {
     app.use('/api/reader', require ('./reader.routes'))
     app.use('/api/bestsellers', require ('./nytimes.routes'))
     app.use('/api/ratings', require ('./ratings.routes'))
+    app.use('/api/files', require('./files.routes.js'))
+
 }

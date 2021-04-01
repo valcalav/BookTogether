@@ -50,8 +50,6 @@ joinClub() {
 }
 
     render() {
-
-        // const { imgBookCover, bookClubName, bookTitle, bookAuthor, description, genre, duration, language, startDate } = this.state.bookClub
         const {bookClub} = this.state
 
         return (
@@ -116,7 +114,7 @@ joinClub() {
                     </Row>
 
 
-                    <Link to="/bookclubs-list" className="btn btn-secondary btn-back">Go back</Link>
+                    <Link to="/bookclubs-list" className="btn btn-secondary btn-back btn-back-details">Go back</Link>
 
                     </Col>
                 </Row>
