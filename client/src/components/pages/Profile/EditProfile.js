@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { AllCountries } from '../../shared/AllCountries'
-import { Container, Form, Button, Card, Row, Col } from 'react-bootstrap'
+import { Container, Form, Button, Row, Col } from 'react-bootstrap'
 import { GenresArr } from '../../shared/AllGenres'
 import { Link } from 'react-router-dom'
 
 import editIcon from '../../../images/edit-icon.jpg'
 
-
 import ReaderService from '../../../service/reader.service'
+import UploadService from '../../../service/upload.service'
+
 import './Profile.css'
 
 function EditProfile(props) {
@@ -15,6 +16,7 @@ function EditProfile(props) {
     const { loggedUser } = props
 
     const readerService = new ReaderService()
+    const uploadService = new UploadService()
 
     const [myInfo, setMyInfo] = useState({
         firstName:'',
@@ -38,6 +40,20 @@ function EditProfile(props) {
         readerService.editProfile(reader_id, myInfo)
             .then(() => {
                 props.history.push('/profile')
+            })
+            .catch(err => console.log(err))
+    }
+
+    function handleFileUpload(e) {
+
+        const uploadData = new FormData()
+        uploadData.append('profileImg', e.target.files[0])
+
+        uploadService
+            .uploadFile(uploadData)
+            .then(response => {
+                console.log('respuesta', response)
+                setMyInfo({...myInfo, profileImg: response.data.secure_url})
             })
             .catch(err => console.log(err))
     }
@@ -67,8 +83,8 @@ function EditProfile(props) {
                         </Row>
                         
                         <Form.Group>
-                            <Form.Label>Profile Image</Form.Label>
-                            <Form.Control type="text" placeholder="Link here..." name="profileImg" value={myInfo.profileImg} onChange={(e) => setMyInfo({...myInfo, profileImg: e.target.value})} />
+                            <Form.Label>Imagen (File)</Form.Label>
+                            <Form.Control type="file" name="profileImg" onChange={e => handleFileUpload(e)} />
                         </Form.Group>
 
                         <Form.Group>
