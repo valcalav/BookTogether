@@ -8,6 +8,7 @@ import editIcon from '../../../images/edit-icon.jpg'
 
 import ReaderService from '../../../service/reader.service'
 import UploadService from '../../../service/upload.service'
+import Spinner from '../../shared/Spinner/Spinner'
 
 import './Profile.css'
 
@@ -26,6 +27,7 @@ function EditProfile(props) {
         country:''
     })
     const [error, setError] = useState(null)
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         setMyInfo({...myInfo,
@@ -46,6 +48,8 @@ function EditProfile(props) {
 
     function handleFileUpload(e) {
 
+        setLoading(true)
+
         const uploadData = new FormData()
         uploadData.append('profileImg', e.target.files[0])
 
@@ -54,6 +58,7 @@ function EditProfile(props) {
             .then(response => {
                 console.log('respuesta', response)
                 setMyInfo({...myInfo, profileImg: response.data.secure_url})
+                setLoading(false)
             })
             .catch(err => console.log(err))
     }
@@ -83,7 +88,7 @@ function EditProfile(props) {
                         </Row>
                         
                         <Form.Group>
-                            <Form.Label>Imagen (File)</Form.Label>
+                            <Form.Label>Imagen (File) {loading && <Spinner />}</Form.Label>
                             <Form.Control type="file" name="profileImg" onChange={e => handleFileUpload(e)} />
                         </Form.Group>
 

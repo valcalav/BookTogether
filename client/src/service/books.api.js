@@ -9,15 +9,15 @@ class GBookService {
     }
 
     getByTitle (title, startIdx, maxResults) {
-        return this.api.get(`/volumes?q=intitle:${title}&startIndex=${startIdx}&maxResults=${maxResults}&key=AIzaSyCL85Aun0K58V1YhjUtm0fryvRoBHNUREE`)
+        return this.api.get(`/volumes?q=intitle:${title}&startIndex=${startIdx}&maxResults=${maxResults}&key=AIzaSyAywZQ7AYD9e8CsWESjbejIV_1vMpJq_YM`)
     }
 
     getByAuthor (author, startIdx, maxResults) {
-        return this.api.get(`/volumes?q=inauthor:${author}&startIndex=${startIdx}&maxResults=${maxResults}&key=AIzaSyCL85Aun0K58V1YhjUtm0fryvRoBHNUREE`)
+        return this.api.get(`/volumes?q=inauthor:${author}&startIndex=${startIdx}&maxResults=${maxResults}&key=AIzaSyAywZQ7AYD9e8CsWESjbejIV_1vMpJq_YM`)
     }
     
     getByTitleAndAuthor (title, author, startIdx, maxResults) {
-        return this.api.get(`/volumes?q=${title}+inauthor:${author}&startIndex=${startIdx}&maxResults=${maxResults}&key=AIzaSyCL85Aun0K58V1YhjUtm0fryvRoBHNUREE`)
+        return this.api.get(`/volumes?q=${title}+inauthor:${author}&startIndex=${startIdx}&maxResults=${maxResults}&key=AIzaSyAywZQ7AYD9e8CsWESjbejIV_1vMpJq_YM`)
     }
 }
 
