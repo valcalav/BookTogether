@@ -28,13 +28,6 @@ router.put('/editRatings/:rating_id', (req, res) => {
     const user_id = req.user._id
     const rating_id = req.params.rating_id
 
-    // Ratings
-    //     .findByIdAndUpdate(rating_id, {$set: req.body, $push: {voters: user_id}})
-    //     .then(rating => {
-    //         console.log('funciona', rating)
-    //         res.json(rating)})
-    //     .catch(() => res.status(500).json({ code: 500, message: 'Error editing rating'}))
-
     Ratings
         .findById(rating_id)
         .then(rating => {

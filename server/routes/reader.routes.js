@@ -11,14 +11,22 @@ const Reader = require('../models/reader.model')
 
 router.put('/joinBookClub/:bookClub_id', (req, res, next) => {
 
-    const eventPromise = Event.findByIdAndUpdate(req.params.bookClub_id, { $push: { participants: req.user._id, participantsEmails: req.user.userInfo.email } }, { new: true })
-
-    const readerPromise = Reader.findByIdAndUpdate(req.user._id, { $push: { clubsJoined: req.params.bookClub_id }}, { new: true })
-
-    Promise.all([eventPromise, readerPromise])
-        .then(results => res.json(results))
-        .catch(err => next(new Error(err)))
-
+    Event
+        .findById(req.params.bookClub_id)
+        .then(response => {
+            if ( response.participants.includes(req.user._id) ) {
+                console.log('Sorry, you already joined this club')
+                res.json({message: 'Sorry, you already joined this club'})
+            } else {
+                const eventPromise = Event.findByIdAndUpdate(req.params.bookClub_id, { $push: { participants: req.user._id, participantsEmails: req.user.userInfo.email } }, { new: true })
+                const readerPromise = Reader.findByIdAndUpdate(req.user._id, { $push: { clubsJoined: req.params.bookClub_id }}, { new: true })
+            
+                Promise.all([eventPromise, readerPromise])
+                    .then(results => res.json(results))
+                    .catch(err => next(new Error(err)))
+            }
+        })
+        .catch(err => res.status(500).json({code: 500, message: 'Error'}))
 })
 
 //Leave Book Club
