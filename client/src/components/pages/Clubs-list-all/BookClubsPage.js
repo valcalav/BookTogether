@@ -118,7 +118,7 @@ export default function BookClubs() {
                 </Row>
 
                  <Row>
-                    <Col md={{ span: 3, offset: 1 }}>
+                    <Col className='search-lists' md={{ span: 3, offset: 1 }}>
                         <GenreList handleGenre={handleGenre} />
                         <LanguageList handleLanguage={handleLanguage}/>
                     </Col>

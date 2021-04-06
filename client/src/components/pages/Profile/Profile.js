@@ -80,7 +80,7 @@ function Profile(props) {
                 </Col>
                 <Col lg={{ span: 7, pull: 1 }}>
                     <div className="my-clubs-header">
-                        <h5>Created clubs</h5>
+                        <h5>Created clubs<Link to='/my-clubs' className='see-all'>[See all]</Link></h5>
                         <Link to='/create-club' className="btn btn-outline-info">Create a Book Club</Link>
                     </div>
                     <hr />
@@ -89,9 +89,8 @@ function Profile(props) {
                             userClubs && userClubs.slice(0, 4).map((userClub, idx)=> <MyClubsCard clubInfo={userClub} key={idx} />)
                         }
                     </Row>
-
                     <div className="my-clubs-header">
-                        <h5>Joined clubs</h5>
+                        <h5>Joined clubs<Link to='/my-clubs' className='see-all'>[See all]</Link></h5>
                         <Link to='/bookclubs-list' className="btn btn-outline-info">Join a Book Club</Link>
                     </div>
                     <hr />
