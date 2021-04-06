@@ -21,9 +21,12 @@ function ShowMeetingsCard({setModalShow, clubMeetings, owner, loggedUser}) {
                         <p>Meeting link: {elm.meetingLink}</p>
                         <small>Note: {elm.description}</small>
                         <br />
-                        <div style={{ display: "flex" }}>
-                            <Link to={`/edit-meeting/${elm._id}`} style={{marginLeft: "auto"}} className="btn btn-light btn-edit">Edit</Link>
-                        </div>
+                        {
+                            owner === loggedUser._id &&
+                                <div style={{ display: "flex" }}>
+                                    <Link to={`/edit-meeting/${elm._id}`} style={{marginLeft: "auto"}} className="btn btn-light btn-edit">Edit</Link>
+                                </div>
+                        }
                         <hr />
                     </div>)}
                     
