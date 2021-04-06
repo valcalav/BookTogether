@@ -5,7 +5,7 @@
 .clubs-card h6 {
     font-size: 16px;
     margin-bottom: 10px;
-    padding-top: 0px;
+    padding-top: 5px;
 }
 
 .clubs-card hr {
@@ -80,6 +80,33 @@
 
 .buttons-pagination {
     margin-bottom: 50px;
+}
+
+@media (max-width: 1380px) and (min-width: 1100px) {
+
+    .clubs-card-body {
+        padding: 2px;
+        height: 225px;
+    }
+
+    .clubs-card img {
+        height: 175px;
+        width: auto;
+    }
+}
+
+@media (max-width: 1099px) and (min-width: 990px) {
+
+    .clubs-card-body {
+        padding: 2px;
+        height: 245px;
+    }
+
+    .clubs-card img {
+        height: 175px;
+        width: auto;
+    }
+    
 }
 
 @media (max-width:450px) {
