@@ -65,7 +65,7 @@ function ClubDashboard(props) {
         <div>
             {
                 !loading ?
-                <div>
+                <div className='book-spinner'>
 
                 <BookSpinner />
 
